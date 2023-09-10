@@ -1,0 +1,10 @@
+/* Estilo para las celdas de encabezado de la tabla */
+thead.thead-dark th {
+  background-color: #136137; /* Cambia el color de fondo del encabezado de la tabla */
+  color: #fff; /* Cambia el color del texto del encabezado de la tabla */
+}
+
+/* Estilo para las celdas de datos de la tabla */
+tbody tr td {
+  color: #000000d0; /* Cambia el color del texto de las celdas de datos */
+}
