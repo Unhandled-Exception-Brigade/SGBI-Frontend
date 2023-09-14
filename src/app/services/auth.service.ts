@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenApiModel } from '../models/token-api.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,11 @@ export class AuthService {
   ingresar(userFrontEnd: any) {
     return this.http.post<any>(this.baseUrl + 'ingresar', userFrontEnd);
   }
+
+  renewToken(tokenApi: TokenApiModel) {
+    return this.http.post<any>(this.baseUrl + 'refrescar', tokenApi);
+  }
+
   cerrarSesion() {
     localStorage.clear();
     this.router.navigate(['/ingresar']);
@@ -29,8 +35,15 @@ export class AuthService {
     localStorage.setItem('token', tokenValue);
   }
 
+  guardarRefreshToken(tokenValue: string) {
+    localStorage.setItem('refreshToken', tokenValue);
+  }
+
   obtenerToken() {
     return localStorage.getItem('token');
+  }
+  obtenerRefreshToken() {
+    return localStorage.getItem('refreshToken');
   }
 
   estaLogueado(): boolean {
@@ -39,7 +52,7 @@ export class AuthService {
   decodedToken() {
     const helper = new JwtHelperService();
     const token = this.obtenerToken();
-
+    console.log(helper.decodeToken(token));
     return helper.decodeToken(token);
   }
   obtenerNombreDelToken() {

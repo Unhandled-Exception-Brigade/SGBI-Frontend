@@ -46,15 +46,21 @@ export class LoginComponent {
         next: (res) => {
           console.log(res.message);
           this.loginForm.reset();
-          this.auth.guardarToken(res.token);
+
+          this.auth.guardarToken(res.accessToken);
+          this.auth.guardarRefreshToken(res.refreshToken);
+
           const tokenPayload = this.auth.decodedToken();
+
           this.usuarioService.setNombreUsuario(tokenPayload.unique_name);
           this.usuarioService.setRolUsuario(tokenPayload.role);
+
           this.toast.success({
             detail: 'CORRECTO',
             summary: res.message,
             duration: 4000,
           });
+
           // Agregar un retraso de 1 segundo antes de redirigir al dashboard
           setTimeout(() => {
             this.router.navigate(['/panel']);

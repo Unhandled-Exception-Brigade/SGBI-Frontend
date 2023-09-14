@@ -52,10 +52,14 @@ export class SignupComponent {
             summary: res.message,
             duration: 4000,
           });
-          // Agregar un retraso de 1 segundo antes de redirigir al ingresar
-          setTimeout(() => {
-            this.router.navigate(['/ingresar']);
-          }, 600); //
+
+          // Verificar si el usuario está autenticado antes de redirigir
+          if (!this.auth.estaLogueado()) {
+            // Agregar un retraso de 1 segundo antes de redirigir al ingresar
+            setTimeout(() => {
+              this.router.navigate(['/ingresar']);
+            }, 600);
+          }
         },
         error: (err) => {
           this.toast.error({
