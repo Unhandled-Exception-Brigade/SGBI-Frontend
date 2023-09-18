@@ -28,8 +28,27 @@ export class SignupComponent {
       nombre: ['', [Validators.required, primeraLetraMayuscula()]],
       apellido: ['', [Validators.required, primeraLetraMayuscula()]],
       cedula: ['', [Validators.required, Validators.minLength(9)]],
-      correo: ['', [Validators.required]],
-      contrasena: ['', [Validators.required]],
+      correo: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/),
+          Validators.maxLength(50),
+          Validators.minLength(5),
+        ],
+      ],
+      contrasena: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
+          //Validators.pattern(
+          //  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+          //),
+        ],
+      ],
     });
   }
 
@@ -125,6 +144,19 @@ export class SignupComponent {
     if (campo?.hasError('required')) {
       return 'El correo es requerido';
     }
+    if (campo?.hasError('email')) {
+      return 'El correo debe tener un formato válido';
+    }
+    if (campo?.hasError('pattern')) {
+      return 'El correo debe tener un formato válido';
+    }
+    if (campo?.hasError('maxlength')) {
+      return 'El correo debe tener máximo 50 caracteres';
+    }
+    if (campo?.hasError('minlength')) {
+      return 'El correo debe tener mínimo 5 caracteres';
+    }
+
     return '';
   }
   obtenerErrorCampoContrasena() {
@@ -133,6 +165,15 @@ export class SignupComponent {
     if (campo?.hasError('required')) {
       return 'La contraseña es requerida';
     }
+    if (campo?.hasError('minlength')) {
+      return 'La contraseña debe tener mínimo 8 caracteres';
+    }
+    if (campo?.hasError('maxlength')) {
+      return 'La contraseña debe tener máximo 20 caracteres';
+    }
+    // if (campo?.hasError('pattern')) {
+    //   return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
+    // }
 
     return '';
   }

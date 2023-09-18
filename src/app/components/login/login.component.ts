@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
+import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class LoginComponent {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
+  public resetearContrasenaEmail!: string;
+  public esValidoElCorreo!: boolean;
 
   loginForm!: FormGroup;
   constructor(
@@ -21,7 +24,8 @@ export class LoginComponent {
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private cambiarContrasenaService: CambiarContrasenaService
   ) {}
 
   ngOnInit(): void {
@@ -113,5 +117,40 @@ export class LoginComponent {
     // Agregar más validaciones y mensajes de error según sea necesario...
 
     return '';
+  }
+  validarCorreo(event: string) {
+    const valor = event;
+    const patron = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+
+    this.esValidoElCorreo = patron.test(valor);
+    return this.esValidoElCorreo;
+  }
+  confirmarEnvio() {
+    if (this.validarCorreo(this.resetearContrasenaEmail)) {
+      console.log(this.resetearContrasenaEmail);
+
+      this.cambiarContrasenaService
+        .sendResetPasswordLink(this.resetearContrasenaEmail)
+        .subscribe({
+          next: (res) => {
+            this.toast.success({
+              detail: 'CORRECTO',
+              summary: res.message,
+              duration: 4000,
+            });
+
+            this.resetearContrasenaEmail = '';
+            const buttonRef = document.getElementById('closeBtn');
+            buttonRef?.click();
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'ERROR',
+              summary: err.error.message,
+              duration: 4000,
+            });
+          },
+        });
+    }
   }
 }
