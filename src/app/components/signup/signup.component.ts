@@ -44,9 +44,9 @@ export class SignupComponent {
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(20),
-          //Validators.pattern(
-          //  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
-          //),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+          ),
         ],
       ],
     });
@@ -171,9 +171,9 @@ export class SignupComponent {
     if (campo?.hasError('maxlength')) {
       return 'La contraseña debe tener máximo 20 caracteres';
     }
-    // if (campo?.hasError('pattern')) {
-    //   return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
-    // }
+    if (campo?.hasError('pattern')) {
+      return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
+    }
 
     return '';
   }

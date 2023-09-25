@@ -6,7 +6,7 @@ import { ResetPassword } from '../models/reset-password.model';
   providedIn: 'root',
 })
 export class CambiarContrasenaService {
-  private baseURL = 'http://localhost:5005/api/usuario';
+  private baseURL = 'https://localhost:7106/api/usuario';
 
   constructor(private http: HttpClient) {}
 
@@ -15,6 +15,7 @@ export class CambiarContrasenaService {
   }
 
   resetPassword(resetPasswordObj: ResetPassword) {
+    console.log(resetPasswordObj);
     return this.http.post<any>(
       `${this.baseURL}/resetear-contrasena`,
       resetPasswordObj

@@ -8,7 +8,7 @@ import { TokenApiModel } from '../models/token-api.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = 'http://localhost:5005/api/usuario/';
+  private baseUrl: string = 'https://localhost:7106/api/usuario/';
   private usuarioPayload: any;
   constructor(private http: HttpClient, private router: Router) {
     this.usuarioPayload = this.decodedToken();
