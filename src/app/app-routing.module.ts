@@ -6,6 +6,11 @@ import { authGuard } from './guards/auth.guard';
 import { ResetComponent } from './components/reset/reset.component';
 import { AgregarEmpleadoComponent } from './components/agregar-empleado/agregar-empleado.component';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
+import { TramitesComponent } from './components/tramites/tramites.component';
+import { CreacionTramitesComponent } from './components/creacion-tramites/creacion-tramites.component';
+import { ConfiguracionUsuarioComponent } from './components/configuracion-usuario/configuracion-usuario.component';
+import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
+import { ReporteriaComponent } from './components/reporteria/reporteria.component';
 
 const routes: Routes = [
   {
@@ -24,6 +29,26 @@ const routes: Routes = [
   {
     path: 'resetear',
     component: ResetComponent,
+  },
+  {
+    path: 'tramites',
+    component: TramitesComponent,
+  },
+  {
+    path: 'creacion-tramites',
+    component: CreacionTramitesComponent,
+  },
+  {
+    path: 'configuracion-usuario',
+    component: ConfiguracionUsuarioComponent,
+  },
+  {
+    path: 'mantenimiento',
+    component: MantenimientoComponent,
+  },
+  {
+    path: 'reporteria',
+    component: ReporteriaComponent,
   },
   {
     path: 'agregarEmpleado',

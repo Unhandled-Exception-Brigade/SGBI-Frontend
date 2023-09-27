@@ -65,4 +65,9 @@ export class AuthService {
       return this.usuarioPayload.role;
     }
   }
+  // obtenerEstadoDelToken() {
+  //   if (this.usuarioPayload) {
+  //     return this.usuarioPayload.estado;   //Falta
+  //   }
+  // }
 }

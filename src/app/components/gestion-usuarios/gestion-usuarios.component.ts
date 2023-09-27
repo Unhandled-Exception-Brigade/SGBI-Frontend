@@ -41,7 +41,6 @@ export class GestionUsuariosComponent {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
-      //  this.rol = 'administrador';
     });
   }
 

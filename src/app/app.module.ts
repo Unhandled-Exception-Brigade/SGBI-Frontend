@@ -16,6 +16,13 @@ import { ResetComponent } from './components/reset/reset.component';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { AgregarEmpleadoComponent } from './components/agregar-empleado/agregar-empleado.component';
 import { RoleDropdownComponent } from './components/role-dropdown/role-dropdown.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ConfiguracionUsuarioComponent } from './components/configuracion-usuario/configuracion-usuario.component';
+import { CreacionTramitesComponent } from './components/creacion-tramites/creacion-tramites.component';
+import { EstadoDropdownComponent } from './components/estado-dropdown/estado-dropdown.component';
+import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
+import { ReporteriaComponent } from './components/reporteria/reporteria.component';
+import { TramitesComponent } from './components/tramites/tramites.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,13 @@ import { RoleDropdownComponent } from './components/role-dropdown/role-dropdown.
     GestionUsuariosComponent,
     AgregarEmpleadoComponent,
     RoleDropdownComponent,
+    SidenavComponent,
+    ConfiguracionUsuarioComponent,
+    CreacionTramitesComponent,
+    EstadoDropdownComponent,
+    MantenimientoComponent,
+    ReporteriaComponent,
+    TramitesComponent,
   ],
   imports: [
     BrowserModule,
