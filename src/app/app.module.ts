@@ -9,19 +9,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './helpers/material/material.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FormsModule } from '@angular/forms';
 import { ResetComponent } from './components/reset/reset.component';
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
+import { AgregarEmpleadoComponent } from './components/agregar-empleado/agregar-empleado.component';
+import { RoleDropdownComponent } from './components/role-dropdown/role-dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent,
+
     ResetComponent,
+    GestionUsuariosComponent,
+    AgregarEmpleadoComponent,
+    RoleDropdownComponent,
   ],
   imports: [
     BrowserModule,

@@ -67,7 +67,7 @@ export class LoginComponent {
 
           // Agregar un retraso de 1 segundo antes de redirigir al dashboard
           setTimeout(() => {
-            this.router.navigate(['/panel']);
+            this.router.navigate(['/gestionUsuarios']);
           }, 1000); // 1000 milisegundos = 1 segundo
         },
         error: (err) => {
@@ -146,7 +146,7 @@ export class LoginComponent {
           error: (err) => {
             this.toast.error({
               detail: 'ERROR',
-              summary: err.error.message,
+              summary: 'El correo ingresado no existe en el sistema',
               duration: 4000,
             });
           },
