@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import {EstadoDropdownComponent} from 'src/app/components/estado-dropdown/estado-dropdown.component'
 
 @Component({
   selector: 'app-gestion-usuarios',

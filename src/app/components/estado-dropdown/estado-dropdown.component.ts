@@ -11,5 +11,6 @@ export class EstadoDropdownComponent {
 
   estado_establecido(estado: string) {
     this.estadoSeleccionadoOutput.emit(estado);
+    console.log(estado);
   }
 }

@@ -24,30 +24,37 @@ const routes: Routes = [
   },
   {
     path: 'registrarse',
+    canActivate: [authGuard],
     component: SignupComponent,
   },
   {
     path: 'resetear',
+    canActivate: [authGuard],
     component: ResetComponent,
   },
   {
     path: 'tramites',
+    canActivate: [authGuard],
     component: TramitesComponent,
   },
   {
     path: 'creacion-tramites',
+    canActivate: [authGuard],
     component: CreacionTramitesComponent,
   },
   {
     path: 'configuracion-usuario',
+    canActivate: [authGuard],
     component: ConfiguracionUsuarioComponent,
   },
   {
     path: 'mantenimiento',
+    canActivate: [authGuard],
     component: MantenimientoComponent,
   },
   {
     path: 'reporteria',
+    canActivate: [authGuard],
     component: ReporteriaComponent,
   },
   {
