@@ -25,3 +25,8 @@ tbody tr td {
   height: 100%;
   
 }
+
+.mi-td-grande {
+  padding-right: 100px; /* Ajusta este valor según el tamaño deseado */
+  /* Otros estilos si es necesario */
+}

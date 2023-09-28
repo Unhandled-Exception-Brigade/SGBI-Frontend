@@ -116,8 +116,9 @@ export class GestionUsuariosComponent {
     usuario.rol = newRole;
   }
 
-  actualizarEstadoUsuario(newStatus: string, usuario: any) {
-    usuario.estado = newStatus;
+  updateUserEstado(nuevoEstado: boolean, usuario: any){
+    usuario.estaInactivo = nuevoEstado;
+    console.log(nuevoEstado);
   }
 
   public usuariosEditables: any = []; // Un array para mantener usuarios en modo de edición
