@@ -124,8 +124,10 @@
                     "
                   ></app-estado-dropdown>
                 </ng-container>
-                {{ usuario.estaInactivo }}
-                <ng-container *ngIf="!estaEditando(usuario)"> </ng-container>
+
+                <ng-container *ngIf="!estaEditando(usuario)">
+                  {{ usuario.estaInactivo }}
+                </ng-container>
               </td>
 
               <td>
