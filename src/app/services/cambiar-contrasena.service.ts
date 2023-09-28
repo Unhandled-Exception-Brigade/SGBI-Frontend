@@ -11,7 +11,10 @@ export class CambiarContrasenaService {
   constructor(private http: HttpClient) {}
 
   sendResetPasswordLink(email: string) {
-    return this.http.post<any>(`${this.baseURL}/enviar-email-cambio-contrasena/${email}`, {});
+    return this.http.post<any>(
+      `${this.baseURL}/enviar-email-cambio-contrasena/${email}`,
+      {}
+    );
   }
 
   resetPassword(resetPasswordObj: ResetPassword) {

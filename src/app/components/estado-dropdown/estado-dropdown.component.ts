@@ -7,10 +7,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class EstadoDropdownComponent {
   @Input() estadoSeleccionado: string; // (activo, inactivo)
-  @Output() estadoSeleccionadoOutput = new EventEmitter<string>();
+  @Output() estadoSeleccionadoOutput = new EventEmitter<boolean>();
 
   estado_establecido(estado: string) {
-    this.estadoSeleccionadoOutput.emit(estado);
+    if (estado == 'activo') {
+      this.estadoSeleccionadoOutput.emit(false);
+    } else {
+      this.estadoSeleccionadoOutput.emit(true);
+    }
     console.log(estado);
   }
 }

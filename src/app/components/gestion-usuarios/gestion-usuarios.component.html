@@ -115,15 +115,17 @@
                 </ng-container>
               </td>
 
-              <td>
+              <td class="mi-td-grande">
                 <ng-container *ngIf="estaEditando(usuario)">
-                  <app-estado-dropdown></app-estado-dropdown>
+                  <app-estado-dropdown
+                    [estadoSeleccionado]="usuario.EstaInactivo"
+                    (estadoSeleccionadoOutput)="
+                      updateUserEstado($event, usuario)
+                    "
+                  ></app-estado-dropdown>
                 </ng-container>
-                <ng-container *ngIf="!estaEditando(usuario)">
-                  <ng-container *ngIf="usuario.EstaInactivo === false">
-                    <h1>dfdf</h1>
-                  </ng-container>
-                </ng-container>
+                {{ usuario.estaInactivo }}
+                <ng-container *ngIf="!estaEditando(usuario)"> </ng-container>
               </td>
 
               <td>
