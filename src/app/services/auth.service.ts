@@ -52,7 +52,7 @@ export class AuthService {
   decodedToken() {
     const helper = new JwtHelperService();
     const token = this.obtenerToken();
-    console.log(helper.decodeToken(token));
+
     return helper.decodeToken(token);
   }
   obtenerCedulaDelToken() {

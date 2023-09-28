@@ -48,7 +48,6 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       this.auth.ingresar(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res.message);
           this.loginForm.reset();
 
           this.auth.guardarToken(res.accessToken);
@@ -76,7 +75,6 @@ export class LoginComponent {
             summary: 'Credenciales incorrectas',
             duration: 4000,
           });
-          console.log(err);
         },
       });
     } else {
