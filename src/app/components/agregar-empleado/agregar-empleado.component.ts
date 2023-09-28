@@ -15,7 +15,6 @@ export class AgregarEmpleadoComponent {
   apellido: string;
   cedula: string;
   correo: string;
-  contrasena: string;
 
   type: string = 'password';
   isText: boolean = false;
@@ -44,23 +43,8 @@ export class AgregarEmpleadoComponent {
           Validators.minLength(5),
         ],
       ],
-      contrasena: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ],
-      ],
     });
   }
-
-  hideShowPass() {
-    this.isText = !this.isText;
-    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isText ? (this.type = 'text') : (this.type = 'password');
-  }
-
   onSignup() {
     this.markFormGroupTouched(this.signupForm);
 
@@ -75,13 +59,7 @@ export class AgregarEmpleadoComponent {
             duration: 4000,
           });
 
-          // Verificar si el usuario está autenticado antes de redirigir
-          if (!this.auth.estaLogueado()) {
-            // Agregar un retraso de 1 segundo antes de redirigir al ingresar
-            setTimeout(() => {
-              this.router.navigate(['/gestionUsuarios']);
-            }, 600);
-          }
+          this.router.navigate(['/gestionUsuarios']);
         },
         error: (err) => {
           this.toast.error({
@@ -159,25 +137,6 @@ export class AgregarEmpleadoComponent {
     if (campo?.hasError('minlength')) {
       return 'El correo debe tener mínimo 5 caracteres';
     }
-
-    return '';
-  }
-  obtenerErrorCampoContrasena() {
-    const campo = this.signupForm.get('contrasena');
-
-    if (campo?.hasError('required')) {
-      return 'La contraseña es requerida';
-    }
-    if (campo?.hasError('minlength')) {
-      return 'La contraseña debe tener mínimo 8 caracteres';
-    }
-    if (campo?.hasError('maxlength')) {
-      return 'La contraseña debe tener máximo 20 caracteres';
-    }
-    // if (campo?.hasError('pattern')) {
-    //   return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
-    // }
-
     return '';
   }
 }

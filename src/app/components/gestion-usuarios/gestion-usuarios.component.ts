@@ -143,7 +143,7 @@ export class GestionUsuariosComponent {
         next: (res) => {
           this.toast.success({
             detail: 'CORRECTO',
-            summary: res.messege,
+            summary: 'Usuario actualizado',
             duration: 4000,
           });
           this.usuarioEnEdicion = null;
@@ -151,7 +151,7 @@ export class GestionUsuariosComponent {
         error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: err.messege,
+            summary: 'No se pudo actualizar el usuario',
             duration: 4000,
           });
         },

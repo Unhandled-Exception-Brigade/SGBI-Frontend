@@ -89,7 +89,7 @@
                 {{ obtenerErrorCampoCedula() }}
               </small>
 
-              <div class="dropdown">
+              <!-- <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle w-100"
                   type="button"
@@ -101,11 +101,11 @@
                   Rol
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">usuario</a>
-                  <a class="dropdown-item" href="#">administrador</a>
-                  <a class="dropdown-item" href="#">jefe</a>
+                  <a class="dropdown-item">usuario</a>
+                  <a class="dropdown-item">administrador</a>
+                  <a class="dropdown-item">jefe</a>
                 </div>
-              </div>
+              </div> -->
 
               <div class="form-group pt-3">
                 <div
@@ -133,40 +133,10 @@
                 >{{ obtenerErrorCampoCorreo() }}</small
               >
 
-              <div class="form-group pt-3">
-                <div
-                  class="input-field"
-                  [class.error]="
-                    signupForm.get('contrasena').touched &&
-                    signupForm.get('contrasena').invalid
-                  "
-                >
-                  <span class="fa fa-lock p-2"></span>
-                  <input
-                    formControlName="contrasena"
-                    [type]="type"
-                    placeholder="Contraseña"
-                  />
-                  <span
-                    (click)="hideShowPass()"
-                    class="fa {{ eyeIcon }}"
-                  ></span>
-                </div>
-              </div>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('contrasena').touched &&
-                  signupForm.get('contrasena').invalid
-                "
-                >{{ obtenerErrorCampoContrasena() }}</small
-              >
               <button
                 (click)="onSignup()"
                 type="submit"
                 class="btn btn-primary btn-block mt-4 w-100"
-                [routerLink]="['/gestion-usuarios']"
               >
                 Registrar
               </button>
