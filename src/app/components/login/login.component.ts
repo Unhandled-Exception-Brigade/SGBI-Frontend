@@ -19,6 +19,7 @@ export class LoginComponent {
   public esValidoElCorreo!: boolean;
 
   loginForm!: FormGroup;
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -30,7 +31,14 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      cedula: ['', [Validators.required, Validators.minLength(9)]], // Utiliza un arreglo para los validadores
+      cedula: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(15),
+        ],
+      ], // Utiliza un arreglo para los validadores
       contrasena: ['', [Validators.required]],
     });
   }
@@ -81,6 +89,7 @@ export class LoginComponent {
       console.log('Formulario inválido');
     }
   }
+
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       if (control instanceof FormGroup) {
@@ -100,6 +109,10 @@ export class LoginComponent {
     if (campo?.hasError('minlength')) {
       // Asegúrate de usar 'minlength' en minúsculas
       return 'La cédula debe tener 9 dígitos';
+    }
+    if (campo?.hasError('maxlength')) {
+      // Asegúrate de usar 'maxlength' en minúsculas
+      return 'La cédula debe tener 15 dígitos';
     }
 
     return '';
