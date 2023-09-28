@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import {EstadoDropdownComponent} from 'src/app/components/estado-dropdown/estado-dropdown.component'
+import { EstadoDropdownComponent } from 'src/app/components/estado-dropdown/estado-dropdown.component';
+import { actualizarUsuario } from 'src/app/models/actualizar-usuario';
+import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
+import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -11,6 +15,7 @@ import {EstadoDropdownComponent} from 'src/app/components/estado-dropdown/estado
 })
 export class GestionUsuariosComponent {
   public usuarios: any = [];
+  actualizarUsuarioObj = new actualizarUsuario();
 
   public nombreCompleto: string = '';
   public rol: string = '';
@@ -24,7 +29,10 @@ export class GestionUsuariosComponent {
   constructor(
     private api: ApiService,
     private auth: AuthService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private toast: NgToastService,
+    private router: Router,
+    private editarUsuarioService: EditarUsuarioService
   ) {}
 
   ngOnInit() {
@@ -86,9 +94,9 @@ export class GestionUsuariosComponent {
   }
 
   guardarEstadoOrden() {
-    // Guarda el estado de orden y columna en localStorage
-    localStorage.setItem('ordenAscendente', this.ordenAscendente.toString());
-    localStorage.setItem('columnaOrden', this.columnaOrden);
+    // // Guarda el estado de orden y columna en localStorage
+    // localStorage.setItem('ordenAscendente', this.ordenAscendente.toString());
+    // localStorage.setItem('columnaOrden', this.columnaOrden);
   }
 
   // Método para cambiar el orden de la tabla
@@ -122,10 +130,32 @@ export class GestionUsuariosComponent {
   }
 
   guardarCambios() {
-    // Puedes realizar acciones de guardado aquí si es necesario
+    this.actualizarUsuarioObj.nombre = this.usuarioEnEdicion.nombre;
+    this.actualizarUsuarioObj.apellido = this.usuarioEnEdicion.apellido;
+    this.actualizarUsuarioObj.cedula = this.usuarioEnEdicion.cedula;
+    this.actualizarUsuarioObj.correo = this.usuarioEnEdicion.correo;
+    this.actualizarUsuarioObj.rol = this.usuarioEnEdicion.rol;
+    this.actualizarUsuarioObj.estaInactivo = this.usuarioEnEdicion.estaInactivo;
 
-    // Salir del modo de edición
-    this.usuarioEnEdicion = null;
+    this.editarUsuarioService
+      .actualizarUsuario(this.actualizarUsuarioObj)
+      .subscribe({
+        next: (res) => {
+          this.toast.success({
+            detail: 'CORRECTO',
+            summary: res.messege,
+            duration: 4000,
+          });
+          this.usuarioEnEdicion = null;
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'ERROR',
+            summary: err.messege,
+            duration: 4000,
+          });
+        },
+      });
   }
 
   cancelarEdicion() {
