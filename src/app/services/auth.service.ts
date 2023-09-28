@@ -55,7 +55,7 @@ export class AuthService {
     console.log(helper.decodeToken(token));
     return helper.decodeToken(token);
   }
-  obtenerNombreDelToken() {
+  obtenerCedulaDelToken() {
     if (this.usuarioPayload) {
       return this.usuarioPayload.unique_name;
     }

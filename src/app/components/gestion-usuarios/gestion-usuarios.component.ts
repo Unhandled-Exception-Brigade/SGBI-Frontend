@@ -17,9 +17,8 @@ export class GestionUsuariosComponent {
   public usuarios: any = [];
   actualizarUsuarioObj = new actualizarUsuario();
 
-  public nombreCompleto: string = '';
+  public cedula: string = '';
   public rol: string = '';
-  public estado: string = '';
 
   usuariosPorPagina: number = 10; // Número de usuarios por página
   paginaActual: number = 1; // Página actual
@@ -43,8 +42,8 @@ export class GestionUsuariosComponent {
     });
 
     this.usuarioService.getNombreUsuario().subscribe((val) => {
-      const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
-      this.nombreCompleto = val || nombreCompletoDelToken;
+      const cedulaDelToken = this.auth.obtenerCedulaDelToken();
+      this.cedula = val || cedulaDelToken;
     });
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
@@ -93,12 +92,6 @@ export class GestionUsuariosComponent {
     }
   }
 
-  guardarEstadoOrden() {
-    // // Guarda el estado de orden y columna en localStorage
-    // localStorage.setItem('ordenAscendente', this.ordenAscendente.toString());
-    // localStorage.setItem('columnaOrden', this.columnaOrden);
-  }
-
   // Método para cambiar el orden de la tabla
   cambiarOrden(columna: string) {
     if (this.columnaOrden === columna) {
@@ -107,8 +100,6 @@ export class GestionUsuariosComponent {
       this.columnaOrden = columna;
       this.ordenAscendente = true;
     }
-
-    this.guardarEstadoOrden();
     this.ordenarUsuarios(); // Volver a ordenar cuando se cambie el orden
   }
 
@@ -118,7 +109,6 @@ export class GestionUsuariosComponent {
 
   updateUserEstado(nuevoEstado: boolean, usuario: any) {
     usuario.estaInactivo = nuevoEstado;
-    console.log(nuevoEstado);
   }
 
   public usuariosEditables: any = []; // Un array para mantener usuarios en modo de edición

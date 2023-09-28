@@ -1,5 +1,5 @@
-/* Estilo para las celdas de encabezado de la tabla */ble
-thead.thead-dark th {
+/* Estilo para las celdas de encabezado de la tabla */
+ble thead.thead-dark th {
   /* background-color: #136137; */
   color: #fff;
 }
@@ -14,14 +14,12 @@ tbody tr td {
   width: 50%;
 }
 
-.table-responsive{
+.table-responsive {
   width: 100%;
   height: 100%;
 }
 
-.table-container{
-
+.table-container {
   width: 100%;
   height: 100%;
-  
 }

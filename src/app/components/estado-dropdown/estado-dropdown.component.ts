@@ -15,6 +15,5 @@ export class EstadoDropdownComponent {
     } else {
       this.estadoSeleccionadoOutput.emit(true);
     }
-    console.log(estado);
   }
 }
