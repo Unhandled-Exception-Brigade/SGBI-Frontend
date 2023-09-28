@@ -126,7 +126,7 @@
                 </ng-container>
 
                 <ng-container *ngIf="!estaEditando(usuario)">
-                  {{ usuario.estaInactivo }}
+                  {{ usuario.estaInactivo ? "inactivo" : "activo" }}
                 </ng-container>
               </td>
 
