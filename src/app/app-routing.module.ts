@@ -29,7 +29,6 @@ const routes: Routes = [
   },
   {
     path: 'resetear',
-    canActivate: [authGuard],
     component: ResetComponent,
   },
   {
