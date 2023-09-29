@@ -41,7 +41,7 @@ export class GestionUsuariosComponent {
       this.ordenarUsuarios(); // Ordenar los usuarios después de cargar los datos y el estado
     });
 
-    this.usuarioService.getNombreUsuario().subscribe((val) => {
+    this.usuarioService.getCedulaUsuario().subscribe((val) => {
       const cedulaDelToken = this.auth.obtenerCedulaDelToken();
       this.cedula = val || cedulaDelToken;
     });

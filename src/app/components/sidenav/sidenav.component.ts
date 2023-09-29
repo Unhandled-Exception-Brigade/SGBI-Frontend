@@ -40,7 +40,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   navData = navbarData;
   multiple: boolean = false;
 
-  public nombreCompleto: string = '';
+  public cedula: string = '';
   public rol: string = '';
 
   ngOnInit() {
@@ -50,6 +50,11 @@ export class SidenavComponent implements OnInit, OnDestroy {
       const rolDelToken = this.auth.obtenerRolDelToken();
 
       this.rol = val || rolDelToken;
+    });
+
+    this.usuarioService.getCedulaUsuario().subscribe((val) => {
+      const cedulaDelToken = this.auth.obtenerCedulaDelToken();
+      this.cedula = val || cedulaDelToken;
     });
   }
 
