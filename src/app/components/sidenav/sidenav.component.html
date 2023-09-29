@@ -69,11 +69,11 @@
               <span class="pl-2" style="color: white">{{ cedula }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#"
-                ><i class="fas fa-key pr-2"></i>Cambiar contraseña</a
-              >
-              <button (click)="cerrarSesion()" class="dropdown-item">
-                Cerrar sesión
+              <button class="dropdown-item" (click)="cambiarContrasena()">
+                <i class="fas fa-key pr-2"></i> Cambiar contraseña
+              </button>
+              <button class="dropdown-item" (click)="cerrarSesion()">
+                <i class="fas fa-sign-out-alt pr-2"></i> Cerrar sesión
               </button>
             </div>
           </div>

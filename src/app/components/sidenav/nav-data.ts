@@ -1,7 +1,7 @@
 export const navbarData = [
   {
     routeLink: 'tramites',
-    icon: 'far fa-clipboard',
+    icon: 'fas fa-clipboard',
     label: 'Trámites',
     permiso: ['administrador', 'usuario'],
   },
@@ -19,7 +19,7 @@ export const navbarData = [
   },
   {
     routeLink: 'mantenimiento',
-    icon: 'fas fa-broom',
+    icon: 'fas fa-toolbox',
     label: 'Mantenimiento',
     permiso: ['administrador', 'usuario'],
   },
@@ -31,7 +31,7 @@ export const navbarData = [
   },
   {
     routeLink: 'configuracion-usuario',
-    icon: 'fas fa-screwdriver',
+    icon: 'fas fa-gear',
     label: 'Configuración de usuario',
     permiso: ['administrador', 'usuario'],
   },
