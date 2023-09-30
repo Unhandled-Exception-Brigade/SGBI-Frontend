@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { navbarData } from './nav-data';
 import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
+import {Router} from '@angular/router'
 
 interface SideNavToggle {
   screenWidth: number;
@@ -24,7 +25,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
     private api: ApiService,
     private auth: AuthService,
     private usuarioService: UsuarioService,
-    private sideNavService: SidenavService
+    private sideNavService: SidenavService,
+    private Router: Router
   ) {
     this.suscripcion = this.sideNavService.mostraSidenav.subscribe((value) => {
       this.mostrarSideNav = value;
@@ -65,5 +67,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   tienePermiso(permisos: string[]) {
     return permisos.includes(this.rol);
+  }
+
+  redirigirATramites() {
+    this.Router.navigate(['/tramites']); // Redirige a la ruta '/tramites'
   }
 }

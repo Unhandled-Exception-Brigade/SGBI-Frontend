@@ -1,4 +1,4 @@
-<app-sidenav></app-sidenav>
+<app-sidenav *ngIf="shouldShowSidenav()"></app-sidenav>
 
 <div class="bg-color pt-2 pl-5 pr-5 pb-2">
   <router-outlet></router-outlet>

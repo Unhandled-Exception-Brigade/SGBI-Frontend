@@ -16,6 +16,7 @@ export class AgregarEmpleadoComponent {
   cedula: string;
   correo: string;
   contrasena: string;
+  botonDesactivado = false;
 
   type: string = 'password';
   isText: boolean = false;
@@ -33,7 +34,10 @@ export class AgregarEmpleadoComponent {
     this.signupForm = this.fb.group({
       nombre: ['', [Validators.required, primeraLetraMayuscula()]],
       apellido: ['', [Validators.required, primeraLetraMayuscula()]],
-      cedula: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      cedula: [
+        '',
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      ],
       correo: [
         '',
         [
@@ -42,15 +46,6 @@ export class AgregarEmpleadoComponent {
           Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/),
           Validators.maxLength(50),
           Validators.minLength(5),
-        ],
-      ],
-      contrasena: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(18),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
         ],
       ],
     });
@@ -66,6 +61,7 @@ export class AgregarEmpleadoComponent {
     this.markFormGroupTouched(this.signupForm);
 
     if (this.signupForm.valid) {
+      this.botonDesactivado = true;
       this.auth.registrarse(this.signupForm.value).subscribe({
         next: (res) => {
           console.log(res.message);
@@ -75,14 +71,19 @@ export class AgregarEmpleadoComponent {
             summary: res.message,
             duration: 4000,
           });
+          this.botonDesactivado = false;
+
+          setTimeout(() => {
+            this.router.navigate(['/gestionUsuarios']);
+          }, 600);
 
           // Verificar si el usuario está autenticado antes de redirigir
-          if (!this.auth.estaLogueado()) {
-            // Agregar un retraso de 1 segundo antes de redirigir al ingresar
-            setTimeout(() => {
-              this.router.navigate(['/ingresar']);
-            }, 600);
-          }
+          // if (!this.auth.estaLogueado()) {
+          //   // Agregar un retraso de 1 segundo antes de redirigir al ingresar
+          //   setTimeout(() => {
+          //     this.router.navigate(['tramites']);
+          //   }, 600);
+          // }
         },
         error: (err) => {
           this.toast.error({
@@ -163,22 +164,10 @@ export class AgregarEmpleadoComponent {
 
     return '';
   }
-  obtenerErrorCampoContrasena() {
-    const campo = this.signupForm.get('contrasena');
 
-    if (campo?.hasError('required')) {
-      return 'La contraseña es requerida';
-    }
-    if (campo?.hasError('pattern')) {
-      return 'La contraseña debe incluir al menos una mayúscula, una minúscula, un número y un caracter especial (@$!%*?&)';
-    }
-    if (campo?.hasError('minlength')) {
-      return 'La contraseña debe tener al menos 12 caracteres';
-    }
-    if (campo?.hasError('maxlength')) {
-      return 'La contraseña debe tener máximo 18 caracteres';
-    }
-
-    return '';
+  desactivarBoton() {
+    return this.botonDesactivado
+      ? 'btn btn-primary btn-block mt-4 w-100 boton-desactivado'
+      : 'btn btn-primary btn-block mt-4 w-100';
   }
 }

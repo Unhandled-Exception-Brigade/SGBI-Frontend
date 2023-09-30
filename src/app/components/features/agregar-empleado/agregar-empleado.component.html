@@ -11,81 +11,51 @@
             <form class="form" [formGroup]="signupForm">
               <p class="title">Registrar a un Usuario</p>
               <div class="form-group pt-3 flex">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('nombre').touched &&
                     signupForm.get('nombre').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-user p-2"></span>
-                  <input
-                    formControlName="nombre"
-                    type="text"
-                    placeholder="Nombre"
-                  />
+                  <input formControlName="nombre" type="text" placeholder="Nombre" />
                 </div>
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   signupForm.get('nombre').touched &&
                   signupForm.get('nombre').invalid
-                "
-              >
+                ">
                 {{ obtenerErrorCampoNombre() }}
               </small>
               <div class="form-group pt-3 flex">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('apellido').touched &&
                     signupForm.get('apellido').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-user p-2"></span>
-                  <input
-                    formControlName="apellido"
-                    type="text"
-                    placeholder="Primer apellido"
-                  />
+                  <input formControlName="apellido" type="text" placeholder="Primer apellido" />
                 </div>
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   signupForm.get('apellido').touched &&
                   signupForm.get('apellido').invalid
-                "
-              >
+                ">
                 {{ obtenerErrorCampoApellido() }}
               </small>
               <div class="form-group pt-3">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('cedula').touched &&
                     signupForm.get('cedula').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-id-card p-2"></span>
-                  <input
-                    formControlName="cedula"
-                    type="text"
-                    placeholder="Cédula"
-                  />
+                  <input formControlName="cedula" type="text" placeholder="Cédula" />
                 </div>
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   signupForm.get('cedula').touched &&
                   signupForm.get('cedula').invalid
-                "
-              >
+                ">
                 {{ obtenerErrorCampoCedula() }}
               </small>
 
@@ -108,36 +78,21 @@
               </div> -->
 
               <div class="form-group pt-3">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('correo').touched &&
                     signupForm.get('correo').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-envelope p-2"></span>
-                  <input
-                    formControlName="correo"
-                    type="text"
-                    placeholder="Correo"
-                  />
+                  <input formControlName="correo" type="text" placeholder="Correo" />
                 </div>
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   signupForm.get('correo').touched &&
                   signupForm.get('correo').invalid
-                "
-                >{{ obtenerErrorCampoCorreo() }}</small
-              >
+                ">{{ obtenerErrorCampoCorreo() }}</small>
 
-              <button
-                (click)="onSignup()"
-                type="submit"
-                class="btn btn-primary btn-block mt-4 w-100"
-              >
+              <button (click)="onSignup()" [ngClass]="desactivarBoton()" type="submit" class="btn btn-primary btn-block mt-4 w-100">
                 Registrar
               </button>
             </form>
