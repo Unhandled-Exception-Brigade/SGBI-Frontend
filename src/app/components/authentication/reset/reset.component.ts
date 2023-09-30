@@ -94,10 +94,9 @@ export class ResetComponent {
           error: (err) => {
             this.toast.error({
               detail: 'ERROR',
-              summary: 'Error al cambiar la contraseña',
+              summary: err.error,
               duration: 4000,
             });
-            console.log(err);
           },
         });
     } else {

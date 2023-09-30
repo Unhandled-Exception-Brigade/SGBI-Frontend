@@ -68,7 +68,7 @@ export class LoginComponent {
 
           this.toast.success({
             detail: 'CORRECTO',
-            summary: 'Inicio de sesión exitoso',
+            summary: res.message,
             duration: 4000,
           });
 
@@ -80,7 +80,7 @@ export class LoginComponent {
         error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: 'Credenciales incorrectas',
+            summary: err.error,
             duration: 4000,
           });
         },

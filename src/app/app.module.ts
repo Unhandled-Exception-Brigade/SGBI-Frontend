@@ -30,7 +30,6 @@ import { FirstEntryComponent } from './components/authentication/first-entry/fir
     AppComponent,
     LoginComponent,
     SignupComponent,
-
     ResetComponent,
     GestionUsuariosComponent,
     AgregarEmpleadoComponent,
