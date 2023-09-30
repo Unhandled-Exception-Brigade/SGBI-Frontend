@@ -44,7 +44,7 @@ export class TokenInterceptor implements HttpInterceptor {
             return this.handleUnauthorizedError(request, next);
           }
         }
-        return throwError(() => new Error('Ocurrio otro error'));
+        return throwError(() => err.error); // Retornar el error
       })
     );
   }

@@ -74,7 +74,7 @@ export class LoginComponent {
 
           // Agregar un retraso de 1 segundo antes de redirigir al dashboard
           setTimeout(() => {
-            this.router.navigate(['/gestionUsuarios']);
+            this.router.navigate(['/tramites']);
           }, 1000); // 1000 milisegundos = 1 segundo
         },
         error: (err) => {

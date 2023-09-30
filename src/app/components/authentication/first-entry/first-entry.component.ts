@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ResetPassword } from 'src/app/models/reset-password.model';
-import { ConfirmarContrasena } from 'src/app/helpers/validators/confirmarContrasena';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 import { NgToastService } from 'ng-angular-popup';
+import { ConfirmarContrasena } from 'src/app/helpers/validators/confirmarContrasena';
+import { ResetPassword } from 'src/app/models/reset-password.model';
+import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 
 @Component({
-  selector: 'app-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.css'],
+  selector: 'app-first-entry',
+  templateUrl: './first-entry.component.html',
+  styleUrls: ['./first-entry.component.css'],
 })
-export class ResetComponent {
+export class FirstEntryComponent {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -53,10 +53,19 @@ export class ResetComponent {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.correo = params['email'];
       let urlToken = params['code'];
-      this.correoToken = urlToken.replace(/ /g, '+');
 
-      console.log(this.correo);
-      console.log(this.correoToken);
+      if (this.correo && urlToken) {
+        // Los parámetros requeridos están presentes, puedes procesarlos
+        this.correoToken = urlToken.replace(/ /g, '+');
+      } else {
+        this.toast.warning({
+          detail: 'ADVERTENCIA',
+          summary: 'No cuenta con el token para cambiar la contraseña',
+          duration: 4000,
+        });
+
+        this.router.navigate(['/tramites']);
+      }
     });
   }
 
@@ -70,13 +79,13 @@ export class ResetComponent {
         this.resetForm.value.confirmarContrasena;
 
       this.cambiarContrasenaService
-        .resetPassword(this.resetPasswordObj)
+        .resetPasswordFirstTime(this.resetPasswordObj)
         .subscribe({
           next: (res) => {
             console.log(res.message);
             this.toast.success({
               detail: 'CORRECTO',
-              summary: 'Contraseña cambiada exitosamente',
+              summary: res.message,
               duration: 4000,
             });
 
@@ -85,10 +94,9 @@ export class ResetComponent {
           error: (err) => {
             this.toast.error({
               detail: 'ERROR',
-              summary: 'Error al cambiar la contraseña',
+              summary: err.error,
               duration: 4000,
             });
-            console.log(err);
           },
         });
     } else {

@@ -18,9 +18,14 @@ export class CambiarContrasenaService {
   }
 
   resetPassword(resetPasswordObj: ResetPassword) {
-    console.log(resetPasswordObj);
     return this.http.post<any>(
       `${this.baseURL}/resetear-contrasena`,
+      resetPasswordObj
+    );
+  }
+  resetPasswordFirstTime(resetPasswordObj: ResetPassword) {
+    return this.http.post<any>(
+      `${this.baseURL}/activar-cuenta`,
       resetPasswordObj
     );
   }

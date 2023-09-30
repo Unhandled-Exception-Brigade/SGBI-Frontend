@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { EstadoDropdownComponent } from 'src/app/components/estado-dropdown/estado-dropdown.component';
+import { EstadoDropdownComponent } from 'src/app/components/dropdowns/estado-dropdown/estado-dropdown.component';
 import { actualizarUsuario } from 'src/app/models/actualizar-usuario';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
@@ -142,9 +142,16 @@ export class GestionUsuariosComponent {
         error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: 'No se pudo actualizar el usuario',
+            summary: err.error,
             duration: 4000,
           });
+
+          //aca se recarga la pagina
+          this.router
+            .navigateByUrl('/', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate(['/gestionUsuarios']);
+            });
         },
       });
   }
@@ -152,6 +159,10 @@ export class GestionUsuariosComponent {
   cancelarEdicion() {
     // Salir del modo de edición sin guardar cambios
     this.usuarioEnEdicion = null;
+    //aca se recarga la pagina
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/gestionUsuarios']);
+    });
   }
 
   estaEditando(usuario: any) {

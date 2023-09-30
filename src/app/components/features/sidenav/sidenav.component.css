@@ -8,6 +8,11 @@
   padding: 6px 10px;
   transition: 0.5s;
 }
+.offcanvas {
+  border-top-right-radius: 20px; /* Redondea la esquina superior derecha */
+  border-bottom-right-radius: 20px; /* Redondea la esquina inferior derecha */
+}
+
 .sidebar-nav ul li a:hover {
   background-color: #072414;
   border-radius: 4px;
