@@ -36,10 +36,10 @@ export class ResetComponent {
           '',
           [
             Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(20),
+            Validators.minLength(12),
+            Validators.maxLength(18),
             Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{12,18}$/
             ),
           ],
         ],
@@ -128,10 +128,10 @@ export class ResetComponent {
       return 'La contraseña es requerida';
     }
     if (campo?.hasError('minlength')) {
-      return 'La contraseña debe tener mínimo 8 caracteres';
+      return 'La contraseña debe tener mínimo 12 caracteres';
     }
     if (campo?.hasError('maxlength')) {
-      return 'La contraseña debe tener máximo 20 caracteres';
+      return 'La contraseña debe tener máximo 18 caracteres';
     }
     if (campo?.hasError('pattern')) {
       return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';

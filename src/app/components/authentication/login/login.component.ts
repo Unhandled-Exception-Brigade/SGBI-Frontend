@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import {SidenavService} from 'src/app/services/app-services/sidenav.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy{
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -19,28 +20,35 @@ export class LoginComponent {
   public esValidoElCorreo!: boolean;
 
   loginForm!: FormGroup;
-
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService,
     private usuarioService: UsuarioService,
+    private sideNav: SidenavService,
     private cambiarContrasenaService: CambiarContrasenaService
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      cedula: [
+      cedula: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]], // Utiliza un arreglo para los validadores
+      contrasena: [
         '',
         [
           Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(15),
+          Validators.minLength(12),
+          Validators.maxLength(18),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
         ],
-      ], // Utiliza un arreglo para los validadores
-      contrasena: ['', [Validators.required]],
+      ],
     });
+
+    this.sideNav.ocultar();
+  }
+
+  ngOnDestroy(){
+    this.sideNav.mostar();
   }
 
   hideShowPass() {
@@ -56,6 +64,7 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       this.auth.ingresar(this.loginForm.value).subscribe({
         next: (res) => {
+          console.log(res.message);
           this.loginForm.reset();
 
           this.auth.guardarToken(res.accessToken);
@@ -68,7 +77,7 @@ export class LoginComponent {
 
           this.toast.success({
             detail: 'CORRECTO',
-            summary: 'Inicio de sesión exitoso',
+            summary: res.message,
             duration: 4000,
           });
 
@@ -83,13 +92,13 @@ export class LoginComponent {
             summary: 'Credenciales incorrectas',
             duration: 4000,
           });
+          console.log(err);
         },
       });
     } else {
       console.log('Formulario inválido');
     }
   }
-
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       if (control instanceof FormGroup) {
@@ -103,27 +112,28 @@ export class LoginComponent {
     const campo = this.loginForm.get('cedula');
 
     if (campo?.hasError('required')) {
-      return 'La cédula es requerida';
+      return 'La cedula es requerida';
     }
-
-    if (campo?.hasError('minlength')) {
-      // Asegúrate de usar 'minlength' en minúsculas
-      return 'La cédula debe tener 9 dígitos';
+    if (campo?.hasError('minlength') || campo?.hasError('maxlength')) {
+      return 'La cedula debe tener exactamente 9 dígitos';
     }
-    if (campo?.hasError('maxlength')) {
-      // Asegúrate de usar 'maxlength' en minúsculas
-      return 'La cédula debe tener 15 dígitos';
-    }
-
+    
     return '';
   }
 
   obtenerErrorCampoContrasena() {
     const campo = this.loginForm.get('contrasena');
 
-    if (campo?.hasError('required')) {
-      return 'La contraseña es requerida';
-    }
+  if (campo?.hasError('required')) {
+    return 'La contraseña es requerida';
+  }
+ 
+  if (campo?.hasError('minlength')) {
+    return 'La contraseña debe tener el formato adecuado';
+  }
+  if (campo?.hasError('maxlength')) {
+    return 'La contraseña debe tener el formato adecuado';
+  }
 
     // Agregar más validaciones y mensajes de error según sea necesario...
 
@@ -157,7 +167,7 @@ export class LoginComponent {
           error: (err) => {
             this.toast.error({
               detail: 'ERROR',
-              summary: 'El correo ingresado no existe en el sistema',
+              summary: err.error.message,
               duration: 4000,
             });
           },

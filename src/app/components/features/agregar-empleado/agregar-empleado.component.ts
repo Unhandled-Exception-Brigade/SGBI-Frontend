@@ -15,6 +15,7 @@ export class AgregarEmpleadoComponent {
   apellido: string;
   cedula: string;
   correo: string;
+  contrasena: string;
 
   type: string = 'password';
   isText: boolean = false;
@@ -32,7 +33,7 @@ export class AgregarEmpleadoComponent {
     this.signupForm = this.fb.group({
       nombre: ['', [Validators.required, primeraLetraMayuscula()]],
       apellido: ['', [Validators.required, primeraLetraMayuscula()]],
-      cedula: ['', [Validators.required, Validators.minLength(9)]],
+      cedula: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       correo: [
         '',
         [
@@ -43,8 +44,24 @@ export class AgregarEmpleadoComponent {
           Validators.minLength(5),
         ],
       ],
+      contrasena: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(12),
+          Validators.maxLength(18),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
+        ],
+      ],
     });
   }
+
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
+
   onSignup() {
     this.markFormGroupTouched(this.signupForm);
 
@@ -59,7 +76,13 @@ export class AgregarEmpleadoComponent {
             duration: 4000,
           });
 
-          this.router.navigate(['/gestionUsuarios']);
+          // Verificar si el usuario está autenticado antes de redirigir
+          if (!this.auth.estaLogueado()) {
+            // Agregar un retraso de 1 segundo antes de redirigir al ingresar
+            setTimeout(() => {
+              this.router.navigate(['/ingresar']);
+            }, 600);
+          }
         },
         error: (err) => {
           this.toast.error({
@@ -113,8 +136,8 @@ export class AgregarEmpleadoComponent {
     if (campo?.hasError('required')) {
       return 'La cedula es requerida';
     }
-    if (campo?.hasError('minlength')) {
-      return 'La cedula debe tener 9 digitos';
+    if (campo?.hasError('minlength') || campo?.hasError('maxlength')) {
+      return 'La cedula debe tener exactamente 9 dígitos';
     }
     return '';
   }
@@ -137,6 +160,25 @@ export class AgregarEmpleadoComponent {
     if (campo?.hasError('minlength')) {
       return 'El correo debe tener mínimo 5 caracteres';
     }
+
+    return '';
+  }
+  obtenerErrorCampoContrasena() {
+    const campo = this.signupForm.get('contrasena');
+
+    if (campo?.hasError('required')) {
+      return 'La contraseña es requerida';
+    }
+    if (campo?.hasError('pattern')) {
+      return 'La contraseña debe incluir al menos una mayúscula, una minúscula, un número y un caracter especial (@$!%*?&)';
+    }
+    if (campo?.hasError('minlength')) {
+      return 'La contraseña debe tener al menos 12 caracteres';
+    }
+    if (campo?.hasError('maxlength')) {
+      return 'La contraseña debe tener máximo 18 caracteres';
+    }
+
     return '';
   }
 }
