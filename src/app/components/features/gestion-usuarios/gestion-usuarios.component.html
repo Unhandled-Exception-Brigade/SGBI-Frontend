@@ -175,7 +175,7 @@
     <div class="d-flex justify-content-center">
       <ul class="pagination">
         <li class="page-item" *ngFor="let pagina of calcularPaginas(); let i = index">
-          <a class="page-link" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
+          <a class="page-link cursor" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
         </li>
       </ul>
     </div>

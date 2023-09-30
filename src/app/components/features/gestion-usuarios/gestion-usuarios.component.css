@@ -9,6 +9,10 @@ tbody tr td {
   color: #000000d0;
 }
 
+.cursor{
+  cursor: pointer;
+}
+
 .custom-modal-dialog {
   max-width: 50%;
   width: 50%;
