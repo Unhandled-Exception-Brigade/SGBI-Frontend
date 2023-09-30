@@ -3,11 +3,7 @@
     <div class="d-flex align-items-end pt-4">
       <form class="d-flex" role="search">
         <div *ngIf="rol === 'administrador'">
-          <button
-            type="button"
-            class="btn btn-success ml-3"
-            [routerLink]="['/agregarEmpleado']"
-          >
+          <button type="button" class="btn btn-success ml-3" [routerLink]="['/agregarEmpleado']">
             Agregar Empleado
           </button>
         </div>
@@ -20,6 +16,18 @@
 
 <!--Tabla de usuarios-->
 <div *ngIf="rol === 'administrador'" class="container">
+  <!-- Campo de búsqueda -->
+  <div class="mb-3">
+    <label for="busqueda" class="form-label">Buscar Usuario:</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Búsqueda por Nombre, Apellido y Cédula" id="busqueda"
+        [(ngModel)]="filtroBusqueda" (input)="realizarBusqueda()" />
+      <span class="input-group-text">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+
   <h4 class="text-center pt-1">Lista de usuarios</h4>
   <br />
   <div class="table-container">
@@ -31,21 +39,6 @@
             <th scope="col">#</th>
             <th scope="col">
               Cedula
-              <button
-                type="button"
-                class="btn btn-link"
-                (click)="cambiarOrden('nombre')"
-              >
-                <!-- <i [ngClass]="{'fa fa-sort-asc': ordenAscendente, 'fa fa-sort-desc': !ordenAscendente}"></i> (NO FUNCIONA EL ASCENDENTE) -->
-                <i
-                  class="fa fa-arrow-up"
-                  *ngIf="columnaOrden === 'nombre' && ordenAscendente"
-                ></i>
-                <i
-                  class="fa fa-arrow-down"
-                  *ngIf="columnaOrden === 'nombre' && !ordenAscendente"
-                ></i>
-              </button>
             </th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
@@ -58,14 +51,7 @@
         <tbody>
           <!-- Usar un índice basado en la página actual -->
           <ng-container
-            *ngFor="
-              let usuario of usuarios.slice(
-                (paginaActual - 1) * usuariosPorPagina,
-                paginaActual * usuariosPorPagina
-              );
-              let i = index
-            "
-          >
+            *ngFor=" let usuario of usuarios.slice((paginaActual - 1) * usuariosPorPagina,paginaActual * usuariosPorPagina);let i = index">
             <tr>
               <th scope="row">
                 {{ (paginaActual - 1) * usuariosPorPagina + i + 1 }}
@@ -78,6 +64,21 @@
               <td>
                 <ng-container *ngIf="estaEditando(usuario)">
                   <input [(ngModel)]="usuario.nombre" class="form-control" />
+                  <span class="text-muted">
+                    <!-- Otros elementos como el contador de caracteres pueden ir aquí -->
+                  </span>
+                  <ng-container
+                    *ngIf="validarNombre(usuario.nombre).nombreValido && !validarNombre(usuario.nombre).caracterEspecial">
+                    <span class="text-success iconos">✓</span>
+                    <span class="text-success">Nombre válido</span>
+                  </ng-container>
+                  <ng-container *ngIf="!validarNombre(usuario.nombre).nombreValido">
+                    <span class="text-danger iconos">✕</span>
+                    <span class="text-danger">{{ validarNombre(usuario.nombre).mensaje }}</span>
+                  </ng-container>
+                  <ng-container *ngIf="validarNombre(usuario.nombre).contieneNumeros">
+                    <span class="text-danger"></span>
+                  </ng-container>
                 </ng-container>
                 <ng-container *ngIf="!estaEditando(usuario)">
                   {{ usuario.nombre }}
@@ -87,6 +88,18 @@
               <td>
                 <ng-container *ngIf="estaEditando(usuario)">
                   <input [(ngModel)]="usuario.apellido" class="form-control" />
+                  <span class="text-muted">
+                    <!-- Otros elementos como el contador de caracteres pueden ir aquí -->
+                  </span>
+                  <ng-container
+                    *ngIf="validarApellido(usuario.apellido).apellidoValido && !validarApellido(usuario.apellido).caracterEspecial">
+                    <span class="text-success iconos">✓</span>
+                    <span class="text-success">Apellido válido</span>
+                  </ng-container>
+                  <ng-container *ngIf="!validarApellido(usuario.apellido).apellidoValido">
+                    <span class="text-danger iconos">✕</span>
+                    <span class="text-danger">{{ validarApellido(usuario.apellido).mensaje }}</span>
+                  </ng-container>
                 </ng-container>
                 <ng-container *ngIf="!estaEditando(usuario)">
                   {{ usuario.apellido }}
@@ -96,6 +109,17 @@
               <td>
                 <ng-container *ngIf="estaEditando(usuario)">
                   <input [(ngModel)]="usuario.correo" class="form-control" />
+                  <span class="text-muted">
+                    <!-- Otros elementos como el contador de caracteres pueden ir aquí -->
+                  </span>
+                  <ng-container *ngIf="validarCorreo(usuario.correo)">
+                    <span class="text-success iconos">✓</span>
+                    <span class="text-success">Correo válido</span>
+                  </ng-container>
+                  <ng-container *ngIf="!validarCorreo(usuario.correo)">
+                    <span class="text-danger iconos">✕</span>
+                    <span class="text-danger">Correo no válido</span>
+                  </ng-container>
                 </ng-container>
                 <ng-container *ngIf="!estaEditando(usuario)">
                   {{ usuario.correo }}
@@ -104,10 +128,8 @@
 
               <td>
                 <ng-container *ngIf="estaEditando(usuario)">
-                  <app-role-dropdown
-                    [selectedRole]="usuario.rol"
-                    (roleSelected)="updateUserRole($event, usuario)"
-                  ></app-role-dropdown>
+                  <app-role-dropdown [selectedRole]="usuario.rol"
+                    (roleSelected)="updateUserRole($event, usuario)"></app-role-dropdown>
                 </ng-container>
                 <ng-container *ngIf="!estaEditando(usuario)">
                   {{ usuario.rol }}
@@ -116,12 +138,9 @@
 
               <td>
                 <ng-container *ngIf="estaEditando(usuario)">
-                  <app-estado-dropdown
-                    [estadoSeleccionado]="usuario.EstaInactivo"
-                    (estadoSeleccionadoOutput)="
+                  <app-estado-dropdown [estadoSeleccionado]="usuario.EstaInactivo" (estadoSeleccionadoOutput)="
                       updateUserEstado($event, usuario)
-                    "
-                  ></app-estado-dropdown>
+                    "></app-estado-dropdown>
                 </ng-container>
                 <ng-container *ngIf="!estaEditando(usuario)">
                   {{ usuario.estaInactivo ? "inactivo" : "activo" }}
@@ -129,29 +148,20 @@
               </td>
 
               <td>
-                <button
-                  type="button"
-                  class="btn btn-outline-success ml-3 mr-3"
-                  *ngIf="!estaEditando(usuario)"
-                  (click)="editarUsuario(usuario)"
-                >
+                <button type="button" class="btn btn-outline-success ml-3 mr-3" *ngIf="!estaEditando(usuario)"
+                  (click)="editarUsuario(usuario)">
                   Editar
                 </button>
                 <div class="d-flex flex-row">
-                  <button
-                    type="button"
-                    class="btn btn-outline-primary ml-3 mr-3"
-                    *ngIf="estaEditando(usuario)"
-                    (click)="guardarCambios(usuario)"
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger ml-3 mr-3"
-                    *ngIf="estaEditando(usuario)"
-                    (click)="cancelarEdicion(usuario)"
-                  >
+                  <button type="button" class="btn btn-outline-primary ml-3 mr-3"
+                  *ngIf="estaEditando(usuario)" (click)="guardarCambios(usuario)"
+                  [disabled]="(!validarNombre(usuario.nombre).nombreValido || validarNombre(usuario.nombre).caracterEspecial || validarNombre(usuario.nombre).contieneNumeros) 
+                  || (!validarApellido(usuario.apellido).apellidoValido || validarApellido(usuario.apellido).caracterEspecial || validarApellido(usuario.apellido).contieneNumeros) 
+                  || !validarCorreo(usuario.correo)">
+                  Guardar
+              </button>
+                  <button type="button" class="btn btn-outline-danger ml-3 mr-3" *ngIf="estaEditando(usuario)"
+                    (click)="cancelarEdicion(usuario)">
                     Cancelar
                   </button>
                 </div>
@@ -164,10 +174,7 @@
     <!-- Controles de paginación -->
     <div class="d-flex justify-content-center">
       <ul class="pagination">
-        <li
-          class="page-item"
-          *ngFor="let pagina of calcularPaginas(); let i = index"
-        >
+        <li class="page-item" *ngFor="let pagina of calcularPaginas(); let i = index">
           <a class="page-link" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
         </li>
       </ul>
