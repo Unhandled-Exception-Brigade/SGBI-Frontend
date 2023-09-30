@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/authentication/login/login.component';
-import { SignupComponent } from './components/authentication/signup/signup.component';
 import { authGuard } from './guards/auth.guard';
 import { ResetComponent } from './components/authentication/reset/reset.component';
 import { AgregarEmpleadoComponent } from './components/features/agregar-empleado/agregar-empleado.component';
@@ -22,11 +21,6 @@ const routes: Routes = [
   {
     path: 'ingresar',
     component: LoginComponent,
-  },
-  {
-    path: 'registrarse',
-    canActivate: [authGuard],
-    component: SignupComponent,
   },
   {
     path: 'resetear',

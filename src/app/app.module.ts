@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
-import { SignupComponent } from './components/authentication/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './helpers/material/material.module';
@@ -29,7 +28,6 @@ import { FirstEntryComponent } from './components/authentication/first-entry/fir
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent,
 
     ResetComponent,
     GestionUsuariosComponent,
