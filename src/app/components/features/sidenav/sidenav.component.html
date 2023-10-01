@@ -21,7 +21,7 @@
               <ul class="navbar-nav">
                 <li class="" *ngFor="let data of navData">
                   <ng-container *ngIf="tienePermiso(data.permiso)">
-                    <a href="" [routerLink]="[data.routeLink]" routerLinkActive="active"
+                    <a class="pl-4" [routerLink]="[data.routeLink]" routerLinkActive="active"
                       [routerLinkActiveOptions]="{ exact: true }">
                       <i class="bi" [class]="data.icon" style="color: white">
                         <span class="fuente item-text  Roboto pl-3">{{data.label}}</span>
