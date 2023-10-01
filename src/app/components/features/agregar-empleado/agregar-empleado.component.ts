@@ -43,9 +43,9 @@ export class AgregarEmpleadoComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(9),
-          this.validarCedula,
+        Validators.pattern(/^\d+$/), // Asegura que solo se ingresen números
+        Validators.minLength(9),
+        Validators.maxLength(9),
         ],
       ],
       correo: [
@@ -98,33 +98,40 @@ export class AgregarEmpleadoComponent {
       }
     });
 
-    // Observa cambios en el campo 'cedula' en tiempo real
-  this.signupForm.get('cedula').valueChanges.subscribe(() => {
-    // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
-    this.signupForm.get('cedula').markAsTouched();
-
-    // Obtén el valor actual del campo de cédula
-    const cedula = this.signupForm.get('cedula').value;
-
-    // Verifica si la cédula contiene caracteres no numéricos
-    const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
-
-    // Verifica la longitud de la cédula
-    const longitudValida = cedula.length === 9;
-
-    // Actualiza los mensajes de error en función de las validaciones
-    const errores = {};
-
-    if (contieneCaracteresNoNumericos) {
-      errores['caracteresNoNumericos'] = true;
-    }
-
-    if (!longitudValida && !contieneCaracteresNoNumericos) {
-      errores['longitudInvalida'] = true;
-    }
-
-    this.signupForm.get('cedula').setErrors(errores);
-  });
+    this.signupForm.get('cedula').valueChanges.subscribe(() => {
+      // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
+      this.signupForm.get('cedula').markAsTouched();
+    
+      // Obtén el valor actual del campo de cédula
+      const cedula = this.signupForm.get('cedula').value;
+    
+      // Verifica si la cédula contiene caracteres no numéricos
+      const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
+    
+      // Verifica la longitud de la cédula
+      const longitudValida = cedula.length === 9;
+    
+      // Actualiza los mensajes de error en función de las validaciones
+      const errores = {};
+    
+      if (contieneCaracteresNoNumericos) {
+        errores['caracteresNoNumericos'] = true;
+      }
+    
+      if (!longitudValida) {
+        errores['longitudInvalida'] = true;
+      }
+    
+      // Elimina la clase de error si no hay errores y la cédula es válida
+      if (!contieneCaracteresNoNumericos && longitudValida) {
+        const cedulaInputField = document.querySelector('.input-field.cedula-input-field'); // Ajusta el selector según tu estructura HTML
+        cedulaInputField.classList.remove('error');
+      }
+    
+      this.signupForm.get('cedula').setErrors(errores);
+    });
+    
+    
   } // fin ngOnInit()
 
   hideShowPass() {
