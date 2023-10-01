@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { primeraLetraMayuscula } from 'src/app/helpers/validators/primeraLetraMayuscula';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -32,8 +37,8 @@ export class AgregarEmpleadoComponent {
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
-      nombre: ['', [Validators.required, primeraLetraMayuscula()]],
-      apellido: ['', [Validators.required, primeraLetraMayuscula()]],
+      nombre: ['', [Validators.required, this.validarNombre]],
+      apellido: ['', [Validators.required, this.validarApellido]],
       cedula: [
         '',
         [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
@@ -48,6 +53,18 @@ export class AgregarEmpleadoComponent {
           Validators.minLength(5),
         ],
       ],
+    });
+
+    // Observa cambios en el campo 'nombre' en tiempo real
+    this.signupForm.get('nombre').valueChanges.subscribe(() => {
+      // Marca el campo como tocado para que se muestren los mensajes de error
+      this.signupForm.get('nombre').markAsTouched();
+    });
+
+    // Observa cambios en el campo 'apellido' en tiempo real
+    this.signupForm.get('apellido').valueChanges.subscribe(() => {
+      // Marca el campo como tocado para que se muestren los mensajes de error
+      this.signupForm.get('apellido').markAsTouched();
     });
   }
 
@@ -108,29 +125,6 @@ export class AgregarEmpleadoComponent {
     });
   }
 
-  obtenerErrorCampoNombre() {
-    const campo = this.signupForm.get('nombre');
-
-    if (campo?.hasError('required')) {
-      return 'El nombre es requerido';
-    }
-    if (campo?.hasError('primeraLetraMayuscula')) {
-      return campo.getError('primeraLetraMayuscula').mensaje;
-    }
-    return '';
-  }
-  obtenerErrorCampoApellido() {
-    const campo = this.signupForm.get('apellido');
-
-    if (campo?.hasError('required')) {
-      return 'El apellido es requerido';
-    }
-    if (campo?.hasError('primeraLetraMayuscula')) {
-      return campo.getError('primeraLetraMayuscula').mensaje;
-    }
-    return '';
-  }
-
   obtenerErrorCampoCedula() {
     const campo = this.signupForm.get('cedula');
 
@@ -163,6 +157,50 @@ export class AgregarEmpleadoComponent {
     }
 
     return '';
+  }
+
+  validarNombre(control: FormControl) {
+    const nombre = control.value;
+    const regexLower = /^[a-z]/; // Primera letra minúscula
+    const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
+
+    const errors = {};
+
+    if (regexLower.test(nombre)) {
+      errors['nombreInvalidoLower'] = true;
+    }
+
+    if (regexSpecial.test(nombre)) {
+      errors['nombreInvalidoSpecial'] = true;
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return errors;
+    }
+
+    return null;
+  }
+
+  validarApellido(control: FormControl) {
+    const apellido = control.value;
+    const regexLower = /^[a-z]/; // Primera letra minúscula
+    const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
+
+    const errors = {};
+
+    if (regexLower.test(apellido)) {
+      errors['apellidoInvalidoLower'] = true;
+    }
+
+    if (regexSpecial.test(apellido)) {
+      errors['apellidoInvalidoSpecial'] = true;
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return errors;
+    }
+
+    return null;
   }
 
   desactivarBoton() {
