@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import {FormBuilder,FormGroup,Validators,FormControl,} from '@angular/forms';
 import { primeraLetraMayuscula } from 'src/app/helpers/validators/primeraLetraMayuscula';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -33,7 +28,7 @@ export class AgregarEmpleadoComponent {
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -43,9 +38,9 @@ export class AgregarEmpleadoComponent {
         '',
         [
           Validators.required,
-        Validators.pattern(/^\d+$/), // Asegura que solo se ingresen números
-        Validators.minLength(9),
-        Validators.maxLength(9),
+          Validators.pattern(/^\d+$/), // Asegura que solo se ingresen números
+          Validators.minLength(9),
+          Validators.maxLength(9),
         ],
       ],
       correo: [
@@ -67,13 +62,13 @@ export class AgregarEmpleadoComponent {
 
       // Cambia las clases CSS del cuadro del campo 'nombre' según su estado de validación
       const nombreControl = this.signupForm.get('nombre');
-      const nombreInputField = document.querySelector('.nombre-input-field'); // Ajusta el selector según tu estructura HTML
+      const nombreInputField = document.querySelector('.nombre-input-field'); 
 
       if (nombreControl.valid && nombreControl.touched) {
         nombreInputField.classList.remove('error');
         nombreInputField.classList.add('success');
       } else {
-        nombreInputField.classList.remove('success'); // Asegúrate de quitar la clase 'success' cuando no sea válido
+        nombreInputField.classList.remove('success'); 
         nombreInputField.classList.add('error');
       }
     });
@@ -83,17 +78,16 @@ export class AgregarEmpleadoComponent {
       // Marca el campo 'apellido' como tocado para que se muestren los mensajes de error
       this.signupForm.get('apellido').markAsTouched();
 
-      // Cambia las clases CSS del cuadro del campo 'apellido' según su estado de validación
       const apellidoControl = this.signupForm.get('apellido');
       const apellidoInputField = document.querySelector(
         '.apellido-input-field'
-      ); // Ajusta el selector según tu estructura HTML
+      ); 
 
       if (apellidoControl.valid && apellidoControl.touched) {
         apellidoInputField.classList.remove('error');
         apellidoInputField.classList.add('success');
       } else {
-        apellidoInputField.classList.remove('success'); // Asegúrate de quitar la clase 'success' cuando no sea válido
+        apellidoInputField.classList.remove('success');
         apellidoInputField.classList.add('error');
       }
     });
@@ -101,37 +95,66 @@ export class AgregarEmpleadoComponent {
     this.signupForm.get('cedula').valueChanges.subscribe(() => {
       // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
       this.signupForm.get('cedula').markAsTouched();
-    
+
       // Obtén el valor actual del campo de cédula
       const cedula = this.signupForm.get('cedula').value;
-    
+
       // Verifica si la cédula contiene caracteres no numéricos
       const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
-    
+
       // Verifica la longitud de la cédula
       const longitudValida = cedula.length === 9;
+
+      // Actualiza los mensajes de error en función de las validaciones
+      const errores = {};
+
+      if (contieneCaracteresNoNumericos) {
+        errores['caracteresNoNumericos'] = true;
+      }
+
+      if (!longitudValida) {
+        errores['longitudInvalida'] = true;
+      }
+
+      // Elimina la clase de error si no hay errores y la cédula es válida
+      if (!contieneCaracteresNoNumericos && longitudValida) {
+        const cedulaInputField = document.querySelector(
+          '.input-field.cedula-input-field'
+        ); // Ajusta el selector según tu estructura HTML
+        cedulaInputField.classList.remove('error');
+      }
+
+      this.signupForm.get('cedula').setErrors(errores);
+    });
+
+    this.signupForm.get('correo').valueChanges.subscribe(() => {
+      // Marca el campo 'correo' como tocado para mostrar los mensajes de error
+      this.signupForm.get('correo').markAsTouched();
+    
+      // Obtén el valor actual del campo de correo
+      const correo = this.signupForm.get('correo').value;
+    
+      // Verifica si el correo cumple con el formato válido
+      const formatoValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo);
     
       // Actualiza los mensajes de error en función de las validaciones
       const errores = {};
     
-      if (contieneCaracteresNoNumericos) {
-        errores['caracteresNoNumericos'] = true;
+      if (!formatoValido) {
+        errores['correoInvalido'] = true;
       }
     
-      if (!longitudValida) {
-        errores['longitudInvalida'] = true;
+      // Elimina la clase de error si no hay errores y el correo es válido
+      if (formatoValido) {
+        const correoInputField = document.querySelector('.input-field.correo-input-field'); // Ajusta el selector según tu estructura HTML
+        correoInputField.classList.remove('error');
       }
     
-      // Elimina la clase de error si no hay errores y la cédula es válida
-      if (!contieneCaracteresNoNumericos && longitudValida) {
-        const cedulaInputField = document.querySelector('.input-field.cedula-input-field'); // Ajusta el selector según tu estructura HTML
-        cedulaInputField.classList.remove('error');
-      }
-    
-      this.signupForm.get('cedula').setErrors(errores);
+      this.signupForm.get('correo').setErrors(errores);
     });
     
-    
+
+
   } // fin ngOnInit()
 
   hideShowPass() {
@@ -151,9 +174,9 @@ export class AgregarEmpleadoComponent {
           this.toast.success({
             detail: 'CORRECTO',
             summary: res.message,
-            duration: 4000
+            duration: 4000,
           });
-      
+
           setTimeout(() => {
             this.router.navigate(['/gestionUsuarios']);
             this.botonDesactivado = false;
@@ -186,18 +209,6 @@ export class AgregarEmpleadoComponent {
         control.markAsTouched();
       }
     });
-  }
-
-  obtenerErrorCampoCedula() {
-    const campo = this.signupForm.get('cedula');
-
-    if (campo?.hasError('required')) {
-      return 'La cedula es requerida';
-    }
-    if (campo?.hasError('minlength') || campo?.hasError('maxlength')) {
-      return 'La cedula debe tener exactamente 9 dígitos';
-    }
-    return '';
   }
 
   validarCedula(control: FormControl) {

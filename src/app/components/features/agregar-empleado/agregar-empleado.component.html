@@ -3,10 +3,6 @@
     <div class="row">
       <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
         <div class="panel border bg-white">
-          <!-- <div class="panel-heading">
-              <h3 class="pt-3 font-weight-bold">Registrar Usuario</h3>
-            </div> -->
-
           <div class="panel-body p-3">
             <form class="form" [formGroup]="signupForm">
               <p class="title">Registrar a un Usuario</p>
@@ -45,7 +41,7 @@
                 </ng-container>
               </small>
 
-              <!-- --- -->
+              <!-- APELLIDO -->
               <div class="form-group pt-3 flex">
                 <div class="input-field" [class.error]="
                     signupForm.get('apellido').touched &&
@@ -61,6 +57,7 @@
                 </div>
               </div>
 
+              
               <small class="text-danger" *ngIf="
                   signupForm.get('apellido').touched &&
                   signupForm.get('apellido').hasError('apellidoInvalidoLower')
@@ -85,7 +82,7 @@
                 </ng-container>
               </small>
 
-              <!--  -->
+              <!-- CEDULA  -->
               <div class="form-group pt-3">
                 <div class="input-field" [class.error]="
                     signupForm.get('cedula').touched &&
@@ -102,10 +99,6 @@
                 </small>
               </div>
               
-
-
-
-
               <!-- <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle w-100"
@@ -124,6 +117,7 @@
                 </div>
               </div> -->
 
+              <!-- CORREO -->
               <div class="form-group pt-3">
                 <div class="input-field" [class.error]="
                     signupForm.get('correo').touched &&
@@ -134,10 +128,12 @@
                 </div>
               </div>
 
-              <small class="text-danger" *ngIf="
-                  signupForm.get('correo').touched &&
-                  signupForm.get('correo').invalid
-                ">{{ obtenerErrorCampoCorreo() }}</small>
+              <small class="text-danger" *ngIf="signupForm.get('correo').hasError('correoInvalido')">
+                El correo debe tener un formato válido:
+                <br>
+                alguien@ejemplo.com
+              </small>
+              
 
               <button (click)="onSignup()" [ngClass]="desactivarBoton()" type="submit"
                 class="btn btn-primary btn-block mt-4 w-100">
