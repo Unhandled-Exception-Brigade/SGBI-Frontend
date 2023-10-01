@@ -162,10 +162,9 @@ export class AgregarEmpleadoComponent {
         error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: 'Credenciales ya existentes',
+            summary: err.message,
             duration: 4000,
           });
-          console.log(err);
         },
       });
     } else {

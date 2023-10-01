@@ -34,6 +34,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     component: TramitesComponent,
   },
+  //comentario xd
   {
     path: 'creacion-tramites',
     canActivate: [authGuard],

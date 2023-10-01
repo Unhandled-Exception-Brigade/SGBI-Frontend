@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: 'Credenciales incorrectas',
+            summary: err.error,
             duration: 4000,
           });
           console.log(err);
