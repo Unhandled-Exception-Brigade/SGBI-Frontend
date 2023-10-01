@@ -68,7 +68,7 @@ export class LoginComponent {
 
           this.toast.success({
             detail: 'CORRECTO',
-            summary: res.message,
+            summary: 'Bienvenido al sistema',
             duration: 4000,
           });
 
