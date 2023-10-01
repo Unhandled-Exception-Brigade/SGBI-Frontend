@@ -50,7 +50,6 @@ export class GestionUsuariosComponent {
       this.rol = val || rolDelToken;
     });
 
-    this
   }
 
   cerrarSesion() {
@@ -338,4 +337,12 @@ export class GestionUsuariosComponent {
     // Validar el correo con la expresión regular
     return regex.test(correo);
   }
+
+  esMyUsuario(){
+    if(this.usuarioEnEdicion.cedula === this.cedula){
+      return true;
+    }
+    return false;
+  }
+
 } // fin GestionUsuariosComponent

@@ -127,23 +127,23 @@
               </td>
 
               <td>
-                <ng-container *ngIf="estaEditando(usuario)">
+                <ng-container *ngIf="estaEditando(usuario) && esMyUsuario() != true; else usuarioRol">
                   <app-role-dropdown [selectedRole]="usuario.rol"
                     (roleSelected)="updateUserRole($event, usuario)"></app-role-dropdown>
                 </ng-container>
-                <ng-container *ngIf="!estaEditando(usuario)">
-                  {{ usuario.rol }}
-                </ng-container>
+                <ng-template #usuarioRol>
+                    {{ usuario.rol }}
+                </ng-template>
               </td>
 
               <td>
-                <ng-container *ngIf="estaEditando(usuario)">
+                <ng-container *ngIf="estaEditando(usuario) && esMyUsuario() != true; else usuarioEstado">
                   <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado" (estadoSeleccionadoOutput)="updateUserEstado($event, usuario)"></app-estado-dropdown>
 
                 </ng-container>
-                <ng-container *ngIf="!estaEditando(usuario)">
+                <ng-template #usuarioEstado>
                   {{ usuario.estaInactivo ? "inactivo" : "activo" }}
-                </ng-container>
+                </ng-template>
               </td>
 
               <td>
