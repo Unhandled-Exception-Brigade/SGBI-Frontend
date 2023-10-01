@@ -41,7 +41,12 @@ export class AgregarEmpleadoComponent {
       apellido: ['', [Validators.required, this.validarApellido]],
       cedula: [
         '',
-        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(9),
+          this.validarCedula,
+        ],
       ],
       correo: [
         '',
@@ -57,16 +62,70 @@ export class AgregarEmpleadoComponent {
 
     // Observa cambios en el campo 'nombre' en tiempo real
     this.signupForm.get('nombre').valueChanges.subscribe(() => {
-      // Marca el campo como tocado para que se muestren los mensajes de error
+      // Marca el campo 'nombre' como tocado para que se muestren los mensajes de error
       this.signupForm.get('nombre').markAsTouched();
+
+      // Cambia las clases CSS del cuadro del campo 'nombre' según su estado de validación
+      const nombreControl = this.signupForm.get('nombre');
+      const nombreInputField = document.querySelector('.nombre-input-field'); // Ajusta el selector según tu estructura HTML
+
+      if (nombreControl.valid && nombreControl.touched) {
+        nombreInputField.classList.remove('error');
+        nombreInputField.classList.add('success');
+      } else {
+        nombreInputField.classList.remove('success'); // Asegúrate de quitar la clase 'success' cuando no sea válido
+        nombreInputField.classList.add('error');
+      }
     });
 
     // Observa cambios en el campo 'apellido' en tiempo real
     this.signupForm.get('apellido').valueChanges.subscribe(() => {
-      // Marca el campo como tocado para que se muestren los mensajes de error
+      // Marca el campo 'apellido' como tocado para que se muestren los mensajes de error
       this.signupForm.get('apellido').markAsTouched();
+
+      // Cambia las clases CSS del cuadro del campo 'apellido' según su estado de validación
+      const apellidoControl = this.signupForm.get('apellido');
+      const apellidoInputField = document.querySelector(
+        '.apellido-input-field'
+      ); // Ajusta el selector según tu estructura HTML
+
+      if (apellidoControl.valid && apellidoControl.touched) {
+        apellidoInputField.classList.remove('error');
+        apellidoInputField.classList.add('success');
+      } else {
+        apellidoInputField.classList.remove('success'); // Asegúrate de quitar la clase 'success' cuando no sea válido
+        apellidoInputField.classList.add('error');
+      }
     });
-  }
+
+    // Observa cambios en el campo 'cedula' en tiempo real
+  this.signupForm.get('cedula').valueChanges.subscribe(() => {
+    // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
+    this.signupForm.get('cedula').markAsTouched();
+
+    // Obtén el valor actual del campo de cédula
+    const cedula = this.signupForm.get('cedula').value;
+
+    // Verifica si la cédula contiene caracteres no numéricos
+    const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
+
+    // Verifica la longitud de la cédula
+    const longitudValida = cedula.length === 9;
+
+    // Actualiza los mensajes de error en función de las validaciones
+    const errores = {};
+
+    if (contieneCaracteresNoNumericos) {
+      errores['caracteresNoNumericos'] = true;
+    }
+
+    if (!longitudValida && !contieneCaracteresNoNumericos) {
+      errores['longitudInvalida'] = true;
+    }
+
+    this.signupForm.get('cedula').setErrors(errores);
+  });
+  } // fin ngOnInit()
 
   hideShowPass() {
     this.isText = !this.isText;
@@ -135,6 +194,24 @@ export class AgregarEmpleadoComponent {
       return 'La cedula debe tener exactamente 9 dígitos';
     }
     return '';
+  }
+
+  validarCedula(control: FormControl) {
+    const cedula = control.value;
+    const regex = /^[0-9]{9}$/; // Verifica si la cédula tiene exactamente 9 dígitos
+
+    if (!regex.test(cedula)) {
+      return { cedulaInvalida: true };
+    }
+
+    // Si llegamos aquí, la cédula tiene 9 dígitos, pero ahora verificamos que no contiene letras ni caracteres especiales
+    const regexLetrasCaracteresEspeciales =
+      /[a-zA-Z!@#$%^&*()_+{}\[\]:;<>,.?~\\]/;
+    if (regexLetrasCaracteresEspeciales.test(cedula)) {
+      return { cedulaInvalida: true };
+    }
+
+    return null; // La cédula es válida
   }
 
   obtenerErrorCampoCorreo() {

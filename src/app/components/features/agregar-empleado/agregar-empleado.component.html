@@ -86,7 +86,6 @@
               </small>
 
               <!--  -->
-
               <div class="form-group pt-3">
                 <div class="input-field" [class.error]="
                     signupForm.get('cedula').touched &&
@@ -95,14 +94,16 @@
                   <span class="fa fa-id-card p-2"></span>
                   <input formControlName="cedula" type="text" placeholder="Cédula" />
                 </div>
+                <small class="text-danger" *ngIf="signupForm.get('cedula').hasError('caracteresNoNumericos')">
+                  La cédula debe contener solo números.
+                </small>
+                <small class="text-danger" *ngIf="signupForm.get('cedula').hasError('longitudInvalida')">
+                  La cédula debe tener exactamente 9 números.
+                </small>
               </div>
 
-              <small class="text-danger" *ngIf="
-                  signupForm.get('cedula').touched &&
-                  signupForm.get('cedula').invalid
-                ">
-                {{ obtenerErrorCampoCedula() }}
-              </small>
+
+
 
               <!-- <div class="dropdown">
                 <button
