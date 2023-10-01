@@ -132,6 +132,15 @@ img {
   cursor: not-allowed; /* Cambia el cursor a "no permitido" cuando el botón está desactivado */
 }
 
+.error {
+  border: 1px solid red; /* Estilo de borde en caso de error */
+}
+
+.success {
+  border: 1px solid green; /* Estilo de borde en caso de éxito */
+}
+
+
 @keyframes pulse {
   from {
     transform: scale(0.9);

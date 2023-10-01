@@ -8,7 +8,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {ModalConfirmacionComponent} from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component'
+import { ModalConfirmacionComponent } from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component'
 
 
 @Component({
@@ -37,7 +37,7 @@ export class GestionUsuariosComponent {
     private router: Router,
     private editarUsuarioService: EditarUsuarioService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.api.obtenerUsuarios().subscribe((res) => {
@@ -53,6 +53,7 @@ export class GestionUsuariosComponent {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
+
   }
 
   cerrarSesion() {
@@ -82,10 +83,16 @@ export class GestionUsuariosComponent {
     usuario.estaInactivo = nuevoEstado;
   }
 
+  actualizarEstado(nuevoEstado: string, usuario: any) {
+    usuario.estaInactivo = nuevoEstado;
+  }
+
   public usuariosEditables: any = []; // Un array para mantener usuarios en modo de edición
   public usuariosEnEdicion: Set<number> = new Set<number>(); // Conjunto de IDs de usuarios en modo de edición
   public usuarioEnEdicionId: number | null = null; // ID del usuario actualmente en edición
   public usuarioEnEdicion: any | null = null; // Usuario actualmente en edición, inicializado como null
+
+  estadoSeleccionado: string;
 
   editarUsuario(usuario: any) {
     // Validar el correo electrónico actual antes de iniciar la edición
@@ -93,6 +100,9 @@ export class GestionUsuariosComponent {
     const nombreActualValido = this.validarNombre(usuario.nombre);
     const apellidoActualValido = this.validarApellido(usuario.apellido);
     const cedulaActualValida = this.validarCedula(usuario.cedula);
+
+    // Asigna el estado actual del usuario a estadoSeleccionado
+    this.estadoSeleccionado = usuario.estaInactivo ? 'inactivo' : 'activo';
 
     if (correoActualValido) {
       // El correo actual es válido, ahora se puede iniciar la edición
@@ -341,6 +351,12 @@ export class GestionUsuariosComponent {
         this.guardarCambios();
       }
     });
+  }
+  esMyUsuario() {
+    if (this.usuarioEnEdicion.cedula === this.cedula) {
+      return true;
+    }
+    return false;
   }
 
 } // fin GestionUsuariosComponent

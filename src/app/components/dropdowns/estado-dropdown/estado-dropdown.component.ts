@@ -11,9 +11,12 @@ export class EstadoDropdownComponent {
 
   estado_establecido(estado: string) {
     if (estado == 'activo') {
+      this.estadoSeleccionado = 'activo';
       this.estadoSeleccionadoOutput.emit(false);
     } else {
+      this.estadoSeleccionado = 'inactivo';
       this.estadoSeleccionadoOutput.emit(true);
     }
   }
+  
 }

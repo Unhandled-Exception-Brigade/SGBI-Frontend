@@ -70,7 +70,7 @@ a:hover {
 
 .panel {
   min-height: 380px;
-  box-shadow: 20px 20px 80px rgb(218, 218, 218);
+  /* box-shadow: 20px 20px 80px rgb(218, 218, 218); */
   border-radius: 12px;
   margin-top: 5rem;
   background-color: rgba(
@@ -88,15 +88,10 @@ a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.747);;
   color: #136137;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.647
-  ); /* Cambia el color de fondo a transparente */
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.747); /* Cambia el color de fondo a transparente */
+  backdrop-filter: blur(30px);
 }
 
 .input-field.error {
