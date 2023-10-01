@@ -15,6 +15,7 @@ export class ResetComponent {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
+  botonDesactivado = false;
 
   resetForm!: FormGroup;
   correo!: string;
@@ -69,6 +70,10 @@ export class ResetComponent {
     });
   }
 
+  desactivarBoton(){
+    return this.botonDesactivado ? 'btn btn-primary btn-block mt-4 w-100 boton-desactivado' : 'btn btn-primary btn-block mt-4 w-100';
+  }
+
   reset() {
     if (this.resetForm.valid) {
       this.resetPasswordObj.correo = this.correo;
@@ -76,11 +81,9 @@ export class ResetComponent {
 
       this.resetPasswordObj.nuevaContrasena = this.resetForm.value.contrasena;
       this.resetPasswordObj.confirmarContrasena =
-        this.resetForm.value.confirmarContrasena;
+      this.resetForm.value.confirmarContrasena;
 
-      this.cambiarContrasenaService
-        .resetPassword(this.resetPasswordObj)
-        .subscribe({
+      this.cambiarContrasenaService.resetPassword(this.resetPasswordObj).subscribe({
           next: (res) => {
             console.log(res.message);
             this.toast.success({

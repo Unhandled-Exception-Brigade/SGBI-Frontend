@@ -28,7 +28,7 @@ export class AgregarEmpleadoComponent {
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -59,7 +59,6 @@ export class AgregarEmpleadoComponent {
 
   onSignup() {
     this.markFormGroupTouched(this.signupForm);
-
     if (this.signupForm.valid) {
       this.botonDesactivado = true;
       this.auth.registrarse(this.signupForm.value).subscribe({
@@ -69,21 +68,20 @@ export class AgregarEmpleadoComponent {
           this.toast.success({
             detail: 'CORRECTO',
             summary: res.message,
-            duration: 4000,
+            duration: 4000
           });
-          this.botonDesactivado = false;
-
+      
           setTimeout(() => {
             this.router.navigate(['/gestionUsuarios']);
+            this.botonDesactivado = false;
           }, 600);
 
-          // Verificar si el usuario está autenticado antes de redirigir
-          // if (!this.auth.estaLogueado()) {
-          //   // Agregar un retraso de 1 segundo antes de redirigir al ingresar
-          //   setTimeout(() => {
-          //     this.router.navigate(['tramites']);
-          //   }, 600);
-          // }
+          //Verificar si el usuario está autenticado antes de redirigir
+          if (!this.auth.estaLogueado()) {
+            setTimeout(() => {
+              this.router.navigate(['tramites']);
+            }, 600);
+          }
         },
         error: (err) => {
           this.toast.error({

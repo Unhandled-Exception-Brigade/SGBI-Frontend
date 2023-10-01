@@ -28,11 +28,5 @@ export const navbarData = [
     icon: 'fas fa-user',
     label: 'Gestión de Usuarios',
     permiso: ['administrador'],
-  },
-  {
-    routeLink: 'configuracion-usuario',
-    icon: 'fas fa-gear',
-    label: 'Configuración de usuario',
-    permiso: ['administrador', 'usuario'],
-  },
+  }
 ];

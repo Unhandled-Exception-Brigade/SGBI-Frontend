@@ -16,7 +16,6 @@ import { GestionUsuariosComponent } from './components/features/gestion-usuarios
 import { AgregarEmpleadoComponent } from './components/features/agregar-empleado/agregar-empleado.component';
 import { RoleDropdownComponent } from './components/dropdowns/role-dropdown/role-dropdown.component';
 import { SidenavComponent } from './components/features/sidenav/sidenav.component';
-import { ConfiguracionUsuarioComponent } from './components/features/configuracion-usuario/configuracion-usuario.component';
 import { CreacionTramitesComponent } from './components/features/creacion-tramites/creacion-tramites.component';
 import { EstadoDropdownComponent } from './components/dropdowns/estado-dropdown/estado-dropdown.component';
 import { MantenimientoComponent } from './components/features/mantenimiento/mantenimiento.component';
@@ -28,19 +27,17 @@ import { FirstEntryComponent } from './components/authentication/first-entry/fir
   declarations: [
     AppComponent,
     LoginComponent,
-
     ResetComponent,
     GestionUsuariosComponent,
     AgregarEmpleadoComponent,
     RoleDropdownComponent,
     SidenavComponent,
-    ConfiguracionUsuarioComponent,
     CreacionTramitesComponent,
     EstadoDropdownComponent,
     MantenimientoComponent,
     ReporteriaComponent,
     TramitesComponent,
-    FirstEntryComponent,
+    FirstEntryComponent
   ],
   imports: [
     BrowserModule,

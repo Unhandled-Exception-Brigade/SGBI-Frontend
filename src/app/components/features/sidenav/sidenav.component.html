@@ -24,8 +24,7 @@
                     <a href="" [routerLink]="[data.routeLink]" routerLinkActive="active"
                       [routerLinkActiveOptions]="{ exact: true }">
                       <i class="bi" [class]="data.icon" style="color: white">
-                        <span class="fuente item-text  Roboto pl-3">{{ data.label
-                          }}</span>
+                        <span class="fuente item-text  Roboto pl-3">{{data.label}}</span>
                       </i>
                     </a>
                   </ng-container>
@@ -33,19 +32,24 @@
               </ul>
             </div>
           </div>
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user" style="color: white"></i>
-              <span class="pl-2" style="color: white">Inicio</span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" (click)="cambiarContrasena()">
-                <i class="fas fa-key pr-2"></i> Cambiar contraseña
+          <div class="d-flex justify-content-end">
+            <div class="dropdown mr-3">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user" style="color: white"></i>
+                <span class="pl-2" style="color: white">Inicio</span>
               </button>
-              <button class="dropdown-item" (click)="cerrarSesion()">
-                <i class="fas fa-sign-out-alt pr-2"></i> Cerrar sesión
-              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" (click)="cambiarContrasena()">
+                  <i class="fas fa-key pr-2"></i> Cambiar contraseña
+                </button>
+                <button class="dropdown-item" (click)="cerrarSesion()">
+                  <i class="fas fa-sign-out-alt pr-2"></i> Cerrar sesión
+                </button>
+              </div>
+            </div>
+            <div class="mr-3">
+              <img src="../../../../assets/imagenes/Escudo.png" style="width: 35px;" alt="">
             </div>
           </div>
         </div>
