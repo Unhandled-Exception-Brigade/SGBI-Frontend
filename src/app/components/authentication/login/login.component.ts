@@ -5,14 +5,14 @@ import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import {SidenavService} from 'src/app/services/app-services/sidenav.service'
+import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit, OnDestroy {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -32,14 +32,19 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      cedula: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]], // Utiliza un arreglo para los validadores
+      cedula: [
+        '',
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      ], // Utiliza un arreglo para los validadores
       contrasena: [
         '',
         [
           Validators.required,
           Validators.minLength(12),
           Validators.maxLength(18),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
+          ),
         ],
       ],
     });
@@ -47,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.sideNav.ocultar();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sideNav.mostar();
   }
 
@@ -117,23 +122,23 @@ export class LoginComponent implements OnInit, OnDestroy{
     if (campo?.hasError('minlength') || campo?.hasError('maxlength')) {
       return 'La cedula debe tener exactamente 9 dígitos';
     }
-    
+
     return '';
   }
 
   obtenerErrorCampoContrasena() {
     const campo = this.loginForm.get('contrasena');
 
-  if (campo?.hasError('required')) {
-    return 'La contraseña es requerida';
-  }
- 
-  if (campo?.hasError('minlength')) {
-    return 'La contraseña debe tener el formato adecuado';
-  }
-  if (campo?.hasError('maxlength')) {
-    return 'La contraseña debe tener el formato adecuado';
-  }
+    if (campo?.hasError('required')) {
+      return 'La contraseña es requerida';
+    }
+
+    if (campo?.hasError('minlength')) {
+      return 'La contraseña debe tener el formato adecuado';
+    }
+    if (campo?.hasError('maxlength')) {
+      return 'La contraseña debe tener el formato adecuado';
+    }
 
     // Agregar más validaciones y mensajes de error según sea necesario...
 
