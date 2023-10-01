@@ -1,4 +1,4 @@
-<div class="background-image"></div>
+<!--<div class="background-image"></div>-->
 <div class="outer">
   <div class="container">
     <div class="row">
@@ -45,7 +45,8 @@
               </div>
 
               <div class="form-inline fr mt-4">
-                <a id="forget" data-toggle="modal" data-target="#olvideContrasena" class="font-weight-bold">¿Olvidaste tu contraseña?</a>
+                <a id="forget" data-toggle="modal" data-target="#olvideContrasena">¿Olvidaste
+                  tu contraseña?</a>
               </div>
               <button (click)="onLogin()" type="submit" class="btn btn-primary btn-block mt-4 w-100">
                 Ingresar
@@ -61,7 +62,6 @@
     </div>
   </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade centrado" id="olvideContrasena" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -76,7 +76,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Proporciona la dirección de correo electrónico asociada a tu cuenta. Te enviaremos un correo electrónico con un enlace para restablecer tu contraseña.</p>
+        <p>Proporciona la dirección de correo electrónico asociada a tu cuenta. Te enviaremos un correo electrónico
+          con
+          un enlace para restablecer tu contraseña.</p>
         <div class="form-group pt-3">
           <div class="input-field">
             <span class="fa fa-envelope p-2"></span>
