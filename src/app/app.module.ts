@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
@@ -22,7 +21,10 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { TramitesComponent } from './components/features/tramites/tramites.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
-import { ValidationPopUpComponent } from './components/authentication/validation-pop-up/validation-pop-up.component';
+import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { ValidationPopUpComponent } from './components/authentication/validation
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ValidationPopUpComponent
+    ModalConfirmacionComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { ValidationPopUpComponent } from './components/authentication/validation
     HttpClientModule,
     NgToastModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [
     {
