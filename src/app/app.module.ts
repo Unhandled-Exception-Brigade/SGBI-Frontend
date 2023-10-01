@@ -22,6 +22,7 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { TramitesComponent } from './components/features/tramites/tramites.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
+import { ValidationPopUpComponent } from './components/authentication/validation-pop-up/validation-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FirstEntryComponent } from './components/authentication/first-entry/fir
     MantenimientoComponent,
     ReporteriaComponent,
     TramitesComponent,
-    FirstEntryComponent
+    FirstEntryComponent,
+    ValidationPopUpComponent
   ],
   imports: [
     BrowserModule,
