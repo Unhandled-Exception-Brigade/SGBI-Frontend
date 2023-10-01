@@ -125,6 +125,22 @@ img {
   cursor: pointer;
 }
 
+.boton-desactivado {
+  background-color: transparent; /* Cambia el color de fondo a transparente cuando el botón está desactivado */
+  border: 2px solid #136137; /* Establece un borde verde de 2 píxeles cuando el botón está desactivado */
+  color: rgb(173, 173, 173); /* Cambia el color del texto a verde cuando el botón está desactivado */
+  cursor: not-allowed; /* Cambia el cursor a "no permitido" cuando el botón está desactivado */
+}
+
+.error {
+  border: 1px solid red; /* Estilo de borde en caso de error */
+}
+
+.success {
+  border: 1px solid green; /* Estilo de borde en caso de éxito */
+}
+
+
 @keyframes pulse {
   from {
     transform: scale(0.9);

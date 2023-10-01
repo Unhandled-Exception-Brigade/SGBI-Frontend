@@ -9,6 +9,10 @@ tbody tr td {
   color: #000000d0;
 }
 
+.cursor{
+  cursor: pointer;
+}
+
 .custom-modal-dialog {
   max-width: 50%;
   width: 50%;
@@ -22,4 +26,11 @@ tbody tr td {
 .table-container {
   width: 100%;
   height: 100%;
+}
+
+.barra-busqueda{
+  width: 80%;
+}
+.botonRol{
+  width: 126px;
 }

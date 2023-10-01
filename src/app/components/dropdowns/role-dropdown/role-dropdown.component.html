@@ -1,6 +1,6 @@
 <div class="dropdown">
   <button
-    class="btn btn-secondary dropdown-toggle"
+    class="btn btn-secondary dropdown-toggle botonRol"
     type="button"
     id="roleDropdown"
     data-toggle="dropdown"
@@ -10,10 +10,10 @@
     {{ selectedRole }}
   </button>
   <div class="dropdown-menu" aria-labelledby="roleDropdown">
-    <a class="dropdown-item" (click)="selectRole('administrador')"
+    <a class="cursor botonRol dropdown-item" (click)="selectRole('administrador')"
       >administrador</a
     >
-    <a class="dropdown-item" (click)="selectRole('usuario')">usuario</a>
-    <a class="dropdown-item" (click)="selectRole('jefe')">jefe</a>
+    <a class="cursor  dropdown-item " (click)="selectRole('usuario')">usuario</a>
+    <a class="cursor botonRol dropdown-item " (click)="selectRole('jefe')">jefe</a>
   </div>
 </div>

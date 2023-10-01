@@ -3,36 +3,30 @@ export const navbarData = [
     routeLink: 'tramites',
     icon: 'fas fa-clipboard',
     label: 'Trámites',
-    permiso: ['administrador', 'usuario'],
+    permiso: ['administrador', 'usuario', 'jefe'],
   },
   {
     routeLink: 'creacion-tramites',
     icon: 'fas fa-plus',
     label: 'Crear trámite',
-    permiso: ['administrador'],
+    permiso: ['administrador', 'jefe'],
   },
   {
     routeLink: 'reporteria',
     icon: 'fas fa-chart-bar',
     label: 'Reporteria',
-    permiso: ['administrador', 'usuario'],
+    permiso: ['administrador', 'usuario', 'jefe'],
   },
   {
     routeLink: 'mantenimiento',
     icon: 'fas fa-toolbox',
     label: 'Mantenimiento',
-    permiso: ['administrador', 'usuario'],
+    permiso: ['administrador', 'jefe'],
   },
   {
     routeLink: 'gestionUsuarios',
     icon: 'fas fa-user',
-    label: 'Gestión de Usuarios',
+    label: 'Gestión de usuarios',
     permiso: ['administrador'],
-  },
-  {
-    routeLink: 'configuracion-usuario',
-    icon: 'fas fa-gear',
-    label: 'Configuración de usuario',
-    permiso: ['administrador', 'usuario'],
-  },
+  }
 ];
