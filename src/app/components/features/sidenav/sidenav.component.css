@@ -62,6 +62,10 @@
   margin-top: 2rem;
 }
 
+.logoMuni{
+  cursor: pointer;
+}
+
 .dropdown-toggle::after {
   color: white; /* Cambia el color de la flecha a blanco */
 }
