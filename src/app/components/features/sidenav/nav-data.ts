@@ -14,7 +14,7 @@ export const navbarData = [
   {
     routeLink: 'reporteria',
     icon: 'fas fa-chart-bar',
-    label: 'Reporteria',
+    label: 'Reportería',
     permiso: ['administrador', 'usuario', 'jefe'],
   },
   {

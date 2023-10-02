@@ -127,7 +127,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   obtenerErrorCampoContrasena() {
     const campo = this.loginForm.get('contrasena');
 
-    if (campo?.hasError('required')) {
+            if (campo?.hasError('required')) {
       return 'La contraseña es requerida';
     }
 
