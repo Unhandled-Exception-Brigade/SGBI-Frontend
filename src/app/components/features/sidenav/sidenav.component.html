@@ -1,19 +1,38 @@
-<ng-container *ngIf="rol === 'administrador' || rol === 'usuario' || rol == 'jefe'">
+<ng-container
+  *ngIf="rol === 'administrador' || rol === 'usuario' || rol == 'jefe'"
+>
   <ng-container *ngIf="mostrarSideNav">
     <div class="sidebar-nav">
       <nav class="navbar navbar-dark fixed-top">
         <div class="container">
           <!-- Mobile Menu Toggle Button -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <!-- Menus List -->
-          <div class="offcanvas offcanvas-start shadow" tabindex="-1" id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
-            <div class="marca d-flex flex-row justify-content-center align-items-center" (click)="redirigirATramites()">
-              <img src="../../../assets/imagenes/Escudo.png" class="pr-2 pt-3" style="width: 40px" alt="Escudo" />
+          <div
+            class="offcanvas offcanvas-start shadow"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div
+              class="marca d-flex flex-row justify-content-center align-items-center"
+              (click)="redirigirATramites()"
+            >
+              <img
+                src="../../../assets/imagenes/Escudo.png"
+                class="pr-2 pt-3"
+                style="width: 40px"
+                alt="Escudo"
+              />
               <h1 class="titulo Roboto">SGBI</h1>
             </div>
 
@@ -21,10 +40,16 @@
               <ul class="navbar-nav">
                 <li class="" *ngFor="let data of navData">
                   <ng-container *ngIf="tienePermiso(data.permiso)">
-                    <a class="pl-4" [routerLink]="[data.routeLink]" routerLinkActive="active"
-                      [routerLinkActiveOptions]="{ exact: true }">
+                    <a
+                      class="pl-4"
+                      [routerLink]="[data.routeLink]"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                    >
                       <i class="bi" [class]="data.icon" style="color: white">
-                        <span class="fuente item-text  Roboto pl-3">{{data.label}}</span>
+                        <span class="fuente item-text Roboto pl-3">{{
+                          data.label
+                        }}</span>
                       </i>
                     </a>
                   </ng-container>
@@ -33,9 +58,15 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <div class="dropdown mr-3">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown mx-auto mr-3">
+              <button
+                class="btn dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fas fa-user" style="color: white"></i>
                 <span class="pl-2" style="color: white">Inicio</span>
               </button>
@@ -48,8 +79,13 @@
                 </button>
               </div>
             </div>
+
             <div class="mr-3">
-              <img src="../../../../assets/imagenes/Escudo.png" style="width: 35px;" alt="">
+              <img
+                src="../../../../assets/imagenes/Escudo.png"
+                style="width: 35px"
+                alt=""
+              />
             </div>
           </div>
         </div>
