@@ -1,31 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResetPassword } from '../models/reset-password.model';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CambiarContrasenaService {
-  private baseURL = 'https://localhost:7106/api/usuario';
+  private baseURL = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   sendResetPasswordLink(email: string) {
     return this.http.post<any>(
-      `${this.baseURL}/enviar-email-cambio-contrasena/${email}`,
+      `${this.baseURL}enviar-email-cambio-contrasena/${email}`,
       {}
     );
   }
 
   resetPassword(resetPasswordObj: ResetPassword) {
     return this.http.post<any>(
-      `${this.baseURL}/resetear-contrasena`,
+      `${this.baseURL}resetear-contrasena`,
       resetPasswordObj
     );
   }
   resetPasswordFirstTime(resetPasswordObj: ResetPassword) {
     return this.http.post<any>(
-      `${this.baseURL}/activar-cuenta`,
+      `${this.baseURL}activar-cuenta`,
       resetPasswordObj
     );
   }

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../models/token-api.model';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = 'https://localhost:7106/api/usuario/';
+  private baseUrl: string = environment.apiUrl;
   private usuarioPayload: any;
   constructor(private http: HttpClient, private router: Router) {
     this.usuarioPayload = this.decodedToken();
