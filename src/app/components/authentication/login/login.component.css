@@ -1,55 +1,11 @@
-.outer {
-  height: 100vh;
-  /* display: flex; */
-  /* justify-content: center; 
-  align-items: center;  */
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  overflow: hidden;
-}
-
-.background-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("/assets/imagenes/Atenas.jpg");
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* Coloca la imagen detrás del contenido */
-  filter: blur(5px);
-}
-
-.container{
-  width: 100%;
-}
-
-.centered-image {
-  display: block;
-  margin: 0 auto;
-  width: 90px;
-  height: auto;
-}
-
 .panel-heading {
   text-align: center;
   margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
 }
 #forget {
   min-width: 100px;
   text-decoration: none;
   cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  color: blue;
-  text-decoration: underline;
 }
 a:hover {
   text-decoration: none;
@@ -67,12 +23,11 @@ a:hover {
   background-color: #136137;
 }
 
-
 .panel {
   min-height: 380px;
   box-shadow: 20px 20px 80px rgb(218, 218, 218);
   border-radius: 12px;
-  margin-top: 11.5rem;
+  margin-top: 100px;
 }
 
 .input-field {
@@ -107,16 +62,6 @@ input[type="password"] {
 }
 
 img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-  position: relative;
-}
-
-.centrado {
-  position: fixed;
-  top: 76%; /* Coloca el elemento en la mitad vertical de la ventana */
-  left: 52.5%; /* Coloca el elemento en la mitad horizontal de la ventana */
-  transform: translate(-50%, -50%); /* Centra el contenido */
+  width: 100px;
+  height: 115px;
 }

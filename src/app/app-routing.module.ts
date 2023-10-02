@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/ingresar',
+    redirectTo: '/tramites',
   },
   {
     path: 'ingresar',

@@ -62,6 +62,10 @@
   margin-top: 2rem;
 }
 
+.logoMuni{
+  cursor: pointer;
+}
+
 .dropdown-toggle::after {
   color: white; /* Cambia el color de la flecha a blanco */
 }
@@ -74,12 +78,15 @@
   cursor: pointer;
 }
 
-.fuente{
-  font-family: 'Roboto', sans-serif;
+.fuente {
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
-.active{
+.active {
   background-color: #082c18;
   border-radius: 25px;
+}
+.botonInicio {
+  margin-top: 4px;
 }
