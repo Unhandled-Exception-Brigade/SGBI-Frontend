@@ -39,9 +39,7 @@ export class ResetComponent {
             Validators.required,
             Validators.minLength(12),
             Validators.maxLength(18),
-            Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{12,18}$/
-            ),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*.\-_])[A-Za-z\d!@#$%&*.\-_]{12,18}$/),
           ],
         ],
         confirmarContrasena: ['', [Validators.required]],
