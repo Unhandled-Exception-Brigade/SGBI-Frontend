@@ -37,9 +37,11 @@ export class ResetComponent {
           '',
           [
             Validators.required,
-            Validators.minLength(12),
-            Validators.maxLength(18),
-            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*.\-_])[A-Za-z\d!@#$%&*.\-_]{12,18}$/),
+            Validators.minLength(8),
+            Validators.maxLength(20),
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+            ),
           ],
         ],
         confirmarContrasena: ['', [Validators.required]],
@@ -68,8 +70,10 @@ export class ResetComponent {
     });
   }
 
-  desactivarBoton(){
-    return this.botonDesactivado ? 'btn btn-primary btn-block mt-4 w-100 boton-desactivado' : 'btn btn-primary btn-block mt-4 w-100';
+  desactivarBoton() {
+    return this.botonDesactivado
+      ? 'btn btn-primary btn-block mt-4 w-100 boton-desactivado'
+      : 'btn btn-primary btn-block mt-4 w-100';
   }
 
   reset() {
@@ -79,9 +83,11 @@ export class ResetComponent {
 
       this.resetPasswordObj.nuevaContrasena = this.resetForm.value.contrasena;
       this.resetPasswordObj.confirmarContrasena =
-      this.resetForm.value.confirmarContrasena;
+        this.resetForm.value.confirmarContrasena;
 
-      this.cambiarContrasenaService.resetPassword(this.resetPasswordObj).subscribe({
+      this.cambiarContrasenaService
+        .resetPassword(this.resetPasswordObj)
+        .subscribe({
           next: (res) => {
             console.log(res.message);
             this.toast.success({
@@ -128,10 +134,10 @@ export class ResetComponent {
       return 'La contraseña es requerida';
     }
     if (campo?.hasError('minlength')) {
-      return 'La contraseña debe tener mínimo 12 caracteres';
+      return 'La contraseña debe tener mínimo 8 caracteres';
     }
     if (campo?.hasError('maxlength')) {
-      return 'La contraseña debe tener máximo 18 caracteres';
+      return 'La contraseña debe tener máximo 20 caracteres';
     }
     if (campo?.hasError('pattern')) {
       return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';

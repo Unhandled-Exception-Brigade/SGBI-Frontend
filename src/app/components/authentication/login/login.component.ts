@@ -40,9 +40,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(18),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*.\-_])[A-Za-z\d!@#$%&*.\-_]+$/),
+          Validators.minLength(8),
+          Validators.maxLength(20),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+          ),
         ],
       ],
     });
@@ -127,15 +129,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   obtenerErrorCampoContrasena() {
     const campo = this.loginForm.get('contrasena');
 
-            if (campo?.hasError('required')) {
+    if (campo?.hasError('required')) {
       return 'La contraseña es requerida';
     }
 
     if (campo?.hasError('minlength')) {
-      return 'La contraseña debe tener el formato adecuado';
+      return 'La contraseña debe tener mínimo 8 caracteres';
     }
     if (campo?.hasError('maxlength')) {
-      return 'La contraseña debe tener el formato adecuado';
+      return 'La contraseña debe tener máximo 20 caracteres';
     }
 
     // Agregar más validaciones y mensajes de error según sea necesario...

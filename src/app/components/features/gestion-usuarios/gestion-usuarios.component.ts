@@ -8,8 +8,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalConfirmacionComponent } from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component'
-
+import { ModalConfirmacionComponent } from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -37,7 +36,7 @@ export class GestionUsuariosComponent {
     private router: Router,
     private editarUsuarioService: EditarUsuarioService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.api.obtenerUsuarios().subscribe((res) => {
@@ -53,7 +52,6 @@ export class GestionUsuariosComponent {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-
   }
 
   cerrarSesion() {
@@ -358,5 +356,4 @@ export class GestionUsuariosComponent {
     }
     return false;
   }
-
 } // fin GestionUsuariosComponent
