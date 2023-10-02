@@ -104,6 +104,7 @@
                 </div>
                 <small class="text-danger" *ngIf="signupForm.get('cedula').hasError('caracteresNoNumericos')">
                   La cédula debe contener solo números.
+                  <br>
                 </small>
                 <small class="text-danger" *ngIf="signupForm.get('cedula').hasError('longitudInvalida')">
                   La cédula debe tener exactamente 9 números.
