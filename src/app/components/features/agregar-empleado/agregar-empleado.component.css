@@ -131,7 +131,11 @@ img {
   color: rgb(173, 173, 173); /* Cambia el color del texto a verde cuando el botón está desactivado */
   cursor: not-allowed; /* Cambia el cursor a "no permitido" cuando el botón está desactivado */
 }
-
+/* .error {
+  background-color: #f8d7da; 
+  border-color: #f5c6cb; 
+  color: #721c24; 
+} */
 
 @keyframes pulse {
   from {

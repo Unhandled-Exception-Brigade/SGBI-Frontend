@@ -71,6 +71,7 @@ export class AgregarEmpleadoComponent {
         nombreInputField.classList.remove('success'); 
         nombreInputField.classList.add('error');
       }
+      
     });
 
     // Observa cambios en el campo 'apellido' en tiempo real
@@ -255,28 +256,35 @@ export class AgregarEmpleadoComponent {
     const nombre = control.value;
     const regexLower = /^[a-z]/; // Primera letra minúscula
     const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
-
+    const regexSpaces = /\s/; // Espacios en blanco
+  
     const errors = {};
-
+  
     if (regexLower.test(nombre)) {
       errors['nombreInvalidoLower'] = true;
     }
-
+  
     if (regexSpecial.test(nombre)) {
       errors['nombreInvalidoSpecial'] = true;
     }
-
+  
+    if (regexSpaces.test(nombre)) {
+      errors['nombreInvalidoEspacios'] = true; // Agrega un error si hay espacios en blanco
+    }
+  
     if (Object.keys(errors).length > 0) {
       return errors;
     }
-
+  
     return null;
   }
+  
 
   validarApellido(control: FormControl) {
     const apellido = control.value;
     const regexLower = /^[a-z]/; // Primera letra minúscula
     const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
+    const regexSpaces = /\s/; // Espacios en blanco
 
     const errors = {};
 
@@ -286,6 +294,10 @@ export class AgregarEmpleadoComponent {
 
     if (regexSpecial.test(apellido)) {
       errors['apellidoInvalidoSpecial'] = true;
+    }
+
+    if (regexSpaces.test(apellido)) {
+      errors['nombreInvalidoEspacios'] = true; // Agrega un error si hay espacios en blanco
     }
 
     if (Object.keys(errors).length > 0) {
