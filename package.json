@@ -2,6 +2,8 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
+    "pre-deploy": "npm config set legacy-peer-deps true",
+    "pre-deploy": "ng add @ng-bootstrap/ng-bootstrap",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
