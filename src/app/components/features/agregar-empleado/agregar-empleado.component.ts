@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import {FormBuilder,FormGroup,Validators,FormControl,} from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { primeraLetraMayuscula } from 'src/app/helpers/validators/primeraLetraMayuscula';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -18,6 +24,8 @@ export class AgregarEmpleadoComponent {
   contrasena: string;
   botonDesactivado = false;
 
+  public rol: string = '';
+
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -26,136 +34,151 @@ export class AgregarEmpleadoComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private toast: NgToastService
   ) {}
 
   ngOnInit(): void {
-    this.signupForm = this.fb.group({
-      nombre: ['', [Validators.required, this.validarNombre]],
-      apellido: ['', [Validators.required, this.validarApellido]],
-      cedula: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^\d+$/), // Asegura que solo se ingresen números
-          Validators.minLength(9),
-          Validators.maxLength(9),
+    this.usuarioService.getRolUsuario().subscribe((val) => {
+      const rolDelToken = this.auth.obtenerRolDelToken();
+      this.rol = val || rolDelToken;
+    });
+
+    if (this.rol == 'administrador') {
+      this.signupForm = this.fb.group({
+        nombre: ['', [Validators.required, this.validarNombre]],
+        apellido: ['', [Validators.required, this.validarApellido]],
+        cedula: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^\d+$/), // Asegura que solo se ingresen números
+            Validators.minLength(9),
+            Validators.maxLength(9),
+          ],
         ],
-      ],
-      correo: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/),
-          Validators.maxLength(50),
-          Validators.minLength(5),
+        correo: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/),
+            Validators.maxLength(50),
+            Validators.minLength(5),
+          ],
         ],
-      ],
-    });
+      });
 
-    // Observa cambios en el campo 'nombre' en tiempo real
-    this.signupForm.get('nombre').valueChanges.subscribe(() => {
-      // Marca el campo 'nombre' como tocado para que se muestren los mensajes de error
-      this.signupForm.get('nombre').markAsTouched();
+      // Observa cambios en el campo 'nombre' en tiempo real
+      this.signupForm.get('nombre').valueChanges.subscribe(() => {
+        // Marca el campo 'nombre' como tocado para que se muestren los mensajes de error
+        this.signupForm.get('nombre').markAsTouched();
 
-      // Cambia las clases CSS del cuadro del campo 'nombre' según su estado de validación
-      const nombreControl = this.signupForm.get('nombre');
-      const nombreInputField = document.querySelector('.nombre-input-field'); 
+        // Cambia las clases CSS del cuadro del campo 'nombre' según su estado de validación
+        const nombreControl = this.signupForm.get('nombre');
+        const nombreInputField = document.querySelector('.nombre-input-field');
 
-      if (nombreControl.valid && nombreControl.touched) {
-        nombreInputField.classList.remove('error');
-        nombreInputField.classList.add('success');
-      } else {
-        nombreInputField.classList.remove('success'); 
-        nombreInputField.classList.add('error');
-      }
-      
-    });
+        if (nombreControl.valid && nombreControl.touched) {
+          nombreInputField.classList.remove('error');
+          nombreInputField.classList.add('success');
+        } else {
+          nombreInputField.classList.remove('success');
+          nombreInputField.classList.add('error');
+        }
+      });
 
-    // Observa cambios en el campo 'apellido' en tiempo real
-    this.signupForm.get('apellido').valueChanges.subscribe(() => {
-      // Marca el campo 'apellido' como tocado para que se muestren los mensajes de error
-      this.signupForm.get('apellido').markAsTouched();
+      // Observa cambios en el campo 'apellido' en tiempo real
+      this.signupForm.get('apellido').valueChanges.subscribe(() => {
+        // Marca el campo 'apellido' como tocado para que se muestren los mensajes de error
+        this.signupForm.get('apellido').markAsTouched();
 
-      const apellidoControl = this.signupForm.get('apellido');
-      const apellidoInputField = document.querySelector(
-        '.apellido-input-field'
-      ); 
+        const apellidoControl = this.signupForm.get('apellido');
+        const apellidoInputField = document.querySelector(
+          '.apellido-input-field'
+        );
 
-      if (apellidoControl.valid && apellidoControl.touched) {
-        apellidoInputField.classList.remove('error');
-        apellidoInputField.classList.add('success');
-      } else {
-        apellidoInputField.classList.remove('success');
-        apellidoInputField.classList.add('error');
-      }
-    });
+        if (apellidoControl.valid && apellidoControl.touched) {
+          apellidoInputField.classList.remove('error');
+          apellidoInputField.classList.add('success');
+        } else {
+          apellidoInputField.classList.remove('success');
+          apellidoInputField.classList.add('error');
+        }
+      });
 
-    this.signupForm.get('cedula').valueChanges.subscribe(() => {
-      // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
-      this.signupForm.get('cedula').markAsTouched();
+      this.signupForm.get('cedula').valueChanges.subscribe(() => {
+        // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
+        this.signupForm.get('cedula').markAsTouched();
 
-      // Obtén el valor actual del campo de cédula
-      const cedula = this.signupForm.get('cedula').value;
+        // Obtén el valor actual del campo de cédula
+        const cedula = this.signupForm.get('cedula').value;
 
-      // Verifica si la cédula contiene caracteres no numéricos
-      const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
+        // Verifica si la cédula contiene caracteres no numéricos
+        const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
 
-      // Verifica la longitud de la cédula
-      const longitudValida = cedula.length === 9;
+        // Verifica la longitud de la cédula
+        const longitudValida = cedula.length === 9;
 
-      // Actualiza los mensajes de error en función de las validaciones
-      const errores = {};
+        // Actualiza los mensajes de error en función de las validaciones
+        const errores = {};
 
-      if (contieneCaracteresNoNumericos) {
-        errores['caracteresNoNumericos'] = true;
-      }
+        if (contieneCaracteresNoNumericos) {
+          errores['caracteresNoNumericos'] = true;
+        }
 
-      if (!longitudValida) {
-        errores['longitudInvalida'] = true;
-      }
+        if (!longitudValida) {
+          errores['longitudInvalida'] = true;
+        }
 
-      // Elimina la clase de error si no hay errores y la cédula es válida
-      if (!contieneCaracteresNoNumericos && longitudValida) {
-        const cedulaInputField = document.querySelector(
-          '.input-field.cedula-input-field'
-        ); // Ajusta el selector según tu estructura HTML
-        cedulaInputField.classList.remove('error');
-      }
+        // Elimina la clase de error si no hay errores y la cédula es válida
+        if (!contieneCaracteresNoNumericos && longitudValida) {
+          const cedulaInputField = document.querySelector(
+            '.input-field.cedula-input-field'
+          ); // Ajusta el selector según tu estructura HTML
+          cedulaInputField.classList.remove('error');
+        }
 
-      this.signupForm.get('cedula').setErrors(errores);
-    });
+        this.signupForm.get('cedula').setErrors(errores);
+      });
 
-    this.signupForm.get('correo').valueChanges.subscribe(() => {
-      // Marca el campo 'correo' como tocado para mostrar los mensajes de error
-      this.signupForm.get('correo').markAsTouched();
-    
-      // Obtén el valor actual del campo de correo
-      const correo = this.signupForm.get('correo').value;
-    
-      // Verifica si el correo cumple con el formato válido
-      const formatoValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo);
-    
-      // Actualiza los mensajes de error en función de las validaciones
-      const errores = {};
-    
-      if (!formatoValido) {
-        errores['correoInvalido'] = true;
-      }
-    
-      // Elimina la clase de error si no hay errores y el correo es válido
-      if (formatoValido) {
-        const correoInputField = document.querySelector('.input-field.correo-input-field'); // Ajusta el selector según tu estructura HTML
-        correoInputField.classList.remove('error');
-      }
-    
-      this.signupForm.get('correo').setErrors(errores);
-    });
-    
+      this.signupForm.get('correo').valueChanges.subscribe(() => {
+        // Marca el campo 'correo' como tocado para mostrar los mensajes de error
+        this.signupForm.get('correo').markAsTouched();
 
+        // Obtén el valor actual del campo de correo
+        const correo = this.signupForm.get('correo').value;
 
+        // Verifica si el correo cumple con el formato válido
+        const formatoValido =
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo);
+
+        // Actualiza los mensajes de error en función de las validaciones
+        const errores = {};
+
+        if (!formatoValido) {
+          errores['correoInvalido'] = true;
+        }
+
+        // Elimina la clase de error si no hay errores y el correo es válido
+        if (formatoValido) {
+          const correoInputField = document.querySelector(
+            '.input-field.correo-input-field'
+          ); // Ajusta el selector según tu estructura HTML
+          correoInputField.classList.remove('error');
+        }
+
+        this.signupForm.get('correo').setErrors(errores);
+      });
+    } else {
+      this.toast.warning({
+        detail: 'ADVERTENCIA',
+        summary: 'No tiene los permisos para acceder a este modulo',
+        duration: 4000,
+      });
+
+      this.router.navigate(['/tramites']);
+    }
   } // fin ngOnInit()
 
   hideShowPass() {
@@ -257,28 +280,27 @@ export class AgregarEmpleadoComponent {
     const regexLower = /^[a-z]/; // Primera letra minúscula
     const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
     const regexSpaces = /\s/; // Espacios en blanco
-  
+
     const errors = {};
-  
+
     if (regexLower.test(nombre)) {
       errors['nombreInvalidoLower'] = true;
     }
-  
+
     if (regexSpecial.test(nombre)) {
       errors['nombreInvalidoSpecial'] = true;
     }
-  
+
     if (regexSpaces.test(nombre)) {
       errors['nombreInvalidoEspacios'] = true; // Agrega un error si hay espacios en blanco
     }
-  
+
     if (Object.keys(errors).length > 0) {
       return errors;
     }
-  
+
     return null;
   }
-  
 
   validarApellido(control: FormControl) {
     const apellido = control.value;

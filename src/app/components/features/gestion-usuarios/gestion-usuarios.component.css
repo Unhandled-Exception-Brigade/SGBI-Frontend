@@ -1,6 +1,6 @@
 /* Estilo para las celdas de encabezado de la tabla */
-ble thead.thead-dark th {
-  /* background-color: #136137; */
+thead.thead-dark th {
+  background-color: #136137;
   color: #fff;
 }
 
@@ -9,7 +9,7 @@ tbody tr td {
   color: #000000d0;
 }
 
-.cursor{
+.cursor {
   cursor: pointer;
 }
 
@@ -18,7 +18,7 @@ tbody tr td {
   width: 50%;
 }
 
-.btn-success{
+.btn-success {
   background-color: #136137;
 }
 
@@ -32,9 +32,9 @@ tbody tr td {
   height: 100%;
 }
 
-.barra-busqueda{
+.barra-busqueda {
   width: 80%;
 }
-.botonRol{
+.botonRol {
   width: 126px;
 }

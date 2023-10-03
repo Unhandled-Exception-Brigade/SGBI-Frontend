@@ -39,19 +39,29 @@ export class GestionUsuariosComponent {
   ) {}
 
   ngOnInit() {
-    this.api.obtenerUsuarios().subscribe((res) => {
-      this.usuarios = res;
-    });
-
-    this.usuarioService.getCedulaUsuario().subscribe((val) => {
-      const cedulaDelToken = this.auth.obtenerCedulaDelToken();
-      this.cedula = val || cedulaDelToken;
-    });
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
+
+    if (this.rol == 'administrador') {
+      this.api.obtenerUsuarios().subscribe((res) => {
+        this.usuarios = res;
+      });
+
+      this.usuarioService.getCedulaUsuario().subscribe((val) => {
+        const cedulaDelToken = this.auth.obtenerCedulaDelToken();
+        this.cedula = val || cedulaDelToken;
+      });
+    } else {
+      this.toast.warning({
+        detail: 'ADVERTENCIA',
+        summary: 'No tiene los permisos para acceder a este modulo',
+        duration: 4000,
+      });
+
+      this.router.navigate(['/tramites']);
+    }
   }
 
   cerrarSesion() {
