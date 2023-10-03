@@ -23,6 +23,7 @@ export class AgregarEmpleadoComponent {
   correo: string;
   contrasena: string;
   botonDesactivado = false;
+  usuarioCreado = false;
 
   public rol: string = '';
 
@@ -200,7 +201,11 @@ export class AgregarEmpleadoComponent {
             summary: res.message,
             duration: 4000,
           });
+          this.usuarioCreado = true;
 
+          setTimeout(() => {
+            this.usuarioCreado = false;
+          }, 2000);
           setTimeout(() => {
             this.router.navigate(['/gestionUsuarios']);
             this.botonDesactivado = false;
