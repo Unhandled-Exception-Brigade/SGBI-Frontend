@@ -140,7 +140,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       return 'La contraseña debe tener máximo 20 caracteres';
     }
 
-    // Agregar más validaciones y mensajes de error según sea necesario...
+    if (campo?.hasError('pattern')) {
+      return 'La contraseña debe tener al menos una letra mayúscula, una minúscula, un número y un caracter especial';
+    }
 
     return '';
   }
