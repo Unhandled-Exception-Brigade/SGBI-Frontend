@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'url de la api',
+  apiUrl: 'https://sgbi.azurewebsites.net/api/usuario/',
 };
