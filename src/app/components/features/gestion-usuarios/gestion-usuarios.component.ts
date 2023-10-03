@@ -272,7 +272,7 @@ export class GestionUsuariosComponent {
     contieneNumeros: boolean;
   } {
     // Expresión regular para validar que solo contenga letras (mayúsculas y minúsculas)
-    const regex = /^[a-zA-Z]+$/;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/;
 
     // Validar el nombre con la expresión regular
     const nombreValido = regex.test(nombre);
@@ -309,7 +309,7 @@ export class GestionUsuariosComponent {
     caracterEspecial: boolean;
     contieneNumeros: boolean;
   } {
-    const regex = /^[a-zA-Z]+$/;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/;
 
     // Validar el apellido con la expresión regular
     const apellidoValido = regex.test(apellido);
