@@ -25,7 +25,7 @@ export class CreacionTramitesComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador') {
+    if (this.rol == 'administrador' || this.rol == 'jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
