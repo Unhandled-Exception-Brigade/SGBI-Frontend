@@ -10,6 +10,7 @@ import {
 import { primeraLetraMayuscula } from 'src/app/helpers/validators/primeraLetraMayuscula';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { sinTildes } from 'src/app/helpers/validators/sinTildes';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -17,21 +18,10 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./agregar-empleado.component.css'],
 })
 export class AgregarEmpleadoComponent {
-  nombre: string;
-  apellido: string;
-  cedula: string;
-  correo: string;
-  contrasena: string;
-  botonDesactivado = false;
-  usuarioCreado = false;
-
   public rol: string = '';
 
-  type: string = 'password';
-  isText: boolean = false;
-  eyeIcon: string = 'fa-eye-slash';
-
   signupForm!: FormGroup;
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -48,8 +38,33 @@ export class AgregarEmpleadoComponent {
 
     if (this.rol == 'administrador') {
       this.signupForm = this.fb.group({
-        nombre: ['', [Validators.required, this.validarNombre]],
-        apellido: ['', [Validators.required, this.validarApellido]],
+        nombre: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            primeraLetraMayuscula(),
+            sinTildes(),
+          ],
+        ],
+        primerApellido: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            primeraLetraMayuscula(),
+            sinTildes(),
+          ],
+        ],
+        segundoApellido: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            primeraLetraMayuscula(),
+            sinTildes(),
+          ],
+        ],
         cedula: [
           '',
           [
@@ -70,107 +85,6 @@ export class AgregarEmpleadoComponent {
           ],
         ],
       });
-
-      // Observa cambios en el campo 'nombre' en tiempo real
-      this.signupForm.get('nombre').valueChanges.subscribe(() => {
-        // Marca el campo 'nombre' como tocado para que se muestren los mensajes de error
-        this.signupForm.get('nombre').markAsTouched();
-
-        // Cambia las clases CSS del cuadro del campo 'nombre' según su estado de validación
-        const nombreControl = this.signupForm.get('nombre');
-        const nombreInputField = document.querySelector('.nombre-input-field');
-
-        if (nombreControl.valid && nombreControl.touched) {
-          nombreInputField.classList.remove('error');
-          nombreInputField.classList.add('success');
-        } else {
-          nombreInputField.classList.remove('success');
-          nombreInputField.classList.add('error');
-        }
-      });
-
-      // Observa cambios en el campo 'apellido' en tiempo real
-      this.signupForm.get('apellido').valueChanges.subscribe(() => {
-        // Marca el campo 'apellido' como tocado para que se muestren los mensajes de error
-        this.signupForm.get('apellido').markAsTouched();
-
-        const apellidoControl = this.signupForm.get('apellido');
-        const apellidoInputField = document.querySelector(
-          '.apellido-input-field'
-        );
-
-        if (apellidoControl.valid && apellidoControl.touched) {
-          apellidoInputField.classList.remove('error');
-          apellidoInputField.classList.add('success');
-        } else {
-          apellidoInputField.classList.remove('success');
-          apellidoInputField.classList.add('error');
-        }
-      });
-
-      this.signupForm.get('cedula').valueChanges.subscribe(() => {
-        // Marca el campo 'cedula' como tocado para mostrar los mensajes de error
-        this.signupForm.get('cedula').markAsTouched();
-
-        // Obtén el valor actual del campo de cédula
-        const cedula = this.signupForm.get('cedula').value;
-
-        // Verifica si la cédula contiene caracteres no numéricos
-        const contieneCaracteresNoNumericos = /[^\d]/.test(cedula);
-
-        // Verifica la longitud de la cédula
-        const longitudValida = cedula.length === 9;
-
-        // Actualiza los mensajes de error en función de las validaciones
-        const errores = {};
-
-        if (contieneCaracteresNoNumericos) {
-          errores['caracteresNoNumericos'] = true;
-        }
-
-        if (!longitudValida) {
-          errores['longitudInvalida'] = true;
-        }
-
-        // Elimina la clase de error si no hay errores y la cédula es válida
-        if (!contieneCaracteresNoNumericos && longitudValida) {
-          const cedulaInputField = document.querySelector(
-            '.input-field.cedula-input-field'
-          ); // Ajusta el selector según tu estructura HTML
-          cedulaInputField.classList.remove('error');
-        }
-
-        this.signupForm.get('cedula').setErrors(errores);
-      });
-
-      this.signupForm.get('correo').valueChanges.subscribe(() => {
-        // Marca el campo 'correo' como tocado para mostrar los mensajes de error
-        this.signupForm.get('correo').markAsTouched();
-
-        // Obtén el valor actual del campo de correo
-        const correo = this.signupForm.get('correo').value;
-
-        // Verifica si el correo cumple con el formato válido
-        const formatoValido =
-          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo);
-
-        // Actualiza los mensajes de error en función de las validaciones
-        const errores = {};
-
-        if (!formatoValido) {
-          errores['correoInvalido'] = true;
-        }
-
-        // Elimina la clase de error si no hay errores y el correo es válido
-        if (formatoValido) {
-          const correoInputField = document.querySelector(
-            '.input-field.correo-input-field'
-          ); // Ajusta el selector según tu estructura HTML
-          correoInputField.classList.remove('error');
-        }
-
-        this.signupForm.get('correo').setErrors(errores);
-      });
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -180,43 +94,23 @@ export class AgregarEmpleadoComponent {
 
       this.router.navigate(['/tramites']);
     }
-  } // fin ngOnInit()
-
-  hideShowPass() {
-    this.isText = !this.isText;
-    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isText ? (this.type = 'text') : (this.type = 'password');
   }
 
   onSignup() {
     this.markFormGroupTouched(this.signupForm);
     if (this.signupForm.valid) {
-      this.botonDesactivado = true;
       this.auth.registrarse(this.signupForm.value).subscribe({
         next: (res) => {
-          console.log(res.message);
           this.signupForm.reset();
           this.toast.success({
             detail: 'CORRECTO',
             summary: res.message,
             duration: 4000,
           });
-          this.usuarioCreado = true;
 
-          setTimeout(() => {
-            this.usuarioCreado = false;
-          }, 2000);
           setTimeout(() => {
             this.router.navigate(['/gestionUsuarios']);
-            this.botonDesactivado = false;
           }, 600);
-
-          //Verificar si el usuario está autenticado antes de redirigir
-          if (!this.auth.estaLogueado()) {
-            setTimeout(() => {
-              this.router.navigate(['tramites']);
-            }, 600);
-          }
         },
         error: (err) => {
           this.toast.error({
@@ -240,22 +134,24 @@ export class AgregarEmpleadoComponent {
     });
   }
 
-  validarCedula(control: FormControl) {
-    const cedula = control.value;
-    const regex = /^[0-9]{9}$/; // Verifica si la cédula tiene exactamente 9 dígitos
+  obtenerErrorCampoCedula() {
+    const campo = this.signupForm.get('cedula');
 
-    if (!regex.test(cedula)) {
-      return { cedulaInvalida: true };
+    if (campo?.hasError('required')) {
+      return 'La cédula es requerida';
     }
 
-    // Si llegamos aquí, la cédula tiene 9 dígitos, pero ahora verificamos que no contiene letras ni caracteres especiales
-    const regexLetrasCaracteresEspeciales =
-      /[a-zA-Z!@#$%^&*()_+{}\[\]:;<>,.?~\\]/;
-    if (regexLetrasCaracteresEspeciales.test(cedula)) {
-      return { cedulaInvalida: true };
+    if (campo?.hasError('pattern')) {
+      return 'La cédula debe tener un formato nacional válido';
     }
 
-    return null; // La cédula es válida
+    if (campo?.hasError('maxlength')) {
+      return 'La cédula debe tener máximo 9 caracteres';
+    }
+
+    if (campo?.hasError('minlength')) {
+      return 'La cédula debe tener mínimo 9 caracteres';
+    }
   }
 
   obtenerErrorCampoCorreo() {
@@ -279,64 +175,59 @@ export class AgregarEmpleadoComponent {
 
     return '';
   }
+  obtenerErrorCampoNombre() {
+    const campo = this.signupForm.get('nombre');
 
-  validarNombre(control: FormControl) {
-    const nombre = control.value;
-    const regexLower = /^[a-z]/; // Primera letra minúscula
-    const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
-    const regexSpaces = /\s/; // Espacios en blanco
-
-    const errors = {};
-
-    if (regexLower.test(nombre)) {
-      errors['nombreInvalidoLower'] = true;
+    if (campo?.hasError('required')) {
+      return 'El nombre es requerido';
+    }
+    if (campo?.hasError('primeraLetraMayuscula')) {
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    if (campo?.hasError('minlength')) {
+      return 'El nombre debe tener mínimo 4 caracteres';
+    }
+    if (campo?.hasError('sinTildes')) {
+      return campo.getError('sinTildes').mensaje;
     }
 
-    if (regexSpecial.test(nombre)) {
-      errors['nombreInvalidoSpecial'] = true;
+    return '';
+  }
+  obtenerErrorCampoPrimerApellido() {
+    const campo = this.signupForm.get('primerApellido');
+
+    if (campo?.hasError('required')) {
+      return 'El primer apellido es requerido';
+    }
+    if (campo?.hasError('primeraLetraMayuscula')) {
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    if (campo?.hasError('minlength')) {
+      return 'El primer apellido debe tener mínimo 4 caracteres';
+    }
+    if (campo?.hasError('sinTildes')) {
+      return campo.getError('sinTildes').mensaje;
     }
 
-    if (regexSpaces.test(nombre)) {
-      errors['nombreInvalidoEspacios'] = true; // Agrega un error si hay espacios en blanco
-    }
-
-    if (Object.keys(errors).length > 0) {
-      return errors;
-    }
-
-    return null;
+    return '';
   }
 
-  validarApellido(control: FormControl) {
-    const apellido = control.value;
-    const regexLower = /^[a-z]/; // Primera letra minúscula
-    const regexSpecial = /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\]/; // Números o caracteres especiales
-    const regexSpaces = /\s/; // Espacios en blanco
+  obtenerErrorCampoSegundoApellido() {
+    const campo = this.signupForm.get('segundoApellido');
 
-    const errors = {};
-
-    if (regexLower.test(apellido)) {
-      errors['apellidoInvalidoLower'] = true;
+    if (campo?.hasError('required')) {
+      return 'El segundo apellido es requerido';
+    }
+    if (campo?.hasError('primeraLetraMayuscula')) {
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    if (campo?.hasError('minlength')) {
+      return 'El segundo apellido debe tener mínimo 4 caracteres';
+    }
+    if (campo?.hasError('sinTildes')) {
+      return campo.getError('sinTildes').mensaje;
     }
 
-    if (regexSpecial.test(apellido)) {
-      errors['apellidoInvalidoSpecial'] = true;
-    }
-
-    if (regexSpaces.test(apellido)) {
-      errors['nombreInvalidoEspacios'] = true; // Agrega un error si hay espacios en blanco
-    }
-
-    if (Object.keys(errors).length > 0) {
-      return errors;
-    }
-
-    return null;
-  }
-
-  desactivarBoton() {
-    return this.botonDesactivado
-      ? 'btn btn-primary btn-block mt-4 w-100 boton-desactivado'
-      : 'btn btn-primary btn-block mt-4 w-100';
+    return '';
   }
 }
