@@ -44,7 +44,17 @@ export class ResetComponent {
             ),
           ],
         ],
-        confirmarContrasena: ['', [Validators.required]],
+        confirmarContrasena: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(20),
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
+            ),
+          ],
+        ],
       },
       {
         validator: ConfirmarContrasena('contrasena', 'confirmarContrasena'),
@@ -149,6 +159,15 @@ export class ResetComponent {
     const campo = this.resetForm.get('confirmarContrasena');
     if (campo?.hasError('required')) {
       return 'La contraseña es requerida';
+    }
+    if (campo?.hasError('minlength')) {
+      return 'La contraseña debe tener mínimo 8 caracteres';
+    }
+    if (campo?.hasError('maxlength')) {
+      return 'La contraseña debe tener máximo 20 caracteres';
+    }
+    if (campo?.hasError('pattern')) {
+      return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
     }
     if (campo?.hasError('ConfirmarContrasena')) {
       return 'Las contraseñas no coinciden';
