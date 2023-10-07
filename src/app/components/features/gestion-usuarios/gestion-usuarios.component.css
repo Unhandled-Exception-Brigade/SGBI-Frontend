@@ -33,7 +33,7 @@ tbody tr td {
 }
 
 .barra-busqueda {
-  width: 80%;
+  width: 100%;
 }
 .botonRol {
   width: 126px;
@@ -42,11 +42,10 @@ tbody tr td {
   background: #136137;
   text-decoration: none !important;
   font-weight: 500;
-
   color: #fff;
   text-transform: uppercase;
-  font-size: 14px;
-  padding: 10px 24px;
+  font-size: 13px;
+  padding: 10px 10px;
   display: inline-block;
   border-radius: 50px;
   transition: background-color 0.3s ease; /* Agrega una transición suave */

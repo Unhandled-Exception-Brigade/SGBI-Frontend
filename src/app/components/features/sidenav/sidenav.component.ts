@@ -5,7 +5,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { navbarData } from './nav-data';
 import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -42,7 +42,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   navData = navbarData;
   multiple: boolean = false;
 
-  public cedula: string = '';
+  public nombre: string = '';
   public rol: string = '';
 
   ngOnInit() {
@@ -53,9 +53,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
       this.rol = val || rolDelToken;
     });
 
-    this.usuarioService.getCedulaUsuario().subscribe((val) => {
-      const cedulaDelToken = this.auth.obtenerCedulaDelToken();
-      this.cedula = val || cedulaDelToken;
+    this.usuarioService.getNombreUsuario().subscribe((val) => {
+      const nombreDelToken = this.auth.obtenerNombreDelToken();
+      this.nombre = val || nombreDelToken;
     });
   }
 

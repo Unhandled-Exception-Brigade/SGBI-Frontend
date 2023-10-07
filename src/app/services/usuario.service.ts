@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsuarioService {
   private cedulaUsuario$ = new BehaviorSubject<string>('');
+  private nombreUsuario$ = new BehaviorSubject<string>('');
   private rolUsuario$ = new BehaviorSubject<string>('');
 
   constructor() {}
@@ -15,6 +16,9 @@ export class UsuarioService {
   }
   public setRolUsuario(rol: string) {
     this.rolUsuario$.next(rol);
+  }
+  public getNombreUsuario() {
+    return this.nombreUsuario$.asObservable();
   }
 
   public getCedulaUsuario() {

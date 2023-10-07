@@ -66,6 +66,11 @@ export class AuthService {
       return this.usuarioPayload.role;
     }
   }
+  obtenerNombreDelToken() {
+    if (this.usuarioPayload) {
+      return this.usuarioPayload.actort;
+    }
+  }
   obtenerEstadoDelUsuario() {
     if (this.usuarioPayload) {
       return this.usuarioPayload.estado;
