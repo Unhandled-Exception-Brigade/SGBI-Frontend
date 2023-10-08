@@ -54,3 +54,12 @@ tbody tr td {
 .custom-btn:hover {
   background: #0d4821; /* Cambia el color de fondo al pasar el mouse */
 }
+.icono {
+  font-size: 19px; /* Tamaño inicial del icono */
+  transition: transform 0.2s; /* Agrega una transición suave */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+}
+
+.icono:hover {
+  transform: scale(1.2); /* Agrandar el icono al pasar el mouse */
+}
