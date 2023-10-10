@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+
+declare var $: any; // Declara jQuery para su uso en TypeScript
 
 @Component({
   selector: 'app-mantenimiento',
   templateUrl: './mantenimiento.component.html',
   styleUrls: ['./mantenimiento.component.css'],
 })
-export class MantenimientoComponent {
+export class MantenimientoComponent implements OnInit, AfterViewInit {
   public rol: string = '';
 
   constructor(
@@ -35,5 +37,14 @@ export class MantenimientoComponent {
 
       this.router.navigate(['/tramites']);
     }
+  }
+
+  ngAfterViewInit() {
+    // Esto se ejecutará después de que la vista se haya inicializado completamente
+    $(".yearpicker").yearpicker({
+      year: 2021,
+      startYear: 2019,
+      endYear: 2050,
+    });
   }
 }

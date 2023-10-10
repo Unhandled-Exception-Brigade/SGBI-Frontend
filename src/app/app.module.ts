@@ -23,8 +23,10 @@ import { TramitesComponent } from './components/features/tramites/tramites.compo
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
 import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { YearPickerComponent } from './components/dropdowns/year-picker/year-picker.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    YearPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgToastModule,
     FormsModule,
     NgbModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [
     {
