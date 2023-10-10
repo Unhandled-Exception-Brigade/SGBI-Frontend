@@ -6,6 +6,7 @@ import { navbarData } from './nav-data';
 import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -22,7 +23,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   suscripcion: Subscription;
 
   constructor(
-    private api: ApiService,
+    private toast: NgToastService,
     private auth: AuthService,
     private usuarioService: UsuarioService,
     private sideNavService: SidenavService,
@@ -38,7 +39,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
 
   collapsed = false;
-  screenWidth = 0;
+
   navData = navbarData;
   multiple: boolean = false;
 
@@ -46,22 +47,27 @@ export class SidenavComponent implements OnInit, OnDestroy {
   public rol: string = '';
 
   ngOnInit() {
-    this.screenWidth = window.innerWidth;
+    this.usuarioService.getNombreUsuario().subscribe((val) => {
+      const nombreDelToken = this.auth.obtenerNombreDelToken();
+      this.nombre = val || nombreDelToken;
+
+      // Ahora que tienes el nombre, puedes mostrar el componente.
+      this.mostrarSideNav = true;
+    });
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-
-    this.usuarioService.getNombreUsuario().subscribe((val) => {
-      const nombreDelToken = this.auth.obtenerNombreDelToken();
-      this.nombre = val || nombreDelToken;
-    });
   }
 
   cerrarSesion() {
     this.auth.cerrarSesion();
-    window.location.reload(); // Recarga la página actual
+    this.toast.info({
+      detail: 'INFORMACION',
+      summary: 'Sesión cerrada correctamente',
+      duration: 2000,
+    });
   }
 
   tienePermiso(permisos: string[]) {

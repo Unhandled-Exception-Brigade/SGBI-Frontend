@@ -28,5 +28,5 @@ export const navbarData = [
     icon: 'fas fa-user',
     label: 'Gestión de usuarios',
     permiso: ['administrador'],
-  }
+  },
 ];
