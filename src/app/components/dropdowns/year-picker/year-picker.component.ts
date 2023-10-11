@@ -36,6 +36,7 @@ export const MY_FORMATS = {
 })
 export class YearPickerComponent {
   date = new FormControl(moment());
+  minDate = new Date(2023, 0, 1); // 1 de enero de 2023
   chosenYearHandler(normalizedYear: Moment, dp: any) {
     const ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
