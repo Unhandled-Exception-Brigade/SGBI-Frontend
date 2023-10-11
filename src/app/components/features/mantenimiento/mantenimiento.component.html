@@ -19,16 +19,21 @@
                     <app-year-picker></app-year-picker>
                 </div>
 
-                <div class="input-group mb-3">
+                <div class="input-group mb-3"
+                    [ngClass]="{'error-border': loginForm.get('montoExonerar').invalid && loginForm.get('montoExonerar').touched}">
                     <span class="input-group-text" id="basic-addon1">₡</span>
-                    <input type="text" class="input-field form-control" formControlName="montoExonerar" placeholder="Ingresar el monto a exonerar" aria-label="montoExonerar" aria-describedby="basic-addon1">
+                    <input type="text" class="input-field form-control" formControlName="montoExonerar"
+                        placeholder="Ingresar el monto a exonerar" aria-label="montoExonerar"
+                        aria-describedby="basic-addon1">
                 </div>
 
-                <span style="color: red;" *ngIf="this.loginForm.get('montoExonerar') && this.loginForm.get('montoExonerar').invalid && this.loginForm.get('montoExonerar').touched"
-                >{{obtenerErrorCampoMonto()}}</span>
+
+                <span style="color: red;"
+                    *ngIf="this.loginForm.get('montoExonerar') && this.loginForm.get('montoExonerar').invalid && this.loginForm.get('montoExonerar').touched">{{obtenerErrorCampoMonto()}}</span>
 
                 <div class="d-flex flex-column align-items-end">
-                    <button type="submit" [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
+                    <button type="submit" [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-success"><i
+                            class="fa-solid fa-check"></i></button>
                 </div>
             </form>
         </div>

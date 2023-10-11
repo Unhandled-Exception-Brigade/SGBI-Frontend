@@ -3,7 +3,7 @@
     border: 2px solid #b3b3b3; /* Cambia #000 al color que desees para el borde */
     border-radius: 10px;
     padding: 10px; /* Añade un espacio alrededor del contenido dentro del contenedor */
-    background-color: rgb(231, 230, 230);
+    background-color: rgb(243, 243, 243);
 }
 .contenedor-elementos {
     display: flex;
@@ -25,7 +25,6 @@
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
-    color: #136137;
 }
 
 .input-field.error {
@@ -47,6 +46,11 @@
         width: 300px;
     }
 }
+
+.error-border {
+    border: 1px solid red;
+  }
+  
 
 .btn-success{
     background-color: #136137;
