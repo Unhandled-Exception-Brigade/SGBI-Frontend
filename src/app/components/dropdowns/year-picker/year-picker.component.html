@@ -1,12 +1,11 @@
-<div class="year-picker">
-    <mat-form-field>
-        <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date" [min]="minDate">
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp
-                        startView="multi-year"
-                        (yearSelected)="chosenYearHandler($event, dp)"
-                       
-                        panelClass="example-month-picker">
-        </mat-datepicker>
-    </mat-form-field>
+<div class="p-fluid p-grid p-formgrid"> 
+	<div class="p-field p-col-12 p-md-4"> 
+		<p-calendar
+		view="year"
+		dateFormat="yy"
+		[readonlyInput]="false" 
+		inputId="pickYear"
+		placeholder="Seleccione el año"> 
+		</p-calendar> 
+	</div> 
 </div>

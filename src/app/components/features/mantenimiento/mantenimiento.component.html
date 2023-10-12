@@ -17,8 +17,9 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
             <form [formGroup]="loginForm" (ngSubmit)="enviar()">
-                <div class="input-group mb-1 mt-3">
-                    <app-year-picker></app-year-picker>
+
+                <div class="input-group mb-3 mt-3">
+                    <p-calendar view="year" dateFormat="yy" inputId="yearpicker" formControlName="ano" [showIcon]="true" placeholder="Seleccione el año" [minDate]="dateTime" ></p-calendar>
                 </div>
 
                 <div class="input-group mb-3"
@@ -28,7 +29,6 @@
                         placeholder="Ingresar el monto a exonerar" aria-label="montoExonerar"
                         aria-describedby="basic-addon1">
                 </div>
-
 
                 <span style="color: red;"
                     *ngIf="this.loginForm.get('montoExonerar') && this.loginForm.get('montoExonerar').invalid && this.loginForm.get('montoExonerar').touched">{{obtenerErrorCampoMonto()}}</span>

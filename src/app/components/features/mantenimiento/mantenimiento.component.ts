@@ -15,6 +15,8 @@ declare var $: any; // Declara jQuery para su uso en TypeScript
 export class MantenimientoComponent implements OnInit {
   public rol: string = '';
 
+  dateTime = new Date();
+
   loginForm = new FormGroup({
     montoExonerar: new FormControl('', [
       Validators.required,
@@ -34,7 +36,9 @@ export class MantenimientoComponent implements OnInit {
     private auth: AuthService,
     private toast: NgToastService,
     private router: Router
-  ) { }
+  ) { 
+    this.dateTime.setDate(this.dateTime.getDate()); 
+  }
 
   ngOnInit() {
 
