@@ -4,6 +4,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
 
 declare var $: any; // Declara jQuery para su uso en TypeScript
 
