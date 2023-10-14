@@ -1,1 +1,89 @@
-<p>mantenimiento works!</p>
+<header class="text-center">
+    <h3>Mantenimiento</h3>
+</header>
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Agregar monto a exonerar</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Historico</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <form [formGroup]="loginForm" (ngSubmit)="enviar()">
+
+                <div class="input-group mb-3 mt-3">
+                    <p-calendar view="year" dateFormat="yy" inputId="yearpicker" formControlName="ano" [showIcon]="true" placeholder="Seleccione el año" [minDate]="dateTime" ></p-calendar>
+                </div>
+
+                <div class="input-group mb-3"
+                    [ngClass]="{'error-border': loginForm.get('montoExonerar').invalid && loginForm.get('montoExonerar').touched}">
+                    <span class="input-group-text" id="basic-addon1">₡</span>
+                    <input type="text" class="input-field form-control" formControlName="montoExonerar"
+                        placeholder="Ingresar el monto a exonerar" aria-label="montoExonerar"
+                        aria-describedby="basic-addon1">
+                </div>
+
+                <span style="color: red;"
+                    *ngIf="this.loginForm.get('montoExonerar') && this.loginForm.get('montoExonerar').invalid && this.loginForm.get('montoExonerar').touched">{{obtenerErrorCampoMonto()}}</span>
+
+                <div class="d-flex flex-column align-items-end">
+                    <button type="submit" [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-success"><i
+                            class="fa-solid fa-check"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Agregado por</th>
+                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Año</th>
+                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Yesenia</th>
+                        <td>2021</td>
+                        <td>17.973.000,00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ericka</th>
+                        <td>2022</td>
+                        <td>17.973.000,00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Vinicio</th>
+                        <td>2023</td>
+                        <td>17.973.000,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit"
+                role="tab" aria-controls="home" aria-selected="true">Agregar monto a exonerar</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Historico</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    </div>
+</div>

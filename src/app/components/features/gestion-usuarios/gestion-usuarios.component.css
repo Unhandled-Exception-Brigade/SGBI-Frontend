@@ -33,7 +33,7 @@ tbody tr td {
 }
 
 .barra-busqueda {
-  width: 80%;
+  width: 100%;
 }
 .botonRol {
   width: 126px;
@@ -42,11 +42,10 @@ tbody tr td {
   background: #136137;
   text-decoration: none !important;
   font-weight: 500;
-
   color: #fff;
   text-transform: uppercase;
-  font-size: 14px;
-  padding: 10px 24px;
+  font-size: 13px;
+  padding: 10px 10px;
   display: inline-block;
   border-radius: 50px;
   transition: background-color 0.3s ease; /* Agrega una transición suave */
@@ -54,4 +53,13 @@ tbody tr td {
 
 .custom-btn:hover {
   background: #0d4821; /* Cambia el color de fondo al pasar el mouse */
+}
+.icono {
+  font-size: 19px; /* Tamaño inicial del icono */
+  transition: transform 0.2s; /* Agrega una transición suave */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+}
+
+.icono:hover {
+  transform: scale(1.2); /* Agrandar el icono al pasar el mouse */
 }

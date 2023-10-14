@@ -1,245 +1,93 @@
 <div class="outer">
-  <div *ngIf="usuarioCreado" class="ventana-emergente"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-5 col-md-7 mx-auto">
         <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">Registrarse</h3>
+          </div>
+
           <div class="panel-body p-3">
-            <form class="form" [formGroup]="signupForm">
-              <p class="title">Registrar a un usuario</p>
-              <div class="form-group pt-3 flex">
-                <div
-                  class="input-field nombre-input-field"
-                  [class.error]="
-                    signupForm.get('nombre').hasError('nombreInvalidoLower') ||
-                    signupForm
-                      .get('nombre')
-                      .hasError('nombreInvalidoSpecial') ||
-                    signupForm
-                      .get('nombre')
-                      .hasError('nombreInvalidoEspacios') ||
-                    signupForm.get('nombre').touched
-                  "
-                >
-                  <span class="fa fa-user p-2"></span>
-                  <input
-                    formControlName="nombre"
-                    type="text"
-                    placeholder="Nombre"
-                  />
-                </div>
-              </div>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('nombre').touched &&
-                  signupForm.get('nombre').hasError('nombreInvalidoLower')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm.get('nombre').hasError('nombreInvalidoLower')
-                  "
-                >
-                  La primera letra debe ser mayúscula.
-                  <br />
-                </ng-container>
-              </small>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('nombre').touched &&
-                  signupForm.get('nombre').hasError('nombreInvalidoSpecial')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm.get('nombre').hasError('nombreInvalidoSpecial')
-                  "
-                >
-                  El nombre no debe contener números ni caracteres especiales.
-                  <br />
-                </ng-container>
-              </small>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('nombre').hasError('nombreInvalidoEspacios')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm.get('nombre').hasError('nombreInvalidoEspacios')
-                  "
-                >
-                  El nombre no debe contener espacios en blanco.
-                </ng-container>
-              </small>
-
-              <!-- APELLIDO -->
-              <div class="form-group pt-3 flex">
-                <div
-                  class="input-field apellido-input-field"
-                  [class.error]="
-                    signupForm
-                      .get('apellido')
-                      .hasError('apellidoInvalidoLower') ||
-                    signupForm
-                      .get('apellido')
-                      .hasError('apellidoInvalidoSpecial') ||
-                    signupForm.get('apellido').touched
-                  "
-                >
-                  <span class="fa fa-user p-2"></span>
-                  <input
-                    formControlName="apellido"
-                    type="text"
-                    placeholder="Apellido"
-                  />
-                </div>
-              </div>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('apellido').touched &&
-                  signupForm.get('apellido').hasError('apellidoInvalidoLower')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm.get('apellido').hasError('apellidoInvalidoLower')
-                  "
-                >
-                  La primera letra debe ser mayúscula.
-                  <br />
-                </ng-container>
-              </small>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('apellido').touched &&
-                  signupForm.get('apellido').hasError('apellidoInvalidoSpecial')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm
-                      .get('apellido')
-                      .hasError('apellidoInvalidoSpecial')
-                  "
-                >
-                  El apellido no debe contener números ni caracteres especiales.
-                  <br />
-                </ng-container>
-              </small>
-
-              <small
-                class="text-danger"
-                *ngIf="
-                  signupForm.get('apellido').hasError('nombreInvalidoEspacios')
-                "
-              >
-                <ng-container
-                  *ngIf="
-                    signupForm
-                      .get('apellido')
-                      .hasError('nombreInvalidoEspacios')
-                  "
-                >
-                  El apellido no debe contener espacios en blanco.
-                </ng-container>
-              </small>
-
-              <!-- CEDULA  -->
+            <form [formGroup]="signupForm">
               <div class="form-group pt-3">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <ng-container class="input-field" [class.error]="
+                    signupForm.get('nombre').touched &&
+                    signupForm.get('nombre').invalid
+                  ">
+                  <span class="fa fa-user p-2"></span>
+                  <input formControlName="nombre" type="text" placeholder="Nombre" />
+                </ng-container>
+                <small class="text-danger" *ngIf="
+                    signupForm.get('nombre').touched &&
+                    signupForm.get('nombre').invalid
+                  ">
+                  {{ obtenerErrorCampoNombre() }}
+                </small>
+              </div>
+
+              <div class="form-group pt-3">
+                <div class="input-field" [class.error]="
+                    signupForm.get('primerApellido').touched &&
+                    signupForm.get('primerApellido').invalid
+                  ">
+                  <span class="fa fa-user p-2"></span>
+                  <input formControlName="primerApellido" type="text" placeholder="Primer apellido" />
+                </div>
+                <small class="text-danger" *ngIf="
+                    signupForm.get('primerApellido').touched &&
+                    signupForm.get('primerApellido').invalid
+                  ">
+                  {{ obtenerErrorCampoPrimerApellido() }}
+                </small>
+              </div>
+              <div class="form-group pt-3">
+                <div class="input-field" [class.error]="
+                    signupForm.get('segundoApellido').touched &&
+                    signupForm.get('segundoApellido').invalid
+                  ">
+                  <span class="fa fa-user p-2"></span>
+                  <input formControlName="segundoApellido" type="text" placeholder="Segundo apellido" />
+                </div>
+                <small class="text-danger" *ngIf="
+                    signupForm.get('segundoApellido').touched &&
+                    signupForm.get('segundoApellido').invalid
+                  ">
+                  {{ obtenerErrorCampoSegundoApellido() }}
+                </small>
+              </div>
+
+              <div class="form-group pt-3">
+                <div class="input-field" [class.error]="
                     signupForm.get('cedula').touched &&
                     signupForm.get('cedula').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-id-card p-2"></span>
-                  <input
-                    formControlName="cedula"
-                    type="text"
-                    placeholder="Cédula"
-                  />
+                  <input formControlName="cedula" type="text" placeholder="Cédula" />
                 </div>
-                <small
-                  class="text-danger"
-                  *ngIf="
-                    signupForm.get('cedula').hasError('caracteresNoNumericos')
-                  "
-                >
-                  La cédula debe contener solo números.
-                  <br />
-                </small>
-                <small
-                  class="text-danger"
-                  *ngIf="signupForm.get('cedula').hasError('longitudInvalida')"
-                >
-                  La cédula debe tener exactamente 9 números.
+                <small class="text-danger" *ngIf="
+                    signupForm.get('cedula').touched &&
+                    signupForm.get('cedula').invalid
+                  ">
+                  {{ obtenerErrorCampoCedula() }}
                 </small>
               </div>
 
-              <!-- <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle w-100"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Rol
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item">usuario</a>
-                  <a class="dropdown-item">administrador</a>
-                  <a class="dropdown-item">jefe</a>
-                </div>
-              </div> -->
-
-              <!-- CORREO -->
               <div class="form-group pt-3">
-                <div
-                  class="input-field"
-                  [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('correo').touched &&
                     signupForm.get('correo').invalid
-                  "
-                >
+                  ">
                   <span class="fa fa-envelope p-2"></span>
-                  <input
-                    formControlName="correo"
-                    type="text"
-                    placeholder="Correo"
-                  />
+                  <input formControlName="correo" type="text" placeholder="Correo" />
                 </div>
+                <small class="text-danger" *ngIf="
+                    signupForm.get('correo').touched &&
+                    signupForm.get('correo').invalid
+                  ">{{ obtenerErrorCampoCorreo() }}</small>
               </div>
 
-              <small
-                class="text-danger"
-                *ngIf="signupForm.get('correo').hasError('correoInvalido')"
-              >
-                El correo debe tener un formato válido:
-                <br />
-                alguien@ejemplo.com
-              </small>
-
-              <button
-                (click)="onSignup()"
-                [ngClass]="desactivarBoton()"
-                type="submit"
-                class="btn btn-primary btn-block mt-4 w-100 custom-btn"
-              >
-                Registrar
+              <button (click)="onSignup()" type="submit" class="btn btn-primary btn-block mt-4 w-100 custom-btn">
+                Registrarse
               </button>
             </form>
           </div>
