@@ -6,12 +6,8 @@
     <div class="barra-busqueda mb-3">
       <label for="busqueda" class="form-label"> </label>
       <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Búsqueda de usuario por nombre, apellido y cédula"
-          id="busqueda"
-        />
+        <input type="text" class="form-control" placeholder="Búsqueda de usuario por nombre, apellido y cédula"
+          id="busqueda" />
         <span class="input-group-text">
           <i class="fas fa-search"></i>
         </span>
@@ -22,11 +18,7 @@
         <div class="d-flex align-items-end pt-4">
           <form class="d-flex" role="search">
             <div *ngIf="rol === 'administrador'">
-              <button
-                type="button"
-                class="btn btn-success ml-3 custom-btn"
-                [routerLink]="['/agregarEmpleado']"
-              >
+              <button type="button" class="btn btn-success ml-3 custom-btn" [routerLink]="['/agregarEmpleado']">
                 <i class="ml-1 fa-solid fa-user-plus"></i>
               </button>
             </div>
@@ -54,7 +46,7 @@
             <td>{{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
             <td>{{ usuario.rol }}</td>
             <td>
-              <i class="mr-2 fa-regular fa-pen-to-square icono"></i>
+              <i class="mr-2 fa-regular fa-pen-to-square icono" (click)="mostrarInformacionUsuario(usuario)"></i>
               <i class="fa-solid fa-user-slash icono"></i>
             </td>
           </tr>

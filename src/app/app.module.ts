@@ -23,6 +23,7 @@ import { TramitesComponent } from './components/features/tramites/tramites.compo
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
 import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
 
 
 
@@ -41,7 +42,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    ModalInformacionUsuarioComponent
   ],
   imports: [
     BrowserModule,

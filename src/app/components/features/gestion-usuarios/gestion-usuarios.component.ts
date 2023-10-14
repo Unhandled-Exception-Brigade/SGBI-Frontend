@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfirmacionComponent } from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component';
+import { ModalInformacionUsuarioComponent } from '../../modal-informacion-usuario/modal-informacion-usuario.component';
+
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -20,6 +22,9 @@ export class GestionUsuariosComponent {
   public cedula: string = '';
   public rol: string = '';
 
+   // Variable para almacenar la información del usuario seleccionado
+   public usuarioSeleccionado: any;
+
   constructor(
     private api: ApiService,
     private auth: AuthService,
@@ -29,6 +34,8 @@ export class GestionUsuariosComponent {
     private editarUsuarioService: EditarUsuarioService,
     private modalService: NgbModal
   ) {}
+
+  
 
   ngOnInit() {
     this.usuarioService.getRolUsuario().subscribe((val) => {
@@ -56,7 +63,23 @@ export class GestionUsuariosComponent {
     }
   }
 
+  
+
   cerrarSesion() {
     this.auth.cerrarSesion();
   }
+  
+
+  // Método para abrir el modal y mostrar la información del usuario seleccionado
+  mostrarInformacionUsuario(usuario: any) {
+    this.usuarioSeleccionado = usuario;
+    this.usuarioSeleccionado.estado = this.auth.obtenerEstadoDelUsuario(); // Agrega el estado del usuario
+    const modalRef = this.modalService.open(ModalInformacionUsuarioComponent, {
+      size: 'lg',
+    });
+  
+    modalRef.componentInstance.usuario = this.usuarioSeleccionado;
+  }
+  
+  
 }
