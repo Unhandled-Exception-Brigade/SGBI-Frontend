@@ -21,17 +21,20 @@
                 <li class="" *ngFor="let data of navData">
                   <ng-container *ngIf="tienePermiso(data.permiso)">
                     <ng-container *ngIf="data.subEnlaces.length !== 0; else opcion">
-                      <a class="pl-4" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" style="cursor: pointer;">
+                      <a class="pl-4" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        style="cursor: pointer;" (click)="mostrarSubMenu()">
                         <i class="bi" [class]="data.icon" style="color: white">
                           <span class="fuente item-text Roboto pl-3">{{data.label}}</span>
-                          <i class="fa-solid fa-caret-down ml-4" (click)="toggleH1()"></i>
+                          <i class="fa-solid fa-caret-down ml-4"></i>
                         </i>
                       </a>
-                      <span *ngIf="mostrarH1">
+                      <span *ngIf="subMenu">
                         <ng-container *ngFor="let enlaces of data.subEnlaces">
-                          <i class="bi" style="color: white">
-                            <span class="fuente item-text Roboto pl-3 ml-5">{{enlaces.etiqueta}}</span>
-                          </i>
+                          <a class="pl-4 sub-menu-item" [routerLink]="[enlaces.link]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <li class="bi sub-menu-list" style="color: white">
+                              <span class="fuente Roboto pl-3 sub-menu-text">{{enlaces.etiqueta}}</span>
+                            </li>
+                          </a>
                         </ng-container>
                       </span>
                     </ng-container>

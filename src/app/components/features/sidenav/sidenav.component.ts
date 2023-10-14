@@ -20,10 +20,10 @@ interface SideNavToggle {
 export class SidenavComponent implements OnInit, OnDestroy {
   mostrarSideNav: boolean = true;
   suscripcion: Subscription;
-  mostrarH1: boolean = false;
+  subMenu: boolean = false;
 
-  toggleH1() {
-    this.mostrarH1 = !this.mostrarH1;
+  mostrarSubMenu() {
+    this.subMenu = !this.subMenu;
   }
 
   constructor(

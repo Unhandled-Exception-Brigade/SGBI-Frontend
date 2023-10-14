@@ -44,6 +44,15 @@
   width: 100%;
 }
 
+.sub-menu-list{
+  
+}
+
+.sub-menu-item{
+  margin-left: 30px;
+  margin-right: 25px;
+}
+
 .navbar {
   background-color: #136137;
 }
