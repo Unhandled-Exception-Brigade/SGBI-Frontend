@@ -24,7 +24,7 @@
                       <a class="pl-4" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                         style="cursor: pointer;" (click)="mostrarSubMenu()">
                         <i class="bi" [class]="data.icon" style="color: white">
-                          <span class="fuente item-text Roboto pl-3">{{data.label}}</span>
+                          <span class="fuente item-text Roboto pl-2">{{data.label}}</span>
                           <i class="fa-solid fa-caret-down ml-4"></i>
                         </i>
                       </a>
@@ -32,7 +32,7 @@
                         <ng-container *ngFor="let enlaces of data.subEnlaces">
                           <a class="pl-4 sub-menu-item" [routerLink]="[enlaces.link]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <li class="bi sub-menu-list" style="color: white">
-                              <span class="fuente Roboto pl-3 sub-menu-text">{{enlaces.etiqueta}}</span>
+                              <span class="Roboto pl-3 sub-menu-text">{{enlaces.etiqueta}}</span>
                             </li>
                           </a>
                         </ng-container>

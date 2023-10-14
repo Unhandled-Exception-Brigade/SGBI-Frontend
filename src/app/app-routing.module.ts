@@ -10,6 +10,7 @@ import { CreacionTramitesComponent } from './components/features/creacion-tramit
 import { MantenimientoComponent } from './components/features/mantenimiento/mantenimiento.component';
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
+import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,11 @@ const routes: Routes = [
     path: 'gestionUsuarios',
     canActivate: [authGuard],
     component: GestionUsuariosComponent,
+  },
+  {
+    path: 'monto-exonerar',
+    canActivate: [authGuard],
+    component: MontoExonerarComponent,
   },
   {
     path: '**',

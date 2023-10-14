@@ -6,22 +6,19 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
 
-declare var $: any; // Declara jQuery para su uso en TypeScript
-
 @Component({
-  selector: 'app-mantenimiento',
-  templateUrl: './mantenimiento.component.html',
-  styleUrls: ['./mantenimiento.component.css'],
+  selector: 'app-monto-exonerar',
+  templateUrl: './monto-exonerar.component.html',
+  styleUrls: ['./monto-exonerar.component.css']
 })
-export class MantenimientoComponent implements OnInit {
+export class MontoExonerarComponent {
   public rol: string = '';
-  value1: number = 1500;
+  value1: number = 0;
   dateTime = new Date();
 
   montoExonerarForm = new FormGroup({
     montoExonerar: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]*$/), // Solo números
       Validators.min(15000000), // Mínimo 15 millones
       Validators.max(30000000), // Máximo 30 millones
     ]),
@@ -37,8 +34,8 @@ export class MantenimientoComponent implements OnInit {
     private auth: AuthService,
     private toast: NgToastService,
     private router: Router
-  ) { 
-    this.dateTime.setDate(this.dateTime.getDate()); 
+  ) {
+    this.dateTime.setDate(this.dateTime.getDate());
   }
 
   ngOnInit() {
@@ -80,7 +77,7 @@ export class MantenimientoComponent implements OnInit {
   }
 
   enviar() {
-    console.log('enviado');
+    console.log(this.montoExonerarForm.value);
   }
 
   obtenerErrorCampoMonto() {
@@ -88,10 +85,6 @@ export class MantenimientoComponent implements OnInit {
 
     if (campo?.hasError('required')) {
       return 'El monto es requerido';
-    }
-
-    if (campo?.hasError('pattern')) {
-      return 'Ingrese solo números';
     }
 
     if (campo?.hasError('min')) {
@@ -106,5 +99,4 @@ export class MantenimientoComponent implements OnInit {
   }
 
   errorBorderClass: string = 'error-border';
-
 }

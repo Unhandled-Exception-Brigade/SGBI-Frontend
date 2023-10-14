@@ -32,7 +32,11 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
+import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
+import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
+import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
+import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     TramitesComponent,
     FirstEntryComponent,
     ModalConfirmacionComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    MontoExonerarComponent,
+    TarifaAseoViasSitiosPublicosComponent,
+    TarifaMantenimientoParquesObrasOrnatoComponent,
+    TarifaServicioRecoleccionBasuraComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +77,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputMaskModule,
     InputTextModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    InputNumberModule
   ],
   providers: [
     {

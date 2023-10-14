@@ -27,8 +27,8 @@ export const navbarData = [
     permiso: ['administrador', 'jefe'],
     subEnlaces: [
       {
-        link: 'tramites',
-        etiqueta: 'Tramites'
+        link: 'monto-exonerar',
+        etiqueta: 'Monto a exonerar'
       }
     ]
   },
