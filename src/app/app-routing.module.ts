@@ -11,6 +11,9 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
 import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
+import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
+import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
+import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
 
 const routes: Routes = [
   {
@@ -61,9 +64,23 @@ const routes: Routes = [
     component: GestionUsuariosComponent,
   },
   {
-    path: 'monto-exonerar',
+    path:'monto-exonerar',
+    component: MontoExonerarComponent
+  },
+  {
+    path: 'tarifa-servicios-aseo-vias-y-sitios-publicos',
     canActivate: [authGuard],
-    component: MontoExonerarComponent,
+    component: TarifaAseoViasSitiosPublicosComponent
+  },
+  {
+    path: 'tarifa-mantenimiento-parques-obras-ornato',
+    canActivate: [authGuard],
+    component: TarifaMantenimientoParquesObrasOrnatoComponent
+  },
+  {
+    path: 'tarifa-servicio-recoleccion-basura',
+    canActivate: [authGuard],
+    component: TarifaServicioRecoleccionBasuraComponent
   },
   {
     path: '**',

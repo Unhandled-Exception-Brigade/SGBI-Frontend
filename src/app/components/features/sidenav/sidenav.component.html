@@ -20,7 +20,7 @@
               <ul class="navbar-nav">
                 <li class="" *ngFor="let data of navData">
                   <ng-container *ngIf="tienePermiso(data.permiso)">
-                    <ng-container *ngIf="data.subEnlaces.length !== 0; else opcion">
+                    <ng-container *ngIf="data.subEnlaces.length !== 0; else elementoUnico">
                       <a class="pl-4" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                         style="cursor: pointer;" (click)="mostrarSubMenu()">
                         <i class="bi" [class]="data.icon" style="color: white">
@@ -32,13 +32,13 @@
                         <ng-container *ngFor="let enlaces of data.subEnlaces">
                           <a class="pl-4 sub-menu-item" [routerLink]="[enlaces.link]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <li class="bi sub-menu-list" style="color: white">
-                              <span class="Roboto pl-3 sub-menu-text">{{enlaces.etiqueta}}</span>
+                              <span class="Roboto sub-menu-text">{{enlaces.etiqueta}}</span>
                             </li>
                           </a>
                         </ng-container>
                       </span>
                     </ng-container>
-                    <ng-template #opcion>
+                    <ng-template #elementoUnico>
                       <a class="pl-4" [routerLink]="[data.routeLink]" routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }">
                         <i class="bi" [class]="data.icon" style="color: white">

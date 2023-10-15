@@ -26,10 +26,23 @@ export const navbarData = [
     label: 'Mantenimiento',
     permiso: ['administrador', 'jefe'],
     subEnlaces: [
+      /*
       {
         link: 'monto-exonerar',
         etiqueta: 'Monto a exonerar'
+      },
+      {
+        link: 'tarifa-servicios-aseo-vias-y-sitios-publicos',
+        etiqueta: 'Aseos de vias y sitios publicos'
+      },
+      {
+        link: 'tarifa-mantenimiento-parques-obras-ornato',
+        etiqueta: 'Tarifa parques y obras ornato'
+      },{
+        link: 'tarifa-servicio-recoleccion-basura',
+        etiqueta: 'Tarifa serivicio recoleccion basura'
       }
+      */
     ]
   },
   {

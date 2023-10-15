@@ -5,7 +5,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
-
+import {TramitesComponent} from 'src/app/components/features/tramites/tramites.component'
+interface City {
+  name: string;
+  code: string;
+}
 declare var $: any; // Declara jQuery para su uso en TypeScript
 
 @Component({
@@ -17,19 +21,8 @@ export class MantenimientoComponent implements OnInit {
   public rol: string = '';
   value1: number = 1500;
   dateTime = new Date();
-
-  montoExonerarForm = new FormGroup({
-    montoExonerar: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[0-9]*$/), // Solo números
-      Validators.min(15000000), // Mínimo 15 millones
-      Validators.max(30000000), // Máximo 30 millones
-    ]),
-  });
-
-  getMontoExonerar() {
-    return this.montoExonerarForm.get('montoExonerar')
-  }
+  selectedOption: string | null = null;
+  buttonText: string = 'Seleccione una opcion';
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +35,6 @@ export class MantenimientoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
@@ -60,51 +52,9 @@ export class MantenimientoComponent implements OnInit {
     }
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach((control) => {
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      } else {
-        control.markAsTouched();
-      }
-    });
+  selectOption(option: string) {
+    this.selectedOption = option;
+    this.buttonText = option;
   }
-
-  onMontoExonerar() {
-    this.markFormGroupTouched(this.montoExonerarForm);
-    if (this.montoExonerarForm.valid) {
-      console.log('valido');
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
-
-  enviar() {
-    console.log('enviado');
-  }
-
-  obtenerErrorCampoMonto() {
-    const campo = this.montoExonerarForm.get('montoExonerar');
-
-    if (campo?.hasError('required')) {
-      return 'El monto es requerido';
-    }
-
-    if (campo?.hasError('pattern')) {
-      return 'Ingrese solo números';
-    }
-
-    if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 15 millones';
-    }
-
-    if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 30 millones';
-    }
-
-    return '';
-  }
-
-  errorBorderClass: string = 'error-border';
 
 }

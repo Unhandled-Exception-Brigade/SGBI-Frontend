@@ -37,6 +37,7 @@ import { TarifaAseoViasSitiosPublicosComponent } from './components/features/mon
 import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
 import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputTextModule,
     CheckboxModule,
     RadioButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    DropdownModule
   ],
   providers: [
     {
