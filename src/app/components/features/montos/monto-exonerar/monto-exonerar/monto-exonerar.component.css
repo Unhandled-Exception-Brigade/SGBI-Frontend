@@ -15,6 +15,14 @@
     align-items: flex-start; /* Alinea los elementos al comienzo del contenedor (opcional) */
 }
 
+.color-boton{
+    background-color: #136137;
+}
+
+.borde-boton{
+    border-radius: 25px;
+}
+
 .icono-divisa{
     width: 40px;
 }
