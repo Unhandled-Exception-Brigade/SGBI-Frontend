@@ -1,17 +1,41 @@
 <div class="modal-header">
-  <h4 class="modal-title">Información del Usuario</h4>
+  <h4 class="modal-title">Información del usuario {{usuario.nombre}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
+
   <p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
-  <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
-  <p><strong>Apellidos:</strong> {{ usuario.primerApellido }} {{ usuario.segundoApellido }}</p>
-  <p><strong>Correo:</strong> {{ usuario.correo }}</p>
-  <p><strong>Rol:</strong> {{ usuario.rol }}</p>
-  <p><strong>Estado:</strong> {{ usuario.estado }}</p> <!-- Asegúrate de que "estado" esté en el objeto "usuario" -->
+
+  <!-- Nombre -->
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre" name="nombre">
+  </div>
+
+  <!-- Apellidos -->
+  <div class="form-group">
+    <label for="primerApellido">Primer Apellido</label>
+    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="usuario.primerApellido"
+      name="primerApellido">
+  </div>
+
+  <!-- Correo -->
+  <div class="form-group">
+    <label for="correo">Correo</label>
+    <input type="text" class="form-control" id="correo" [(ngModel)]="usuario.correo" name="correo">
+  </div>
+
+  <!-- Rol -->
+  <div class="form-group">
+    <label for="rol">Rol</label>
+    <input type="text" class="form-control" id="rol" [(ngModel)]="usuario.rol" name="rol">
+  </div>
+
+  <p><strong>Estado:</strong> {{ usuario.estado }}</p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+  <button type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar</button>
 </div>
