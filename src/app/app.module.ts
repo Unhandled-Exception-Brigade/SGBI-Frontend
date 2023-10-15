@@ -21,8 +21,6 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { TramitesComponent } from './components/features/tramites/tramites.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
-import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -39,6 +37,8 @@ import { TarifaServicioRecoleccionBasuraComponent } from './components/features/
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ModalConfirmacionComponent,
     YearPickerComponent,
     MontoExonerarComponent,
     TarifaAseoViasSitiosPublicosComponent,
@@ -71,7 +70,6 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     HttpClientModule,
     NgToastModule,
     FormsModule,
-    NgbModule,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
@@ -82,7 +80,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     RadioButtonModule,
     InputNumberModule,
     DropdownModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ConfirmDialogModule,
   ],
   providers: [
     {
@@ -90,6 +89,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
       useClass: TokenInterceptor,
       multi: true,
     },
+    ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent],
 })

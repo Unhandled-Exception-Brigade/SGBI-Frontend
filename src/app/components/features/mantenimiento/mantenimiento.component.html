@@ -1,12 +1,12 @@
 <ng-container *ngIf="rol === 'administrador' || rol == 'jefe'">
     
     <div class="text-center mt-3">
-        <h3>Mantenimiento</h3>
+        <h3 class="Roboto">Mantenimiento</h3>
     </div>
     
     <div class="container mb-4">
         <div class="mb-3 mt-1">
-            <h4>Seleccione el monto a dar mantenimiento</h4>
+            <h4 class="Roboto">Seleccione el monto a dar mantenimiento</h4>
         </div>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -40,6 +40,5 @@
     <ng-container *ngIf="selectedOption === 'Tarifa de servicio de recolección de basura'">
         <app-tarifa-servicio-recoleccion-basura></app-tarifa-servicio-recoleccion-basura>
     </ng-container>
-
 
 </ng-container>

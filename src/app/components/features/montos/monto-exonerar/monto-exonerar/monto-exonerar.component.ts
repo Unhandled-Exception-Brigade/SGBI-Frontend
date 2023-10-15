@@ -1,20 +1,22 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
 
 @Component({
   selector: 'app-monto-exonerar',
   templateUrl: './monto-exonerar.component.html',
   styleUrls: ['./monto-exonerar.component.css']
 })
-export class MontoExonerarComponent {
+export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  formModal:any
+  @ViewChild('closebutton') closebutton;
+  @ViewChild('saveButton') saveButton: ElementRef;
 
   montoExonerarForm = new FormGroup({
     montoExonerar: new FormControl('', [
@@ -77,7 +79,10 @@ export class MontoExonerarComponent {
   }
 
   enviar() {
-    console.log(this.montoExonerarForm.value);
+    if (this.saveButton) {
+      this.closebutton.nativeElement.click();
+      console.log(this.montoExonerarForm.value);
+    }
   }
 
   obtenerErrorCampoMonto() {
