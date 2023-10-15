@@ -1,12 +1,12 @@
 <ng-container *ngIf="rol === 'administrador' || rol == 'jefe'">
     
-    <div class="text-center">
-        <h1>Mantenimiento</h1>
+    <div class="text-center mt-3">
+        <h3>Mantenimiento</h3>
     </div>
     
     <div class="container mb-4">
         <div class="mb-3 mt-1">
-            <h3>Seleccione el monto a dar mantenimiento</h3>
+            <h4>Seleccione el monto a dar mantenimiento</h4>
         </div>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -14,7 +14,7 @@
               {{ buttonText }} <!-- Enlace de datos para mostrar el texto actual del botón -->
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" (click)="selectOption('Monto a exonerar')">Monto a exonerar.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Monto máximo a exonerar')">Monto máximo a exonerar.</a></li>
               <li><a class="dropdown-item" (click)="selectOption('Tarifa de servicios de aseo de vías y sitios públicos')">
                 Tarifa de servicios de aseo de vías y sitios públicos.</a></li>
               <li><a class="dropdown-item" (click)="selectOption('Tarifa mantenimiento de parques y obras de ornato')">
@@ -25,7 +25,7 @@
         </div>          
     </div>
 
-    <ng-container *ngIf="selectedOption === 'Monto a exonerar'">
+    <ng-container *ngIf="selectedOption === 'Monto máximo a exonerar'">
         <app-monto-exonerar></app-monto-exonerar>
     </ng-container>
 

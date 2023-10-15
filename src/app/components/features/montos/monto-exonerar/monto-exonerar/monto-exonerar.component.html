@@ -1,17 +1,17 @@
 <ng-container *ngIf="rol === 'administrador' || rol == 'jefe'">
     <header class="text-center">
-        <h3>Monto maximo a exonerar</h3>
+        <h3>Monto máximo a exonerar</h3>
     </header>
 
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                    role="tab" aria-controls="home" aria-selected="true">Agregar monto a exonerar</button>
+                    role="tab" aria-controls="home" aria-selected="true">Agregar monto máximo a exonerar.</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">Historico</button>
+                    role="tab" aria-controls="profile" aria-selected="false">Histórico.</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -19,14 +19,14 @@
 
                 <form [formGroup]="montoExonerarForm" (ngSubmit)="enviar()">
 
-                    <div class="card flex flex-wrap gap-3 p-fluid mt-2 bg-card">
+                    <div class="card flex flex-wrap gap-3 p-fluid pb-3 pt-2 bg-card">
                         <div class="d-flex flex-column mt-3">
-                            <label class="block font-bold mb-2" for="currency-us">Ingrese el monto a exonerar</label>
+                            <label class="block font-bold mb-2 pb-2" for="currency-us">Ingrese el monto máximo a exonerar.</label>
                             <p-inputNumber formControlName="montoExonerar" placeholder="Monto a exonerar" inputId="currency-us" mode="currency" currency="CRC" [minFractionDigits]="3"> </p-inputNumber>
                         </div>
                     </div>
 
-                    <span style="color: red;" class="mt-2"
+                    <span style="color: red;" class="pt-2"
                         *ngIf="this.montoExonerarForm.get('montoExonerar') 
                         && this.montoExonerarForm.get('montoExonerar').invalid && 
                         this.montoExonerarForm.get('montoExonerar').touched">

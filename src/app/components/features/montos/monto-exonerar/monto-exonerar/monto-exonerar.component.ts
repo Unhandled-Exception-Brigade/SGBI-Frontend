@@ -88,11 +88,11 @@ export class MontoExonerarComponent {
     }
 
     if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 15 millones';
+      return 'El monto debe ser igual o mayor a ₡15 000 000,000';
     }
 
     if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 30 millones';
+      return 'El monto debe ser igual o menor ₡30.000.000,000';
     }
 
     return '';

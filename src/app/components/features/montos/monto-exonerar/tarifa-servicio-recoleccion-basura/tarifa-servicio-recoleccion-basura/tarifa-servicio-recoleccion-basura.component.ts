@@ -88,11 +88,11 @@ export class TarifaServicioRecoleccionBasuraComponent {
     }
 
     if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 7000';
+      return 'El monto debe ser igual o mayor a ₡7 000,00';
     }
 
     if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 20000';
+      return 'El monto debe ser igual o menor a ₡20 000,00';
     }
 
     return '';

@@ -38,6 +38,7 @@ import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/fea
 import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CheckboxModule,
     RadioButtonModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    BreadcrumbModule
   ],
   providers: [
     {

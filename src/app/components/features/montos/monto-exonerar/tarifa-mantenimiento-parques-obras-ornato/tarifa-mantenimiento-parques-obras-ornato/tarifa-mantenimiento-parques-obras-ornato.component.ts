@@ -88,11 +88,11 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
     }
 
     if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 100';
+      return 'El monto debe ser igual o mayor a ₡100,00';
     }
 
     if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 900';
+      return 'El monto debe ser igual o menor a ₡900,00';
     }
 
     return '';

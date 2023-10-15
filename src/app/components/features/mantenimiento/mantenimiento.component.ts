@@ -22,7 +22,7 @@ export class MantenimientoComponent implements OnInit {
   value1: number = 1500;
   dateTime = new Date();
   selectedOption: string | null = null;
-  buttonText: string = 'Seleccione una opcion';
+  buttonText: string = 'Seleccione una opción';
 
   constructor(
     private fb: FormBuilder,

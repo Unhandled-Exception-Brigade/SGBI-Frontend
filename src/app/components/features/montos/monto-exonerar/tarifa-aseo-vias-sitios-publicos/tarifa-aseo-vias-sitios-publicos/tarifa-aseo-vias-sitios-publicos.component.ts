@@ -89,11 +89,11 @@ export class TarifaAseoViasSitiosPublicosComponent {
     }
 
     if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 1500';
+      return 'El monto debe ser igual o mayor a ₡1 500,00';
     }
 
     if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 3000';
+      return 'El monto debe ser igual o menor a ₡3 000,00';
     }
 
     return '';
