@@ -67,7 +67,7 @@ export class GestionUsuariosComponent {
   // Método para abrir el modal y mostrar la información del usuario seleccionado
   mostrarInformacionUsuario(usuario: any) {
     this.usuarioSeleccionado = usuario;
-    this.usuarioSeleccionado.estado = this.auth.obtenerEstadoDelUsuario(); // Agrega el estado del usuario
+    this.usuarioSeleccionado.estado = this.auth.obtenerEstadoDelUsuario();
     const modalRef = this.modalService.open(ModalInformacionUsuarioComponent, {
       size: 'lg',
     });
