@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +16,8 @@ export class TarifaAseoViasSitiosPublicosComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  @ViewChild('closebutton') closebutton;
+  @ViewChild('saveButton') saveButton: ElementRef;
 
   tarifaAseoViasPublicosForm = new FormGroup({
     montoTarifaAseoViasPublicos: new FormControl('', [
@@ -78,8 +80,12 @@ export class TarifaAseoViasSitiosPublicosComponent {
   }
 
   enviar() {
-    console.log(this.tarifaAseoViasPublicosForm.value);
+    if (this.saveButton) {
+      this.closebutton.nativeElement.click();
+      console.log(this.tarifaAseoViasPublicosForm.value);
+    }
   }
+
 
   obtenerErrorCampoMonto() {
     const campo = this.tarifaAseoViasPublicosForm.get('montoTarifaAseoViasPublicos');

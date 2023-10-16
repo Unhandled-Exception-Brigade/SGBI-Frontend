@@ -13,7 +13,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                <form [formGroup]="tarifaAseoViasPublicosForm" (ngSubmit)="enviar()">
+                <form [formGroup]="tarifaAseoViasPublicosForm">
 
                     <div class="card flex flex-wrap gap-3 p-fluid mt-2 bg-card pb-3 pt-2 ">
                         <div class="d-flex flex-column mt-3">
@@ -30,10 +30,35 @@
                     </span>
 
                     <div class="d-flex flex-column align-items-end">
-                        <button type="submit" [disabled]="tarifaAseoViasPublicosForm.invalid" (click)="onMontoTarifaAseoViasPublicos()"
+                        <button [disabled]="tarifaAseoViasPublicosForm.invalid" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#exampleModal" 
+                            data-target="exampleModal" 
                             class="btn btn-success mt-3">
-                            <i class="fa-solid fa-check"></i>
+                                <i class="fa-solid fa-check"></i>
                         </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">¿Desea guardar los cambios?</h1>
+                                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    La tarifa de servicios de aseo de vias y sitios públicos se adjudicará al año actual y estará disponible para los trámites que requieran de este valor.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger borde-boton"
+                                        data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancelar</button>
+                                    <button type="submit" class="btn btn-primary color-boton borde-boton" (click)="enviar()" #saveButton><i class="fa-solid fa-check"></i> Guardar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </form>

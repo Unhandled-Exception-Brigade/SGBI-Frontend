@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +15,8 @@ export class TarifaServicioRecoleccionBasuraComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  @ViewChild('closebutton') closebutton;
+  @ViewChild('saveButton') saveButton: ElementRef;
 
   tarifaRecoleccionBasuraForm = new FormGroup({
     tarifaRecoleccionBasura: new FormControl('', [
@@ -77,7 +79,10 @@ export class TarifaServicioRecoleccionBasuraComponent {
   }
 
   enviar() {
-    console.log(this.tarifaRecoleccionBasuraForm.value);
+    if (this.saveButton) {
+      this.closebutton.nativeElement.click();
+      console.log(this.tarifaRecoleccionBasuraForm.value);
+    }
   }
 
   obtenerErrorCampoMonto() {
