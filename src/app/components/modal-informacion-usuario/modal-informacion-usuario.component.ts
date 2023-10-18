@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 
 @Component({
@@ -14,13 +14,25 @@ export class ModalInformacionUsuarioComponent {
   toast: any;
   api: any;
 
-  constructor(public activeModal: NgbActiveModal, private editarUsuarioService: EditarUsuarioService) {}
+  ngOnInit() {
+    this.selectedRole = this.usuario.rol; // Inicializa el valor de selectedRole con el rol del usuario.
+  }
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private editarUsuarioService: EditarUsuarioService
+  ) {}
 
   closeModal() {
     this.activeModal.close();
   }
 
+  cambiarRol(nuevoRol: string) {
+    this.selectedRole = nuevoRol;
+  }
+
   guardarCambios() {
+    this.usuario.rol = this.selectedRole; // Actualiza el rol del usuario con el valor seleccionado
     this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe(
       (res) => {
         this.closeModal();

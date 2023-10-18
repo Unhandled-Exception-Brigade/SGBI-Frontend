@@ -17,12 +17,14 @@
   <!-- Apellidos -->
   <div class="form-group">
     <label for="primerApellido">Primer Apellido</label>
-    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="usuario.primerApellido" name="primerApellido">
+    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="usuario.primerApellido"
+      name="primerApellido">
   </div>
 
   <div class="form-group">
     <label for="segundoApellido">Segundo Apellido</label>
-    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="usuario.segundoApellido" name="segundoApellido">
+    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="usuario.segundoApellido"
+      name="segundoApellido">
   </div>
 
   <!-- Correo -->
@@ -34,17 +36,20 @@
   <!-- Rol -->
   <div class="form-group">
     <label for="roleDropdown">Rol:</label>
+    <!-- <select class="form-control" id="roleDropdown" (change)="cambiarRol($event.target.value)">
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select> -->
     <app-role-dropdown [selectedRole]="selectedRole" (roleSelected)="selectedRole = $event"></app-role-dropdown>
   </div>
 
-  <!-- <p><strong>Estado:</strong> {{ usuario.estado }}</p> -->  <!-- No muestra el estado de los usuarios  -->
-
+  <!-- <p><strong>Estado:</strong> {{ usuario.estado }}</p> --> <!-- No muestra el estado de los usuarios  -->
 
   <!-- Estado -->
   <!-- lo nuevo para el estado, falta poder jalar del backend el estado y mostrar ese estado del usuario, y tambien poder cambiar su estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
-    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado" (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
+    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado"
+      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
   </div>
 
 </div> <!-- fin de modal-body -->
