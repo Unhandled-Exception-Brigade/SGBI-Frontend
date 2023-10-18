@@ -9,7 +9,8 @@ import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 })
 export class ModalInformacionUsuarioComponent {
   @Input() usuario: any;
-
+  selectedRole: string;
+  estadoSeleccionado: string;
   toast: any;
   api: any;
 

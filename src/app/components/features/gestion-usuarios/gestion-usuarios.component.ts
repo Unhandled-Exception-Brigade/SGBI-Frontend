@@ -23,6 +23,7 @@ export class GestionUsuariosComponent {
 
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
+  selectedRole: any;
 
   constructor(
     private api: ApiService,
@@ -67,11 +68,12 @@ export class GestionUsuariosComponent {
   // Método para abrir el modal y mostrar la información del usuario seleccionado
   mostrarInformacionUsuario(usuario: any) {
     this.usuarioSeleccionado = usuario;
-    this.usuarioSeleccionado.estado = this.auth.obtenerEstadoDelUsuario();
+    this.selectedRole = usuario.rol;
     const modalRef = this.modalService.open(ModalInformacionUsuarioComponent, {
       size: 'lg',
     });
-
     modalRef.componentInstance.usuario = this.usuarioSeleccionado;
+    modalRef.componentInstance.selectedRole = this.selectedRole; // Inicializa el rol en el modal
   }
+  
 }
