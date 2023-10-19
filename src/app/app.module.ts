@@ -39,6 +39,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService} from 'primeng/api';
+import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { ConfirmationService, MessageService} from 'primeng/api';
     DropdownModule,
     BreadcrumbModule,
     ConfirmDialogModule,
+    DragDropModule
   ],
   providers: [
     {

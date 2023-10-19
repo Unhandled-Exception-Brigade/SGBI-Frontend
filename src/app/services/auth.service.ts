@@ -68,7 +68,7 @@ export class AuthService {
   }
   obtenerNombreDelToken() {
     if (this.usuarioPayload) {
-      return this.usuarioPayload.actort;
+      return this.usuarioPayload.actort;//????
     }
   }
   obtenerEstadoDelUsuario() {

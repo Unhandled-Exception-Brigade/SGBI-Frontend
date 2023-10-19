@@ -6,6 +6,7 @@ import { navbarData } from './nav-data';
 import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -21,6 +22,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   mostrarSideNav: boolean = true;
   suscripcion: Subscription;
   subMenu: boolean = false;
+  items: MenuItem[] | undefined;
+  home: MenuItem | undefined;
 
   mostrarSubMenu() {
     this.subMenu = !this.subMenu;
@@ -56,12 +59,15 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
+      console.log(this.rol);
+    });
+    
+    this.usuarioService.getCedulaUsuario().subscribe((val) => {
+      const nombreDelToken = this.auth.obtenerCedulaDelToken();
+      this.nombre = val || nombreDelToken;
+      console.log(this.nombre);
     });
 
-    this.usuarioService.getNombreUsuario().subscribe((val) => {
-      const nombreDelToken = this.auth.obtenerNombreDelToken();
-      this.nombre = val || nombreDelToken;
-    });
   }
 
   cerrarSesion() {

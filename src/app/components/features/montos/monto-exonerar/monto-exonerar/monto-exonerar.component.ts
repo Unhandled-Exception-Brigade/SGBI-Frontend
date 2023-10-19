@@ -4,6 +4,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-monto-exonerar',
@@ -17,6 +18,9 @@ export class MontoExonerarComponent implements OnInit {
   formModal:any
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
+
+  items: MenuItem[] | undefined;
+  home: MenuItem | undefined;
 
   montoExonerarForm = new FormGroup({
     montoExonerar: new FormControl('', [
