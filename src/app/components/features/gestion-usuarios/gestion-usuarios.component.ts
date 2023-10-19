@@ -73,17 +73,28 @@ export class GestionUsuariosComponent {
   realizarBusqueda() {
     const termino = this.filtroBusqueda.toLowerCase();
 
+    function quitarTildes(texto) {
+      // Para realizar búsqueda con o sin tildes, incluyendo la ñ
+      return texto
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    }
+
     if (termino === '') {
-      this.usuarios = [...this.usuariosOriginales]; // Restaurar la lista original
+      this.usuarios = [...this.usuariosOriginales]; // Restaura la lista original
     } else {
       // Filtra la lista original en función del término de búsqueda
       this.usuarios = this.usuariosOriginales.filter((usuario: any) => {
         return (
-          usuario.nombre.toLowerCase().includes(termino) ||
-          usuario.primerApellido.toLowerCase().includes(termino) ||
-          usuario.segundoApellido.toLowerCase().includes(termino) ||
-          usuario.rol.toLowerCase().includes(termino) ||
-          usuario.cedula.includes(this.filtroBusqueda)
+          quitarTildes(usuario.nombre).includes(quitarTildes(termino)) ||
+          quitarTildes(
+            usuario.primerApellido + ' ' + usuario.segundoApellido
+          ).includes(quitarTildes(termino)) ||
+          quitarTildes(usuario.rol).includes(quitarTildes(termino)) ||
+          quitarTildes(usuario.cedula).includes(
+            quitarTildes(this.filtroBusqueda)
+          )
         );
       });
     }
