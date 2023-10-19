@@ -116,13 +116,13 @@
                 <div
                   class="input-field"
                   [class.error]="
-                    signupForm.get('correo').touched &&
-                    signupForm.get('correo').invalid
+                    signupForm.get('email').touched &&
+                    signupForm.get('email').invalid
                   "
                 >
                   <span class="fa fa-envelope p-2"></span>
                   <input
-                    formControlName="correo"
+                    formControlName="email"
                     type="text"
                     placeholder="Correo"
                   />
@@ -130,8 +130,8 @@
                 <small
                   class="text-danger"
                   *ngIf="
-                    signupForm.get('correo').touched &&
-                    signupForm.get('correo').invalid
+                    signupForm.get('email').touched &&
+                    signupForm.get('email').invalid
                   "
                   >{{ obtenerErrorCampoCorreo() }}</small
                 >

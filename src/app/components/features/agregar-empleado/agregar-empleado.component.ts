@@ -74,7 +74,7 @@ export class AgregarEmpleadoComponent {
             Validators.maxLength(9),
           ],
         ],
-        correo: [
+        email: [
           '',
           [
             Validators.required,
@@ -155,7 +155,7 @@ export class AgregarEmpleadoComponent {
   }
 
   obtenerErrorCampoCorreo() {
-    const campo = this.signupForm.get('correo');
+    const campo = this.signupForm.get('email');
 
     if (campo?.hasError('required')) {
       return 'El correo es requerido';
