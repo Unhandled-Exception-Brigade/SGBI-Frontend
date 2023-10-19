@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -11,4 +12,9 @@ export class ApiService {
   obtenerUsuarios() {
     return this.http.get<any>(this.baseUrl);
   }
+
+  // buscarUsuarios(terminoBusqueda: string): Observable<any> {
+  //   const url = `${this.baseUrl}/usuarios?busqueda=${terminoBusqueda}`;
+  //   return this.http.get(url);
+  // }
 }

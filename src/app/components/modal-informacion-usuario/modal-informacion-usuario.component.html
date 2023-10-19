@@ -48,8 +48,8 @@
   <!-- lo nuevo para el estado, falta poder jalar del backend el estado y mostrar ese estado del usuario, y tambien poder cambiar su estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
-    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado"
-      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
+    <app-estado-dropdown [estadoSeleccionado]="usuario.estado"
+      (estadoSeleccionadoOutput)="actualizarEstadoUsuario($event, usuario)"></app-estado-dropdown>
   </div>
 
 </div> <!-- fin de modal-body -->

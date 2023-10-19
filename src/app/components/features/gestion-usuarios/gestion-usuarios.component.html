@@ -1,18 +1,21 @@
 <div *ngIf="rol === 'administrador'" class="container">
   <h4 class="mt-3 text-center">Gestión de usuarios</h4>
 
-  <!-- Campo de búsqueda -->
+
   <div class="d-flex">
+
+    <!-- Campo de búsqueda -->
     <div class="barra-busqueda mb-3">
       <label for="busqueda" class="form-label"> </label>
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Búsqueda de usuario por nombre, apellido y cédula"
-          id="busqueda" />
+        <input type="text" class="form-control" placeholder="Búsqueda de usuario por cédula, nombre, apellidos o rol"
+          id="busqueda" [(ngModel)]="filtroBusqueda" (input)="realizarBusqueda()" />
         <span class="input-group-text">
           <i class="fas fa-search"></i>
         </span>
       </div>
     </div>
+
     <nav class="mb-5 navbar">
       <div class="container">
         <div class="d-flex align-items-end pt-4">

@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { EstadoDropdownComponent } from 'src/app/components/dropdowns/estado-dropdown/estado-dropdown.component';
-import { actualizarUsuario } from 'src/app/models/actualizar-usuario';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
-import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalConfirmacionComponent } from 'src/app/components/authentication/modal-confirmacion/modal-confirmacion.component';
 import { ModalInformacionUsuarioComponent } from '../../modal-informacion-usuario/modal-informacion-usuario.component';
 
 @Component({
@@ -18,12 +14,14 @@ import { ModalInformacionUsuarioComponent } from '../../modal-informacion-usuari
 })
 export class GestionUsuariosComponent {
   public usuarios: any = [];
+  public nombre: string = '';
   public cedula: string = '';
   public rol: string = '';
 
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
   selectedRole: any;
+  usuariosOriginales: any[];
 
   constructor(
     private api: ApiService,
@@ -31,7 +29,6 @@ export class GestionUsuariosComponent {
     private usuarioService: UsuarioService,
     private toast: NgToastService,
     private router: Router,
-    private editarUsuarioService: EditarUsuarioService,
     private modalService: NgbModal
   ) {}
 
@@ -39,6 +36,16 @@ export class GestionUsuariosComponent {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
+    });
+
+    this.api.obtenerUsuarios().subscribe((res) => {
+      this.usuarios = res;
+      this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
+    });
+
+    this.usuarioService.getNombreUsuario().subscribe((val) => {
+      const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
+      this.nombre = val || nombreCompletoDelToken;
     });
 
     if (this.rol == 'administrador') {
@@ -61,6 +68,27 @@ export class GestionUsuariosComponent {
     }
   }
 
+  filtroBusqueda: string = ''; // Término de búsqueda
+  // Método para realizar la búsqueda
+  realizarBusqueda() {
+    const termino = this.filtroBusqueda.toLowerCase();
+
+    if (termino === '') {
+      this.usuarios = [...this.usuariosOriginales]; // Restaurar la lista original
+    } else {
+      // Filtra la lista original en función del término de búsqueda
+      this.usuarios = this.usuariosOriginales.filter((usuario: any) => {
+        return (
+          usuario.nombre.toLowerCase().includes(termino) ||
+          usuario.primerApellido.toLowerCase().includes(termino) ||
+          usuario.segundoApellido.toLowerCase().includes(termino) ||
+          usuario.rol.toLowerCase().includes(termino) ||
+          usuario.cedula.includes(this.filtroBusqueda)
+        );
+      });
+    }
+  }
+
   cerrarSesion() {
     this.auth.cerrarSesion();
   }
@@ -75,5 +103,4 @@ export class GestionUsuariosComponent {
     modalRef.componentInstance.usuario = this.usuarioSeleccionado;
     modalRef.componentInstance.selectedRole = this.selectedRole; // Inicializa el rol en el modal
   }
-  
 }
