@@ -50,8 +50,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreDelToken;
-
-      // Ahora que tienes el nombre, puedes mostrar el componente.
       this.mostrarSideNav = true;
     });
 
@@ -62,6 +60,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
 
   cerrarSesion() {
+    // Limpia los datos del usuario y redirige a la página de inicio de sesión.
+    this.nombre = '';
+    this.rol = '';
+
     this.auth.cerrarSesion();
     this.toast.info({
       detail: 'INFORMACION',

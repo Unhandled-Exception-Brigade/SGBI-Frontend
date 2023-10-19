@@ -88,11 +88,11 @@ export class ResetComponent {
 
   reset() {
     if (this.resetForm.valid) {
-      this.resetPasswordObj.correo = this.correo;
-      this.resetPasswordObj.correoToken = this.correoToken;
+      this.resetPasswordObj.Email = this.correo;
+      this.resetPasswordObj.EmailToken = this.correoToken;
 
-      this.resetPasswordObj.nuevaContrasena = this.resetForm.value.contrasena;
-      this.resetPasswordObj.confirmarContrasena =
+      this.resetPasswordObj.NuevaContrasena = this.resetForm.value.contrasena;
+      this.resetPasswordObj.ConfirmarContrasena =
         this.resetForm.value.confirmarContrasena;
 
       this.cambiarContrasenaService

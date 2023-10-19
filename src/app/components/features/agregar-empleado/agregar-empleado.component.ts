@@ -36,7 +36,7 @@ export class AgregarEmpleadoComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador') {
+    if (this.rol == 'Administrador') {
       this.signupForm = this.fb.group({
         nombre: [
           '',

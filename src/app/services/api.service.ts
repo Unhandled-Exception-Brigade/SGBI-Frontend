@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.development';
 export class ApiService {
   private baseUrl: string = environment.apiUrl;
   constructor(private http: HttpClient) {}
+
   obtenerUsuarios() {
     return this.http.get<any>(this.baseUrl);
   }

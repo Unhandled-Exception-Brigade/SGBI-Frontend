@@ -25,7 +25,7 @@ export class MantenimientoComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador' || this.rol == 'jefe') {
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',

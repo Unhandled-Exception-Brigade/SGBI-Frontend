@@ -36,7 +36,7 @@ export class GestionUsuariosComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador') {
+    if (this.rol == 'Administrador') {
       this.api.obtenerUsuarios().subscribe((res) => {
         this.usuarios = res;
       });

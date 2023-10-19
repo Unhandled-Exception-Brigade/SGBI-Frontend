@@ -58,22 +58,26 @@ export class AuthService {
   }
   obtenerCedulaDelToken() {
     if (this.usuarioPayload) {
-      return this.usuarioPayload.unique_name;
+      return this.usuarioPayload[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ];
     }
+    return '';
   }
   obtenerRolDelToken() {
     if (this.usuarioPayload) {
-      return this.usuarioPayload.role;
+      return this.usuarioPayload[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
     }
+    return '';
   }
   obtenerNombreDelToken() {
     if (this.usuarioPayload) {
-      return this.usuarioPayload.actort;
+      return this.usuarioPayload[
+        'http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'
+      ];
     }
-  }
-  obtenerEstadoDelUsuario() {
-    if (this.usuarioPayload) {
-      return this.usuarioPayload.estado;
-    }
+    return '';
   }
 }
