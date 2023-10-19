@@ -17,3 +17,15 @@
 .col .form-check {
     margin-bottom: 20px; /* Puedes ajustar el valor según tus necesidades */
 }
+
+.contenedor-botones{
+    display: flex;
+    justify-content: center; /* Puedes ajustar esto según tus necesidades */
+    align-items: center;
+    height: 300px; /* Ajusta la altura según tus necesidades */
+}
+
+.align-items-center {
+    display: flex;
+    justify-content: flex-end;
+}
