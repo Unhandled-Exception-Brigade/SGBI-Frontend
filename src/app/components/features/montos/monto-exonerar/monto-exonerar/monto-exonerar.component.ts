@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
 
 @Component({
   selector: 'app-monto-exonerar',
@@ -15,7 +16,7 @@ export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
-  formModal:any
+  formModal: any
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -39,7 +40,8 @@ export class MontoExonerarComponent implements OnInit {
     private usuarioService: UsuarioService,
     private auth: AuthService,
     private toast: NgToastService,
-    private router: Router
+    private router: Router,
+    private tarifa: tarifaService
   ) {
     this.dateTime.setDate(this.dateTime.getDate());
   }
@@ -61,6 +63,7 @@ export class MontoExonerarComponent implements OnInit {
 
       this.router.navigate(['/tramites']);
     }
+
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -84,8 +87,34 @@ export class MontoExonerarComponent implements OnInit {
 
   enviar() {
     if (this.saveButton) {
+      this.markFormGroupTouched(this.montoExonerarForm);
+      if (this.montoExonerarForm.valid) {
+        const requestData = {
+          montoColones: this.montoExonerarForm.value.montoExonerar,
+          descripcion: 'TARIFA EXONERAR'
+        };
+        console.log(requestData);
+        this.tarifa.registrarTarifa(requestData).subscribe({
+          next: (res) => {
+            this.montoExonerarForm.reset();
+            this.toast.success({
+              detail: 'CORRECTO',
+              summary: res.message,
+              duration: 4000,
+            });
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'ERROR',
+              summary: err.message,
+              duration: 4000,
+            });
+          },
+        });
+      } else {
+        console.log('Formulario inválido');
+      }
       this.closebutton.nativeElement.click();
-      console.log(this.montoExonerarForm.value);
     }
   }
 
@@ -103,9 +132,7 @@ export class MontoExonerarComponent implements OnInit {
     if (campo?.hasError('max')) {
       return 'El monto debe ser igual o menor ₡30.000.000,000';
     }
-
     return '';
   }
-
   errorBorderClass: string = 'error-border';
 }

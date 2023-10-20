@@ -16,15 +16,15 @@ export class AuthService {
   }
 
   registrarse(userFrontEnd: any) {
-    return this.http.post<any>(this.baseUrl + 'registrarse', userFrontEnd);
+    return this.http.post<any>(this.baseUrl + 'cuenta/registrarse', userFrontEnd);
   }
 
   ingresar(userFrontEnd: any) {
-    return this.http.post<any>(this.baseUrl + 'ingresar', userFrontEnd);
+    return this.http.post<any>(this.baseUrl + 'cuenta/ingresar', userFrontEnd);
   }
 
   renewToken(tokenApi: TokenApiModel) {
-    return this.http.post<any>(this.baseUrl + 'refrescar', tokenApi);
+    return this.http.post<any>(this.baseUrl + 'cuenta/refrescar', tokenApi);
   }
 
   cerrarSesion() {

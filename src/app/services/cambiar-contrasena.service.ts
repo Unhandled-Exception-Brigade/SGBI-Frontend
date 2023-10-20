@@ -13,20 +13,21 @@ export class CambiarContrasenaService {
 
   sendResetPasswordLink(email: string) {
     return this.http.post<any>(
-      `${this.baseURL}enviar-email-cambio-contrasena/${email}`,
+      `${this.baseURL}cuenta/enviar-email-cambio-contrasena/${email}`,
       {}
     );
   }
 
   resetPassword(resetPasswordObj: ResetPassword) {
     return this.http.post<any>(
-      `${this.baseURL}resetear-contrasena`,
+      `${this.baseURL}cuenta/resetear-contrasena`,
       resetPasswordObj
     );
   }
+  
   resetPasswordFirstTime(resetPasswordObj: ResetPassword) {
     return this.http.post<any>(
-      `${this.baseURL}activar-cuenta`,
+      `${this.baseURL}cuenta/activar-cuenta`,
       resetPasswordObj
     );
   }

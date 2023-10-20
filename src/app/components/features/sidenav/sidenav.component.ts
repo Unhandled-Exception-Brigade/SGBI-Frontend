@@ -55,20 +55,18 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreDelToken;
-      this.mostrarSideNav = true;
     });
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
-      this.mostrarSideNav = true;
     });
     
     this.usuarioService.getCedulaUsuario().subscribe((val) => {
       const nombreDelToken = this.auth.obtenerCedulaDelToken();
       this.nombre = val || nombreDelToken;
-      this.mostrarSideNav = true;
     });
+    console.log('sidenav abierto');
   }
 
   cerrarSesion() {

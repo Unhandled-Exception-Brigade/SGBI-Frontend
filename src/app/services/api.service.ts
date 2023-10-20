@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl: string = environment.apiUrl;
+  private baseUrl: string = environment.apiUrl+'cuenta/';
   constructor(private http: HttpClient) {}
 
   obtenerUsuarios() {

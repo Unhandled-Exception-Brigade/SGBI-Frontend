@@ -66,10 +66,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.markFormGroupTouched(this.loginForm);
 
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      /*console.log(this.loginForm.value);*/
       this.auth.ingresar(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res.message);
+          /*console.log(res.message);*/
           this.loginForm.reset();
 
           this.auth.guardarToken(res.accessToken);

@@ -15,7 +15,7 @@ export class EditarUsuarioService {
     console.log(actualizarUsuarioObj);
 
     return this.http.post<any>(
-      `${this.baseURL}actualizar-usuario`,
+      `${this.baseURL}cuenta/actualizar-usuario`,
       actualizarUsuarioObj
     );
   }
