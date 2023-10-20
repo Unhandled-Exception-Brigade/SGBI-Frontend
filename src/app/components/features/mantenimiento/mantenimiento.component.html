@@ -1,1 +1,44 @@
-<p>mantenimiento works!</p>
+<ng-container *ngIf="rol === 'administrador' || rol == 'jefe'">
+    
+    <div class="text-center mt-3">
+        <h3 class="Roboto">Mantenimiento</h3>
+    </div>
+    
+    <div class="container mb-4">
+        <div class="container-fluid mb-3 mt-1">
+            <h4 class="Roboto">Seleccione el valor a dar mantenimiento.</h4>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              Seleccione una opción <!-- Enlace de datos para mostrar el texto actual del botón -->
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" (click)="selectOption('Monto máximo a exonerar')">Monto máximo a exonerar.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa de servicios de aseo de vías y sitios públicos')">
+                Tarifa de servicios de aseo de vías y sitios públicos.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa mantenimiento de parques y obras de ornato')">
+                Tarifa mantenimiento de parques y obras de ornato.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa de servicio de recolección de basura')">
+                Tarifa de servicio de recolección de basura.</a></li>
+            </ul>
+        </div>          
+    </div>
+
+    <ng-container *ngIf="selectedOption === 'Monto máximo a exonerar'">
+        <app-monto-exonerar></app-monto-exonerar>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa de servicios de aseo de vías y sitios públicos'">
+        <app-tarifa-aseo-vias-sitios-publicos></app-tarifa-aseo-vias-sitios-publicos>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa mantenimiento de parques y obras de ornato'">
+        <app-tarifa-mantenimiento-parques-obras-ornato></app-tarifa-mantenimiento-parques-obras-ornato>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa de servicio de recolección de basura'">
+        <app-tarifa-servicio-recoleccion-basura></app-tarifa-servicio-recoleccion-basura>
+    </ng-container>
+
+</ng-container>

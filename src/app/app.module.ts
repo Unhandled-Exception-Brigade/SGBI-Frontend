@@ -21,10 +21,25 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { TramitesComponent } from './components/features/tramites/tramites.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
-import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { YearPickerComponent } from './components/dropdowns/year-picker/year-picker.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
+import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
+import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
+import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService} from 'primeng/api';
+import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -41,7 +56,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ModalConfirmacionComponent
+    YearPickerComponent,
+    MontoExonerarComponent,
+    TarifaAseoViasSitiosPublicosComponent,
+    TarifaMantenimientoParquesObrasOrnatoComponent,
+    TarifaServicioRecoleccionBasuraComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +71,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgToastModule,
     FormsModule,
-    NgbModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    CalendarModule,
+    InputMaskModule,
+    InputTextModule,
+    CheckboxModule,
+    RadioButtonModule,
+    InputNumberModule,
+    DropdownModule,
+    BreadcrumbModule,
+    ConfirmDialogModule,
+    DragDropModule
   ],
   providers: [
     {
@@ -60,6 +91,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       useClass: TokenInterceptor,
       multi: true,
     },
+    ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent],
 })

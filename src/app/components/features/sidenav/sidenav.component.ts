@@ -21,6 +21,11 @@ interface SideNavToggle {
 export class SidenavComponent implements OnInit, OnDestroy {
   mostrarSideNav: boolean = true;
   suscripcion: Subscription;
+  subMenu: boolean = false;
+
+  mostrarSubMenu() {
+    this.subMenu = !this.subMenu;
+  }
 
   constructor(
     private toast: NgToastService,
@@ -56,6 +61,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
+      console.log(this.rol);
+    });
+    
+    this.usuarioService.getCedulaUsuario().subscribe((val) => {
+      const nombreDelToken = this.auth.obtenerCedulaDelToken();
+      this.nombre = val || nombreDelToken;
+      console.log(this.nombre);
     });
   }
 

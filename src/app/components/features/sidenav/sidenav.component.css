@@ -18,7 +18,7 @@
   border-radius: 25px;
 }
 .sidebar-nav .offcanvas {
-  width: 350px;
+  width: 300px;
   border: none;
 }
 .sidebar-nav .offcanvas ul li a span {
@@ -44,8 +44,21 @@
   width: 100%;
 }
 
+.sub-menu-list{
+  
+}
+
+.sub-menu-item{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
 .navbar {
   background-color: #136137;
+}
+
+.sub-menu-text{
+  font-size: 20px;
 }
 
 .offcanvas {

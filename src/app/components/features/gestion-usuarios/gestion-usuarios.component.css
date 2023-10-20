@@ -1,4 +1,10 @@
 /* Estilo para las celdas de encabezado de la tabla */
+.Roboto {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+
 thead.thead-dark th {
   background-color: #136137;
   color: #fff;
