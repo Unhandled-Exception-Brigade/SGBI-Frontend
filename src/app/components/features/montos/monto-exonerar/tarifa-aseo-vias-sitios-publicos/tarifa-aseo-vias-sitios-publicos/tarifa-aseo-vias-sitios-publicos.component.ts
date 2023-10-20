@@ -7,7 +7,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
 import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
 
-
 @Component({
   selector: 'app-tarifa-aseo-vias-sitios-publicos',
   templateUrl: './tarifa-aseo-vias-sitios-publicos.component.html',
@@ -17,6 +16,7 @@ export class TarifaAseoViasSitiosPublicosComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  public montoTarifaAseoVias: any = [];
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -51,6 +51,14 @@ export class TarifaAseoViasSitiosPublicosComponent {
     });
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarServiciosAseo().subscribe((res) => {
+        this.montoTarifaAseoVias = res;
+      });
+
+    }
+
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -79,6 +87,27 @@ export class TarifaAseoViasSitiosPublicosComponent {
     } else {
       console.log('Formulario inválido');
     }
+  }
+
+  formatDate(dateString: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true, // Utiliza formato de 12 horas
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('es-ES', options);
+  }
+
+  formatNumber(number: number): string {
+    const options: Intl.NumberFormatOptions = {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2, 
+    };
+    return new Intl.NumberFormat('es-ES', options).format(number);
   }
 
   enviar() {

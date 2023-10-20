@@ -16,6 +16,7 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  public montoMantenimiento: any = [];
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -48,6 +49,14 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
+
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarMantenimiento().subscribe((res) => {
+        this.montoMantenimiento = res;
+      });
+
+    }
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
@@ -111,6 +120,27 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
       }
       this.closebutton.nativeElement.click();
     }
+  }
+
+  formatDate(dateString: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true, // Utiliza formato de 12 horas
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('es-ES', options);
+  }
+
+  formatNumber(number: number): string {
+    const options: Intl.NumberFormatOptions = {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2, 
+    };
+    return new Intl.NumberFormat('es-ES', options).format(number);
   }
 
   obtenerErrorCampoMonto() {

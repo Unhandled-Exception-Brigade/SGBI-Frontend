@@ -140,6 +140,15 @@ export class MontoExonerarComponent implements OnInit {
     return date.toLocaleString('es-ES', options);
   }
 
+  formatNumber(number: number): string {
+    const options: Intl.NumberFormatOptions = {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3, 
+    };
+    return new Intl.NumberFormat('es-ES', options).format(number);
+  }
+  
+
   obtenerErrorCampoMonto() {
     const campo = this.montoExonerarForm.get('montoExonerar');
 
