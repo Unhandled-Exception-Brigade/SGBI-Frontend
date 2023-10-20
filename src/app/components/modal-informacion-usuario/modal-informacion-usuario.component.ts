@@ -15,12 +15,11 @@ export class ModalInformacionUsuarioComponent {
   public usuarios: any = [];
   public estado: string = "";
   selectedRole: string;
-  // estadoSeleccionado: string;
-  toast: any;
-
+  estadoSeleccionado: string;
 
   ngOnInit() {
     this.selectedRole = this.usuario.rol; // Inicializa el valor de selectedRole con el rol del usuario.
+    this.estadoSeleccionado = this.usuario.estaInactivo;
 
     this.api.obtenerUsuarios().subscribe((res) => {
       this.usuarios = res;
@@ -43,12 +42,13 @@ export class ModalInformacionUsuarioComponent {
     this.selectedRole = nuevoRol;
   }
 
-  actualizarEstadoUsuario(newStatus: string, usuario: any) {
-    usuario.estado = newStatus;
+  cambiarEstado(nuevoEstado: string) {
+    this.estadoSeleccionado = nuevoEstado;
   }
 
   guardarCambios() {
     this.usuario.rol = this.selectedRole; // Actualiza el rol del usuario con el valor seleccionado
+    this.usuario.estaInactivo = this.estadoSeleccionado;
     this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe(
       (res) => {
         this.closeModal();

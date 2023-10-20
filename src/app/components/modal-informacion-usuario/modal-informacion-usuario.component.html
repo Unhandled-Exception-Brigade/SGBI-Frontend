@@ -36,20 +36,17 @@
   <!-- Rol -->
   <div class="form-group">
     <label for="roleDropdown">Rol:</label>
-    <!-- <select class="form-control" id="roleDropdown" (change)="cambiarRol($event.target.value)">
-      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-    </select> -->
     <app-role-dropdown [selectedRole]="selectedRole" (roleSelected)="selectedRole = $event"></app-role-dropdown>
   </div>
 
-  <!-- <p><strong>Estado:</strong> {{ usuario.estado }}</p> --> <!-- No muestra el estado de los usuarios  -->
 
   <!-- Estado -->
   <!-- lo nuevo para el estado, falta poder jalar del backend el estado y mostrar ese estado del usuario, y tambien poder cambiar su estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
-    <app-estado-dropdown [estadoSeleccionado]="usuario.estado"
-      (estadoSeleccionadoOutput)="actualizarEstadoUsuario($event, usuario)"></app-estado-dropdown>
+    <!-- <p><strong>Estado:</strong> {{ usuario.estaInactivo }}</p> -->
+    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado" (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
+
   </div>
 
 </div> <!-- fin de modal-body -->
