@@ -32,12 +32,9 @@
                     </span>
 
                     <div class="d-flex flex-column align-items-end">
-                        <button [disabled]="montoExonerarForm.invalid" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#exampleModal" 
-                            data-target="exampleModal" 
-                            class="btn btn-success mt-3">
-                                <i class="fa-solid fa-check"></i>
+                        <button [disabled]="montoExonerarForm.invalid" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" data-target="exampleModal" class="btn btn-success mt-3">
+                            <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
 
@@ -52,12 +49,15 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    El monto máximo a exonerar se adjudicará al año actual y estará disponible para los trámites que requieran de este valor.
+                                    El monto máximo a exonerar se adjudicará al año actual y estará disponible para los
+                                    trámites que requieran de este valor.
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger borde-boton"
-                                        data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancelar</button>
-                                    <button type="submit" class="btn btn-primary color-boton borde-boton" (click)="enviar()" #saveButton><i class="fa-solid fa-check"></i> Guardar</button>
+                                    <button type="button" class="btn btn-danger borde-boton" data-bs-dismiss="modal"><i
+                                            class="fa-solid fa-x"></i> Cancelar</button>
+                                    <button type="submit" class="btn btn-primary color-boton borde-boton"
+                                        (click)="enviar()" #saveButton><i class="fa-solid fa-check"></i>
+                                        Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -70,26 +70,16 @@
                         <table class="table mt-4">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Agregado por</th>
-                                    <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Año</th>
+                                    <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Fecha</th>
+                                    <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Descripcion</th>
                                     <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Monto</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">Yesenia</th>
-                                    <td>2021</td>
-                                    <td>17.973.000,00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Ericka</th>
-                                    <td>2022</td>
-                                    <td>17.973.000,00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Vinicio</th>
-                                    <td>2023</td>
-                                    <td>17.973.000,00</td>
+                                <tr *ngFor="let montos of montoMaximoExonerarLista; let i = index">
+                                    <td scope="row">{{ formatDate(montos.fechaCreacion) }}</td>
+                                    <td>Monto máximo a exonerar</td>
+                                    <td>{{ montos.montoColones }}</td>
                                 </tr>
                             </tbody>
                         </table>

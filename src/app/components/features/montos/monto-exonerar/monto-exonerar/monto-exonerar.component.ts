@@ -15,6 +15,8 @@ import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-se
 export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
   value1: number = 0;
+  public montoMaximoExonerarLista: any = [];
+
   dateTime = new Date();
   formModal: any
   @ViewChild('closebutton') closebutton;
@@ -54,13 +56,20 @@ export class MontoExonerarComponent implements OnInit {
     });
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarMontosExonerar().subscribe((res) => {
+        this.montoMaximoExonerarLista = res;
+      });
+
+    }
+
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
         summary: 'No tiene los permisos para acceder a este modulo',
         duration: 4000,
       });
-
       this.router.navigate(['/tramites']);
     }
 
@@ -116,6 +125,19 @@ export class MontoExonerarComponent implements OnInit {
       }
       this.closebutton.nativeElement.click();
     }
+  } 
+
+  formatDate(dateString: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true, // Utiliza formato de 12 horas
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('es-ES', options);
   }
 
   obtenerErrorCampoMonto() {

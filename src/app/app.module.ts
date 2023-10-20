@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './helpers/material/material.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -83,7 +84,8 @@ import { DragDropModule } from 'primeng/dragdrop';
     DropdownModule,
     BreadcrumbModule,
     ConfirmDialogModule,
-    DragDropModule
+    DragDropModule,
+    CommonModule
   ],
   providers: [
     {

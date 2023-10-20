@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
 
 
 @Component({
@@ -36,7 +37,8 @@ export class TarifaAseoViasSitiosPublicosComponent {
     private usuarioService: UsuarioService,
     private auth: AuthService,
     private toast: NgToastService,
-    private router: Router
+    private router: Router,
+    private tarifa: tarifaService
   ) {
     this.dateTime.setDate(this.dateTime.getDate());
   }
@@ -81,8 +83,34 @@ export class TarifaAseoViasSitiosPublicosComponent {
 
   enviar() {
     if (this.saveButton) {
+      this.markFormGroupTouched(this.tarifaAseoViasPublicosForm);
+      if (this.tarifaAseoViasPublicosForm.valid) {
+        const requestData = {
+          montoColones: this.tarifaAseoViasPublicosForm.value.montoTarifaAseoViasPublicos,
+          descripcion: 'TARIFA SERVICIOS ASEO'
+        };
+        console.log(requestData);
+        this.tarifa.registrarTarifa(requestData).subscribe({
+          next: (res) => {
+            this.tarifaAseoViasPublicosForm.reset();
+            this.toast.success({
+              detail: 'CORRECTO',
+              summary: res.message,
+              duration: 4000,
+            });
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'ERROR',
+              summary: err.message,
+              duration: 4000,
+            });
+          },
+        });
+      } else {
+        console.log('Formulario inválido');
+      }
       this.closebutton.nativeElement.click();
-      console.log(this.tarifaAseoViasPublicosForm.value);
     }
   }
 

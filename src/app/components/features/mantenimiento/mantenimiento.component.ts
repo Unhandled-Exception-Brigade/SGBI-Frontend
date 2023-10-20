@@ -6,6 +6,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
 import {TramitesComponent} from 'src/app/components/features/tramites/tramites.component'
+
+
+
 interface City {
   name: string;
   code: string;
