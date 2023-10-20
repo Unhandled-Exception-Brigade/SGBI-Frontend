@@ -39,16 +39,13 @@
     <app-role-dropdown [selectedRole]="selectedRole" (roleSelected)="selectedRole = $event"></app-role-dropdown>
   </div>
 
-
   <!-- Estado -->
-  <!-- lo nuevo para el estado, falta poder jalar del backend el estado y mostrar ese estado del usuario, y tambien poder cambiar su estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
     <!-- <p><strong>Estado:</strong> {{ usuario.estaInactivo }}</p> -->
-    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado" (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
-
+    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado"
+      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
   </div>
-
 </div> <!-- fin de modal-body -->
 
 <!-- botones cerrar y guardar -->
