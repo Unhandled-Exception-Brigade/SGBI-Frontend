@@ -65,6 +65,7 @@ const routes: Routes = [
   },
   {
     path:'monto-exonerar',
+    canActivate: [authGuard],
     component: MontoExonerarComponent
   },
   {
