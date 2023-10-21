@@ -17,6 +17,12 @@ export class ModalInformacionUsuarioComponent {
   selectedRole: string;
   estadoSeleccionado: string;
 
+  public usuarioEditado: any; // Copia del usuario para edición
+  public nombreEditado: string;
+  public primerApellidoEditado: string;
+  public segundoApellidoEditado: string;
+  public correoEditado: string;
+
   constructor(
     public activeModal: NgbActiveModal,
     private editarUsuarioService: EditarUsuarioService,
@@ -26,6 +32,13 @@ export class ModalInformacionUsuarioComponent {
   ) {}
 
   ngOnInit() {
+    this.usuarioEditado = { ...this.usuario };
+    // Inicializa el campo de las variables editas con el valor actual
+    this.nombreEditado = this.usuario.nombre;
+    this.primerApellidoEditado = this.usuario.primerApellido;
+    this.segundoApellidoEditado = this.usuario.segundoApellido;
+    this.correoEditado = this.usuario.correo;
+
     this.selectedRole = this.usuario.rol; // Inicializa el valor de selectedRole con el rol del usuario.
     this.estadoSeleccionado = this.usuario.estaInactivo;
 
@@ -114,9 +127,32 @@ export class ModalInformacionUsuarioComponent {
     }
   }
 
+  // Método para aplicar cambios al campo Nombre
+  aplicarCambiosNombre() {
+    this.usuarioEditado.nombre = this.nombreEditado;
+  }
+
+  aplicarCambiosPrimerApellido() {
+    this.usuarioEditado.primerApellido = this.primerApellidoEditado;
+  }
+
+  aplicarCambiosSegundoApellido() {
+    this.usuarioEditado.segundoApellido = this.segundoApellidoEditado;
+  }
+
+  aplicarCambiosCorreo() {
+    this.usuarioEditado.correo = this.correoEditado;
+  }
+
   guardarCambios() {
-    this.usuario.rol = this.selectedRole; // Actualiza el rol del usuario con el valor seleccionado
+    // Aplica los cambios al usuario original
+    this.usuario.nombre = this.usuarioEditado.nombre;
+    this.usuario.primerApellido = this.usuarioEditado.primerApellido;
+    this.usuario.segundoApellido = this.usuarioEditado.segundoApellido;
+    this.usuario.correo = this.usuarioEditado.correo;
+    this.usuario.rol = this.selectedRole;
     this.usuario.estaInactivo = this.estadoSeleccionado;
+
     this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe(
       (res) => {
         this.closeModal();
