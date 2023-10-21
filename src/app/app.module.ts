@@ -24,6 +24,7 @@ import { FirstEntryComponent } from './components/authentication/first-entry/fir
 import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
+import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
 
 
 
@@ -43,7 +44,8 @@ import { ModalInformacionUsuarioComponent } from './components/modal-informacion
     TramitesComponent,
     FirstEntryComponent,
     ModalConfirmacionComponent,
-    ModalInformacionUsuarioComponent
+    ModalInformacionUsuarioComponent,
+    ModalVerInformacionUsuarioComponent
   ],
   imports: [
     BrowserModule,

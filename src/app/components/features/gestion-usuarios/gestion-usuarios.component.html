@@ -49,8 +49,8 @@
             <td class="columnaApellidos">{{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
             <td class="columnaRol">{{ usuario.rol }}</td>
             <td class="columnaAccion text-center">
+              <i class="mr-2 fa-solid fa-eye icono" (click)="verInformacionUsuario(usuario)"></i>
               <i class="mr-2 fa-regular fa-pen-to-square icono" (click)="mostrarInformacionUsuario(usuario)"></i>
-              <i class="fa-solid fa-user-slash icono"></i>
             </td>
           </tr>
         </tbody>

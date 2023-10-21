@@ -6,6 +6,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalInformacionUsuarioComponent } from '../../modal-informacion-usuario/modal-informacion-usuario.component';
+import { ModalVerInformacionUsuarioComponent } from '../../modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -105,6 +106,7 @@ export class GestionUsuariosComponent {
   }
 
   // Método para abrir el modal y mostrar la información del usuario seleccionado
+  // Aqui se edita la informacion de los usuarios, por medio del modal.
   mostrarInformacionUsuario(usuario: any) {
     this.usuarioSeleccionado = usuario;
     this.selectedRole = usuario.rol;
@@ -113,5 +115,13 @@ export class GestionUsuariosComponent {
     });
     modalRef.componentInstance.usuario = this.usuarioSeleccionado;
     modalRef.componentInstance.selectedRole = this.selectedRole; // Inicializa el rol en el modal
+  }
+
+  verInformacionUsuario(usuario: any){
+    this.usuarioSeleccionado = usuario;
+    const modalRef = this.modalService.open(ModalVerInformacionUsuarioComponent, {
+      size: 'lg',
+    });
+    modalRef.componentInstance.usuario = this.usuarioSeleccionado;
   }
 }
