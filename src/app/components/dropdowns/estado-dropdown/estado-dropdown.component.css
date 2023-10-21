@@ -2,11 +2,11 @@
   cursor: pointer;
 }
 
-.botonRol {
+.botonEstado {
   width: 140px;
 }
 
 .boton{
   background-color: #136137;
-  color: #136137;
+  color: #ffff;
 }

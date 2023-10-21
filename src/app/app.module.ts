@@ -41,6 +41,11 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DragDropModule } from 'primeng/dragdrop';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
+import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
+
+
 
 @NgModule({
   declarations: [
@@ -62,6 +67,8 @@ import { DragDropModule } from 'primeng/dragdrop';
     TarifaAseoViasSitiosPublicosComponent,
     TarifaMantenimientoParquesObrasOrnatoComponent,
     TarifaServicioRecoleccionBasuraComponent,
+    ModalInformacionUsuarioComponent,
+    ModalVerInformacionUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +93,7 @@ import { DragDropModule } from 'primeng/dragdrop';
     ConfirmDialogModule,
     DragDropModule,
     CommonModule,
+    NgbModule
   ],
   providers: [
     {

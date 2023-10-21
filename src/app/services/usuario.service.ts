@@ -8,6 +8,7 @@ export class UsuarioService {
   private cedulaUsuario$ = new BehaviorSubject<string>('');
   private nombreUsuario$ = new BehaviorSubject<string>('');
   private rolUsuario$ = new BehaviorSubject<string>('');
+  private estadoUsuario$ = new BehaviorSubject<string>('');
 
   constructor() {}
 
@@ -27,4 +28,5 @@ export class UsuarioService {
   public setNombreUsuario(nombre: string) {
     this.cedulaUsuario$.next(nombre);
   }
+
 }
