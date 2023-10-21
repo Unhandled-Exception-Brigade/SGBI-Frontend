@@ -95,6 +95,25 @@ export class ModalInformacionUsuarioComponent {
     }
   }
 
+  correoValido: boolean = true;
+  mensajeErrorCorreo: string = '';
+
+  validarCorreo() {
+    const correo = this.usuario.correo;
+
+    // Expresión regular para validar un formato de correo electrónico válido.
+    const patronCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+    if (!patronCorreo.test(correo)) {
+      this.correoValido = false;
+      this.mensajeErrorCorreo =
+        'El correo electrónico no tiene un formato válido.';
+    } else {
+      this.correoValido = true;
+      this.mensajeErrorCorreo = '';
+    }
+  }
+
   guardarCambios() {
     this.usuario.rol = this.selectedRole; // Actualiza el rol del usuario con el valor seleccionado
     this.usuario.estaInactivo = this.estadoSeleccionado;

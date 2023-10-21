@@ -31,7 +31,8 @@
   <!-- Correo -->
   <div class="form-group">
     <label for="correo">Correo</label>
-    <input type="text" class="form-control" id="correo" [(ngModel)]="usuario.correo" name="correo">
+    <input type="text" class="form-control" id="correo" [(ngModel)]="usuario.correo" name="correo" (input)="validarCorreo()">
+    <div *ngIf="!correoValido" class="text-danger">{{ mensajeErrorCorreo }}</div>
   </div>
 
   <!-- Rol -->
@@ -52,5 +53,5 @@
 <!-- botones cerrar y guardar -->
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
- <button type="button" class="btn btn-primary" (click)="guardarCambios()" [disabled]="!nombreValido || !primerApellidoValido || !segundoApellidoValido">Guardar</button>
+ <button type="button" class="btn btn-primary" (click)="guardarCambios()" [disabled]="!nombreValido || !primerApellidoValido || !segundoApellidoValido || !correoValido">Guardar</button>
 </div>
