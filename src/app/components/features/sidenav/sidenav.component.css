@@ -6,11 +6,10 @@
   text-decoration: none;
   display: block;
   padding: 6px 10px;
-  transition: 0.5s;
 }
 .offcanvas {
-  border-top-right-radius: 20px; /* Redondea la esquina superior derecha */
-  border-bottom-right-radius: 20px; /* Redondea la esquina inferior derecha */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .sidebar-nav ul li a:hover {
@@ -27,9 +26,7 @@
   top: -4px;
   transition: 0.5s;
 }
-.sidebar-nav .offcanvas.show ul li a:hover span {
-  padding-left: 10px;
-}
+
 .sidebar-nav .dropdown-toggle::after {
   position: relative;
   top: 3px;
@@ -44,20 +41,15 @@
   width: 100%;
 }
 
-.sub-menu-list {
-}
-
 .sub-menu-item {
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 20px;
+
+  margin-bottom: 4px;
+  margin-top: 4px;
 }
 
 .navbar {
   background-color: #136137;
-}
-
-.sub-menu-text {
-  font-size: 20px;
 }
 
 .offcanvas {

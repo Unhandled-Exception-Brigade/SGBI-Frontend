@@ -11,12 +11,16 @@ import { environment } from 'src/environments/environment.development';
 export class AuthService {
   private baseUrl: string = environment.apiUrl;
   private usuarioPayload: any;
+
   constructor(private http: HttpClient, private router: Router) {
-    
+    this.usuarioPayload = this.decodedToken();
   }
 
   registrarse(userFrontEnd: any) {
-    return this.http.post<any>(this.baseUrl + 'cuenta/registrarse', userFrontEnd);
+    return this.http.post<any>(
+      this.baseUrl + 'cuenta/registrarse',
+      userFrontEnd
+    );
   }
 
   ingresar(userFrontEnd: any) {
