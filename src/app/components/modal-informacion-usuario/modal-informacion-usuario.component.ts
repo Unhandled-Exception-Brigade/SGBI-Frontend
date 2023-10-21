@@ -36,7 +36,6 @@ export class ModalInformacionUsuarioComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private editarUsuarioService: EditarUsuarioService,
-    private api: ApiService,
     private auth: AuthService,
     private usuarioService: UsuarioService
   ) {}

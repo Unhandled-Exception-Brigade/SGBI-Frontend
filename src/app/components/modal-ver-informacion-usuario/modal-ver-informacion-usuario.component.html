@@ -1,17 +1,17 @@
 <div class="modal-header">
     <h4 class="modal-title">Información del usuario <strong>{{usuario.nombre}}</strong></h4>
     <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-      <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="modal-body">
+</div>
+<div class="modal-body">
     <p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
     <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
     <p><strong>Apellidos:</strong> {{ usuario.primerApellido }} {{ usuario.segundoApellido }}</p>
     <p><strong>Correo:</strong> {{ usuario.correo }}</p>
     <p><strong>Rol:</strong> {{ usuario.rol }}</p>
     <p><strong>Estado:</strong> {{ usuario.estaInactivo ? 'Inactivo' : 'Activo' }}</p>
-  </div>
-  <div class="modal-footer">
+</div>
+<div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
-  </div>
+</div>

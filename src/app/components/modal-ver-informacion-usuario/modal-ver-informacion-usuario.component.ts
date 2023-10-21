@@ -2,14 +2,13 @@ import { Component, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { NgToastService } from 'ng-angular-popup';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-modal-ver-informacion-usuario',
   templateUrl: './modal-ver-informacion-usuario.component.html',
   styleUrls: ['./modal-ver-informacion-usuario.component.css'],
 })
+
 export class ModalVerInformacionUsuarioComponent {
   @Input() usuario: any;
   public usuarios: any = [];
@@ -21,10 +20,7 @@ export class ModalVerInformacionUsuarioComponent {
     public activeModal: NgbActiveModal,
     private api: ApiService,
     private auth: AuthService,
-    private usuarioService: UsuarioService,
-    private toast: NgToastService,
-    private router: Router,
-    private modalService: NgbModal
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit() {
@@ -51,7 +47,7 @@ export class ModalVerInformacionUsuarioComponent {
         const cedulaDelToken = this.auth.obtenerCedulaDelToken();
         this.cedula = val || cedulaDelToken;
       });
-    } 
+    }
   }
 
   closeModal() {
