@@ -148,6 +148,12 @@
                     scope="col"
                     class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
                   >
+                    Usuario modificación
+                  </th>
+                  <th
+                    scope="col"
+                    class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
+                  >
                     Fecha
                   </th>
                   <th
@@ -166,6 +172,9 @@
               </thead>
               <tbody>
                 <tr *ngFor="let montos of montoMantenimiento; let i = index">
+                  <td scope="row">
+                    {{ montos.usuarioModificacion }}
+                  </td>
                   <td scope="row">
                     {{ formatDate(montos.fechaModificacion) }}
                   </td>

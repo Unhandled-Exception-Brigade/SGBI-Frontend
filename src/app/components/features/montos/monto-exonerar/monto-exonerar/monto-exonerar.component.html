@@ -143,6 +143,12 @@
                     scope="col"
                     class="bg-color-tabla-montoExonerar color-titulo"
                   >
+                    Usuario modificación
+                  </th>
+                  <th
+                    scope="col"
+                    class="bg-color-tabla-montoExonerar color-titulo"
+                  >
                     Fecha
                   </th>
                   <th
@@ -164,8 +170,12 @@
                   *ngFor="let montos of montoMaximoExonerarLista; let i = index"
                 >
                   <td scope="row">
+                    {{ montos.usuarioModificacion }}
+                  </td>
+                  <td scope="row">
                     {{ formatDate(montos.fechaModificacion) }}
                   </td>
+
                   <td>Monto máximo a exonerar</td>
                   <td>₡ {{ formatNumber(montos.montoColones) }}</td>
                 </tr>
