@@ -1,16 +1,27 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 
 @Component({
   selector: 'app-monto-exonerar',
   templateUrl: './monto-exonerar.component.html',
-  styleUrls: ['./monto-exonerar.component.css']
+  styleUrls: ['./monto-exonerar.component.css'],
 })
 export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
@@ -18,7 +29,7 @@ export class MontoExonerarComponent implements OnInit {
   public montoMaximoExonerarLista: any = [];
 
   dateTime = new Date();
-  formModal: any
+  formModal: any;
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -34,7 +45,7 @@ export class MontoExonerarComponent implements OnInit {
   });
 
   getMontoExonerar() {
-    return this.montoExonerarForm.get('montoExonerar')
+    return this.montoExonerarForm.get('montoExonerar');
   }
 
   constructor(
@@ -49,18 +60,15 @@ export class MontoExonerarComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
       this.tarifa.listarMontosExonerar().subscribe((res) => {
         this.montoMaximoExonerarLista = res;
       });
-
     }
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
@@ -72,7 +80,6 @@ export class MontoExonerarComponent implements OnInit {
       });
       this.router.navigate(['/tramites']);
     }
-
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -100,7 +107,7 @@ export class MontoExonerarComponent implements OnInit {
       if (this.montoExonerarForm.valid) {
         const requestData = {
           montoColones: this.montoExonerarForm.value.montoExonerar,
-          descripcion: 'TARIFA EXONERAR'
+          descripcion: 'TARIFA EXONERAR',
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({
@@ -125,7 +132,7 @@ export class MontoExonerarComponent implements OnInit {
       }
       this.closebutton.nativeElement.click();
     }
-  } 
+  }
 
   formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -143,11 +150,10 @@ export class MontoExonerarComponent implements OnInit {
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
       minimumFractionDigits: 3,
-      maximumFractionDigits: 3, 
+      maximumFractionDigits: 3,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
-  
 
   obtenerErrorCampoMonto() {
     const campo = this.montoExonerarForm.get('montoExonerar');
