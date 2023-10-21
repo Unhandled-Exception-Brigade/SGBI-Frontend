@@ -44,11 +44,10 @@
   width: 100%;
 }
 
-.sub-menu-list{
-  
+.sub-menu-list {
 }
 
-.sub-menu-item{
+.sub-menu-item {
   margin-left: 25px;
   margin-right: 25px;
 }
@@ -57,7 +56,7 @@
   background-color: #136137;
 }
 
-.sub-menu-text{
+.sub-menu-text {
   font-size: 20px;
 }
 
@@ -75,7 +74,7 @@
   margin-top: 2rem;
 }
 
-.logoMuni{
+.logoMuni {
   cursor: pointer;
 }
 

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 import { ApiService } from 'src/app/services/api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../../../models/token-api.model';
@@ -59,8 +59,6 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
   public rol: string = '';
 
   ngOnInit() {
-
-
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreDelToken;
@@ -71,18 +69,13 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-    
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.mostrarSideNav = true;
   }
 
   cerrarSesion() {
-    // Limpia los datos del usuario y redirige a la página de inicio de sesión.
-    //this.nombre = '';
-    //this.rol = '';
-
     this.auth.cerrarSesion();
     this.toast.info({
       detail: 'INFORMACION',

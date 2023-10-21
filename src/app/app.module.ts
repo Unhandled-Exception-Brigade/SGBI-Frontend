@@ -39,7 +39,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService, MessageService} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
@@ -61,7 +61,7 @@ import { DragDropModule } from 'primeng/dragdrop';
     MontoExonerarComponent,
     TarifaAseoViasSitiosPublicosComponent,
     TarifaMantenimientoParquesObrasOrnatoComponent,
-    TarifaServicioRecoleccionBasuraComponent
+    TarifaServicioRecoleccionBasuraComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +85,7 @@ import { DragDropModule } from 'primeng/dragdrop';
     BreadcrumbModule,
     ConfirmDialogModule,
     DragDropModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     {
@@ -94,7 +94,7 @@ import { DragDropModule } from 'primeng/dragdrop';
       multi: true,
     },
     ConfirmationService,
-    MessageService
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

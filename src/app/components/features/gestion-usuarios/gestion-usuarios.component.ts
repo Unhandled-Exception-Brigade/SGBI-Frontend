@@ -5,7 +5,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -23,8 +22,7 @@ export class GestionUsuariosComponent {
     private usuarioService: UsuarioService,
     private toast: NgToastService,
     private router: Router,
-    private editarUsuarioService: EditarUsuarioService,
-    private modalService: NgbModal
+    private editarUsuarioService: EditarUsuarioService
   ) {}
 
   ngOnInit() {
