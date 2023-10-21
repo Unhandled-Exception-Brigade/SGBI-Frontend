@@ -32,23 +32,23 @@
   </div>
   <div class="table-container">
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover custom-table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Cédula</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Acción</th>
+            <th class="custom-table text-center columnaCedula" scope="col">Cédula</th>
+            <th class="custom-table text-center columnaNombre" scope="col">Nombre</th>
+            <th class="custom-table text-center columnaApellidos" scope="col">Apellidos</th>
+            <th class="custom-table text-center columnaRol" scope="col">Rol</th>
+            <th class="custom-table text-center columnaAccion" scope="col">Acción</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let usuario of usuarios; let i = index">
             <td>{{ usuario.cedula }}</td>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
-            <td>{{ usuario.rol }}</td>
-            <td>
+            <td class="columnaNombre">{{ usuario.nombre }}</td>
+            <td class="columnaApellidos">{{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
+            <td class="columnaRol">{{ usuario.rol }}</td>
+            <td class="columnaAccion text-center">
               <i class="mr-2 fa-regular fa-pen-to-square icono" (click)="mostrarInformacionUsuario(usuario)"></i>
               <i class="fa-solid fa-user-slash icono"></i>
             </td>

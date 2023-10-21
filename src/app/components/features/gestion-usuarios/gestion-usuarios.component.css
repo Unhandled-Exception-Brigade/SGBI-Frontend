@@ -13,11 +13,6 @@ tbody tr td {
   cursor: pointer;
 }
 
-.custom-modal-dialog {
-  max-width: 50%;
-  width: 50%;
-}
-
 .btn-success {
   background-color: #136137;
 }
@@ -32,12 +27,38 @@ tbody tr td {
   height: 100%;
 }
 
+.custom-table {
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+
+.columnaCedula {
+  width: 4rem;
+}
+
+.columnaNombre {
+  width: 8.2rem;
+  border-left: 1px solid #dee2e6;
+}
+
+.columnaApellidos {
+  width: 8.2rem;
+  border-left: 1px solid #dee2e6;
+}
+
+.columnaRol {
+  width: 5.6rem;
+  border-left: 1px solid #dee2e6;
+}
+.columnaAccion {
+  width: 4.4rem;
+  border-left: 1px solid #dee2e6;
+}
+
 .barra-busqueda {
   width: 100%;
 }
-.botonRol {
-  width: 126px;
-}
+
 .custom-btn {
   background: #136137;
   text-decoration: none !important;
