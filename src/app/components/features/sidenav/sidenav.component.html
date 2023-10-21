@@ -6,84 +6,45 @@
       <nav class="navbar navbar-dark fixed-top">
         <div class="container">
           <!-- Mobile Menu Toggle Button -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-          >
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <!-- Menus List -->
-          <div
-            class="offcanvas offcanvas-start shadow"
-            tabindex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div
-              class="marca d-flex flex-row justify-content-center align-items-center"
-              (click)="redirigirATramites()"
-            >
-              <img
-                src="../../../assets/imagenes/Escudo.png"
-                class="pr-2 pt-3"
-                style="width: 40px"
-                alt="Escudo"
-              />
+          <div class="offcanvas offcanvas-start shadow" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="marca d-flex flex-row justify-content-center align-items-center" (click)="redirigirATramites()">
+              <img src="../../../assets/imagenes/Escudo.png" class="pr-2 pt-3" style="width: 40px" alt="Escudo" />
               <h1 class="titulo Roboto">SGBI</h1>
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav">
                 <li class="" *ngFor="let data of navData">
                   <ng-container *ngIf="tienePermiso(data.permiso)">
-                    <ng-container
-                      *ngIf="data.subEnlaces.length !== 0; else elementoUnico"
-                    >
-                      <a
-                        class="pl-4"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                        style="cursor: pointer"
-                        (click)="mostrarSubMenu()"
-                      >
+                    <ng-container *ngIf="data.subEnlaces.length !== 0; else elementoUnico">
+                      <a class="pl-4" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        style="cursor: pointer;" (click)="mostrarSubMenu()">
                         <i class="bi" [class]="data.icon" style="color: white">
-                          <span class="fuente item-text Roboto pl-2">{{
-                            data.label
-                          }}</span>
+                          <span class="fuente item-text Roboto pl-2">{{data.label}}</span>
                           <i class="fa-solid fa-caret-down ml-4"></i>
                         </i>
                       </a>
                       <span *ngIf="subMenu">
                         <ng-container *ngFor="let enlaces of data.subEnlaces">
-                          <a
-                            class="pl-4 sub-menu-item"
-                            [routerLink]="[enlaces.link]"
-                            routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }"
-                          >
+                          <a class="pl-4 sub-menu-item" [routerLink]="[enlaces.link]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <li class="bi sub-menu-list" style="color: white">
-                              <span class="Roboto sub-menu-text">{{
-                                enlaces.etiqueta
-                              }}</span>
+                              <span class="Roboto sub-menu-text">{{enlaces.etiqueta}}</span>
                             </li>
                           </a>
                         </ng-container>
                       </span>
                     </ng-container>
                     <ng-template #elementoUnico>
-                      <a
-                        class="pl-4"
-                        [routerLink]="[data.routeLink]"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                      >
+                      <a class="pl-4" [routerLink]="[data.routeLink]" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
                         <i class="bi" [class]="data.icon" style="color: white">
-                          <span class="fuente item-text Roboto pl-3">{{
-                            data.label
-                          }}</span>
+                          <span class="fuente item-text Roboto pl-3">{{data.label}}</span>
                         </i>
                       </a>
                     </ng-template>
@@ -94,16 +55,10 @@
           </div>
           <div class="d-flex justify-content-end">
             <div class="dropdown mr-3 botonInicio">
-              <button
-                class="btn dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user" style="color: white"></i>
-                <span class="pl-2" style="color: white">{{ nombre }}</span>
+                <span class="pl-2" style="color: white"></span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <!-- <button class="dropdown-item" (click)="cambiarContrasena()">

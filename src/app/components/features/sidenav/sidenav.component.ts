@@ -49,7 +49,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   multiple: boolean = false;
 
   public nombre: string = '';
-  public cedula: string = '';
   public rol: string = '';
 
   ngOnInit() {
@@ -62,11 +61,12 @@ export class SidenavComponent implements OnInit, OnDestroy {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-
+    
     this.usuarioService.getCedulaUsuario().subscribe((val) => {
-      const cedulaDelToken = this.auth.obtenerCedulaDelToken();
-      this.cedula = val || cedulaDelToken;
+      const nombreDelToken = this.auth.obtenerCedulaDelToken();
+      this.nombre = val || nombreDelToken;
     });
+    console.log('sidenav abierto');
   }
 
   cerrarSesion() {
