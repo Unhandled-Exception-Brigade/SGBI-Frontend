@@ -1,0 +1,8 @@
+.botonGuardar{
+    background-color: #136137;
+    color: #fff;
+}
+.botonGuardar:hover{
+    background-color: #10502e;
+    color: #fff;
+}

@@ -56,7 +56,7 @@
 
 <!-- botones cerrar y guardar -->
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-  <button type="button" class="btn btn-primary" (click)="guardarCambios()"
+  <button type="button" class="btn btn-danger" (click)="closeModal()">Cancelar</button>
+  <button type="button" class="btn botonGuardar" (click)="guardarCambios()"
     [disabled]="!nombreValido || !primerApellidoValido || !segundoApellidoValido || !correoValido">Guardar</button>
 </div>
