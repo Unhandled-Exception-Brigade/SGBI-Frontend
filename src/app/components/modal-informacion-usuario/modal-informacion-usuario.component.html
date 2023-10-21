@@ -11,20 +11,21 @@
   <!-- Nombre -->
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre" name="nombre">
+    <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" (input)="validarNombre_Apellidos()">
+    <div *ngIf="!nombreValido" class="text-danger">{{ mensajeErrorNombre }}</div>
   </div>
 
   <!-- Apellidos -->
   <div class="form-group">
     <label for="primerApellido">Primer Apellido</label>
-    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="usuario.primerApellido"
-      name="primerApellido">
+    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="usuario.primerApellido" name="primerApellido" (input)="validarNombre_Apellidos()">
+      <div *ngIf="!primerApellidoValido" class="text-danger">{{ mensajeErrorPrimerApellido}}</div>
   </div>
 
   <div class="form-group">
     <label for="segundoApellido">Segundo Apellido</label>
-    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="usuario.segundoApellido"
-      name="segundoApellido">
+    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="usuario.segundoApellido" name="segundoApellido" (input)="validarNombre_Apellidos()">
+      <div *ngIf="!segundoApellidoValido" class="text-danger">{{ mensajeErrorSegundoApellido}}</div>
   </div>
 
   <!-- Correo -->
@@ -51,5 +52,5 @@
 <!-- botones cerrar y guardar -->
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
-  <button type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar</button>
+ <button type="button" class="btn btn-primary" (click)="guardarCambios()" [disabled]="!nombreValido || !primerApellidoValido || !segundoApellidoValido">Guardar</button>
 </div>

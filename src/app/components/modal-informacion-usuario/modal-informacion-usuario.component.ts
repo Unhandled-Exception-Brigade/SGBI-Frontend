@@ -52,6 +52,49 @@ export class ModalInformacionUsuarioComponent {
     this.estadoSeleccionado = nuevoEstado;
   }
 
+  nombreValido: boolean = true;
+  primerApellidoValido: boolean = true;
+  segundoApellidoValido: boolean = true;
+
+  mensajeErrorNombre: string = '';
+  mensajeErrorPrimerApellido: string = '';
+  mensajeErrorSegundoApellido: string = '';
+
+  validarNombre_Apellidos() {
+    const nombre = this.usuario.nombre;
+    const primerApellido = this.usuario.primerApellido;
+    const segundoApellido = this.usuario.segundoApellido;
+
+    // Expresión regular que permite letras, tildes y la letra "ñ".
+    const patron = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+
+    if (!patron.test(nombre)) {
+      this.nombreValido = false;
+      this.mensajeErrorNombre = 'El nombre solo debe contener letras y tildes.';
+    } else {
+      this.nombreValido = true;
+      this.mensajeErrorNombre = '';
+    }
+
+    if (!patron.test(primerApellido)) {
+      this.primerApellidoValido = false;
+      this.mensajeErrorPrimerApellido =
+        'El primer apellido solo debe contener letras y tildes.';
+    } else {
+      this.primerApellidoValido = true;
+      this.mensajeErrorPrimerApellido = '';
+    }
+
+    if (!patron.test(segundoApellido)) {
+      this.segundoApellidoValido = false;
+      this.mensajeErrorSegundoApellido =
+        'El segundo apellido solo debe contener letras y tildes.';
+    } else {
+      this.segundoApellidoValido = true;
+      this.mensajeErrorSegundoApellido = '';
+    }
+  }
+
   guardarCambios() {
     this.usuario.rol = this.selectedRole; // Actualiza el rol del usuario con el valor seleccionado
     this.usuario.estaInactivo = this.estadoSeleccionado;
