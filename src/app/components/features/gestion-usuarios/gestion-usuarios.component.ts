@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { EstadoDropdownComponent } from 'src/app/components/dropdowns/estado-dropdown/estado-dropdown.component';
-import { actualizarUsuario } from 'src/app/models/actualizar-usuario';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';

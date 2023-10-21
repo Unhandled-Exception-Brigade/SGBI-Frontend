@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         ],
       ],
     });
-
     this.sideNav.ocultar();
   }
 
