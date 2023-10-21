@@ -23,6 +23,16 @@ export class ModalInformacionUsuarioComponent {
   public segundoApellidoEditado: string;
   public correoEditado: string;
 
+  public nombreValido: boolean = true;
+  public primerApellidoValido: boolean = true;
+  public segundoApellidoValido: boolean = true;
+  public correoValido: boolean = true;
+
+  public mensajeErrorNombre: string = '';
+  public mensajeErrorPrimerApellido: string = '';
+  public mensajeErrorSegundoApellido: string = '';
+  public mensajeErrorCorreo: string = '';
+
   constructor(
     public activeModal: NgbActiveModal,
     private editarUsuarioService: EditarUsuarioService,
@@ -50,7 +60,7 @@ export class ModalInformacionUsuarioComponent {
 
   closeModal() {
     this.activeModal.close();
-    this.recargarPagina();
+    // this.recargarPagina();
   }
 
   recargarPagina() {
@@ -65,23 +75,12 @@ export class ModalInformacionUsuarioComponent {
     this.estadoSeleccionado = nuevoEstado;
   }
 
-  nombreValido: boolean = true;
-  primerApellidoValido: boolean = true;
-  segundoApellidoValido: boolean = true;
-
-  mensajeErrorNombre: string = '';
-  mensajeErrorPrimerApellido: string = '';
-  mensajeErrorSegundoApellido: string = '';
-
   validarNombre_Apellidos() {
-    const nombre = this.usuario.nombre;
-    const primerApellido = this.usuario.primerApellido;
-    const segundoApellido = this.usuario.segundoApellido;
-
     // Expresión regular que permite letras, tildes y la letra "ñ".
     const patron = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
 
-    if (!patron.test(nombre)) {
+    // Valida el campo "Nombre"
+    if (!patron.test(this.nombreEditado)) {
       this.nombreValido = false;
       this.mensajeErrorNombre = 'El nombre solo debe contener letras y tildes.';
     } else {
@@ -89,7 +88,8 @@ export class ModalInformacionUsuarioComponent {
       this.mensajeErrorNombre = '';
     }
 
-    if (!patron.test(primerApellido)) {
+    // Valida el campo "Primer Apellido"
+    if (!patron.test(this.primerApellidoEditado)) {
       this.primerApellidoValido = false;
       this.mensajeErrorPrimerApellido =
         'El primer apellido solo debe contener letras y tildes.';
@@ -98,7 +98,8 @@ export class ModalInformacionUsuarioComponent {
       this.mensajeErrorPrimerApellido = '';
     }
 
-    if (!patron.test(segundoApellido)) {
+    // Valida el campo "Segundo Apellido"
+    if (!patron.test(this.segundoApellidoEditado)) {
       this.segundoApellidoValido = false;
       this.mensajeErrorSegundoApellido =
         'El segundo apellido solo debe contener letras y tildes.';
@@ -108,16 +109,12 @@ export class ModalInformacionUsuarioComponent {
     }
   }
 
-  correoValido: boolean = true;
-  mensajeErrorCorreo: string = '';
-
   validarCorreo() {
-    const correo = this.usuario.correo;
-
     // Expresión regular para validar un formato de correo electrónico válido.
     const patronCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-    if (!patronCorreo.test(correo)) {
+    // Valida el campo "Correo"
+    if (!patronCorreo.test(this.correoEditado)) {
       this.correoValido = false;
       this.mensajeErrorCorreo =
         'El correo electrónico no tiene un formato válido.';
@@ -145,13 +142,27 @@ export class ModalInformacionUsuarioComponent {
   }
 
   guardarCambios() {
-    // Aplica los cambios al usuario original
-    this.usuario.nombre = this.usuarioEditado.nombre;
-    this.usuario.primerApellido = this.usuarioEditado.primerApellido;
-    this.usuario.segundoApellido = this.usuarioEditado.segundoApellido;
-    this.usuario.correo = this.usuarioEditado.correo;
-    this.usuario.rol = this.selectedRole;
-    this.usuario.estaInactivo = this.estadoSeleccionado;
+    // Realiza las validaciones antes de guardar
+    this.validarNombre_Apellidos();
+    this.validarCorreo();
+
+    if (
+      this.nombreValido &&
+      this.primerApellidoValido &&
+      this.segundoApellidoValido &&
+      this.correoValido
+    ) {
+      // Aplica los cambios al usuario original solo cuando se presiona "Guardar"
+      this.usuario.nombre = this.nombreEditado;
+      this.usuario.primerApellido = this.primerApellidoEditado;
+      this.usuario.segundoApellido = this.segundoApellidoEditado;
+      this.usuario.correo = this.correoEditado;
+      this.usuario.rol = this.selectedRole;
+      this.usuario.estaInactivo = this.estadoSeleccionado;
+
+      // Cierra el modal
+      this.activeModal.close();
+    }
 
     this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe(
       (res) => {

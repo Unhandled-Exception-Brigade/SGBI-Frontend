@@ -1,117 +1,62 @@
 <div class="modal-header">
-  <h4 class="modal-title">
-    Información del usuario <strong>{{ usuario.nombre }}</strong>
-  </h4>
+  <h4 class="modal-title">Información del usuario <strong>{{usuario.nombre}}</strong></h4>
   <button type="button" class="close" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
+
   <p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
 
   <!-- Nombre -->
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input
-      type="text"
-      class="form-control"
-      id="nombre"
-      [(ngModel)]="nombreEditado"
-      name="nombre"
-      (input)="aplicarCambiosNombre()"
-    />
-    <div *ngIf="!nombreValido" class="text-danger">
-      {{ mensajeErrorNombre }}
-    </div>
+    <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreEditado" name="nombre"
+      (input)="aplicarCambiosNombre(); validarNombre_Apellidos()">
+    <div *ngIf="!nombreValido" class="text-danger">{{ mensajeErrorNombre }}</div>
   </div>
 
   <!-- Apellidos -->
   <div class="form-group">
     <label for="primerApellido">Primer Apellido</label>
-    <input
-      type="text"
-      class="form-control"
-      id="primerApellido"
-      [(ngModel)]="primerApellidoEditado"
-      name="primerApellido"
-      (input)="aplicarCambiosPrimerApellido()"
-      (input)="validarNombre_Apellidos()"
-    />
-    <div *ngIf="!primerApellidoValido" class="text-danger">
-      {{ mensajeErrorPrimerApellido }}
-    </div>
+    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="primerApellidoEditado"
+      name="primerApellido" (input)="aplicarCambiosPrimerApellido(); validarNombre_Apellidos()">
+    <div *ngIf="!primerApellidoValido" class="text-danger">{{ mensajeErrorPrimerApellido}}</div>
   </div>
 
   <div class="form-group">
     <label for="segundoApellido">Segundo Apellido</label>
-    <input
-      type="text"
-      class="form-control"
-      id="segundoApellido"
-      [(ngModel)]="segundoApellidoEditado"
-      name="segundoApellido"
-      (input)="aplicarCambiosSegundoApellido()"
-      (input)="validarNombre_Apellidos()"
-    />
-    <div *ngIf="!segundoApellidoValido" class="text-danger">
-      {{ mensajeErrorSegundoApellido }}
-    </div>
+    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="segundoApellidoEditado"
+      name="segundoApellido" (input)="aplicarCambiosSegundoApellido(); validarNombre_Apellidos()">
+    <div *ngIf="!segundoApellidoValido" class="text-danger">{{ mensajeErrorSegundoApellido}}</div>
   </div>
 
   <!-- Correo -->
   <div class="form-group">
     <label for="correo">Correo</label>
-    <input
-      type="text"
-      class="form-control"
-      id="correo"
-      [(ngModel)]="correoEditado"
-      name="correo"
-      (input)="aplicarCambiosCorreo()"
-      (input)="validarCorreo()"
-    />
-    <div *ngIf="!correoValido" class="text-danger">
-      {{ mensajeErrorCorreo }}
-    </div>
+    <input type="text" class="form-control" id="correo" [(ngModel)]="correoEditado" name="correo"
+      (input)="aplicarCambiosCorreo(); validarCorreo()">
+    <div *ngIf="!correoValido" class="text-danger">{{ mensajeErrorCorreo }}</div>
   </div>
 
   <!-- Rol -->
   <div class="form-group">
     <label for="roleDropdown">Rol:</label>
-    <app-role-dropdown
-      [selectedRole]="selectedRole"
-      (roleSelected)="selectedRole = $event"
-    ></app-role-dropdown>
+    <app-role-dropdown [selectedRole]="selectedRole" (roleSelected)="selectedRole = $event"></app-role-dropdown>
   </div>
 
   <!-- Estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
     <!-- <p><strong>Estado:</strong> {{ usuario.estaInactivo }}</p> -->
-    <app-estado-dropdown
-      [estadoSeleccionado]="estadoSeleccionado"
-      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"
-    ></app-estado-dropdown>
+    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado"
+      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
   </div>
-</div>
-<!-- fin de modal-body -->
+</div> <!-- fin de modal-body -->
 
 <!-- botones cerrar y guardar -->
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="closeModal()">
-    Cerrar
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    (click)="guardarCambios()"
-    [disabled]="
-      !nombreValido ||
-      !primerApellidoValido ||
-      !segundoApellidoValido ||
-      !correoValido
-    "
-  >
-    Guardar
-  </button>
+  <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+  <button type="button" class="btn btn-primary" (click)="guardarCambios()"
+    [disabled]="!nombreValido || !primerApellidoValido || !segundoApellidoValido || !correoValido">Guardar</button>
 </div>
