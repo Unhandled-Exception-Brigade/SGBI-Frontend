@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent {
   constructor(private router: Router) {}
 
@@ -27,5 +26,4 @@ export class AppComponent {
     // Verifica si la ruta actual no es '/login'
     return currentRoute !== '/login';
   }
-  
 }

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bitacora',
   templateUrl: './bitacora.component.html',
-  styleUrls: ['./bitacora.component.css']
+  styleUrls: ['./bitacora.component.css'],
 })
 export class BitacoraComponent implements OnInit {
-
   public currentPage: number = 1; // Página actual
   public usersPerPage: number = 5; // Usuarios por página
   public rol: string = '';
@@ -26,18 +25,19 @@ export class BitacoraComponent implements OnInit {
     private tarifa: tarifaService,
     private toast: NgToastService,
     private router: Router
-  ) {
-
-  }
+  ) {}
 
   obtenerTarifas() {
     this.tarifa.obtenerTarifas().subscribe((val) => {
       this.mantenimientos = val;
-      for(let i = 0; i < this.mantenimientos.length; i++){ // Cambio en la condición de bucle
-        this.mantenimientos[i].fechaCreacion = this.formatDate(this.mantenimientos[i].fechaCreacion); // Corrección en el acceso a la fecha de creación
-        this.mantenimientos[i].montoColones = this.formatNumber(this.mantenimientos[i].montoColones); // Corrección en el acceso a la fecha de creación
-        
-        console.log(this.mantenimientos[i].fechaCreacion);
+      for (let i = 0; i < this.mantenimientos.length; i++) {
+        // Cambio en la condición de bucle
+        this.mantenimientos[i].fechaCreacion = this.formatDate(
+          this.mantenimientos[i].fechaCreacion
+        ); // Corrección en el acceso a la fecha de creación
+        this.mantenimientos[i].montoColones = this.formatNumber(
+          this.mantenimientos[i].montoColones
+        ); // Corrección en el acceso a la fecha de creación
       }
       this.mantenimientos.reverse();
     });
@@ -78,7 +78,7 @@ export class BitacoraComponent implements OnInit {
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
       minimumFractionDigits: 3,
-      maximumFractionDigits: 3, 
+      maximumFractionDigits: 3,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
@@ -116,8 +116,7 @@ export class BitacoraComponent implements OnInit {
     const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
     return palabrasClave.every((palabra) =>
       // Verificar si alguna parte del usuario coincide con la palabra clave
-      JSON.stringify(elemento).toLowerCase().includes(palabra) 
+      JSON.stringify(elemento).toLowerCase().includes(palabra)
     );
   }
-
 }
