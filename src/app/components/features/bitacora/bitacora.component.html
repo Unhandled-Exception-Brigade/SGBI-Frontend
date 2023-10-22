@@ -60,10 +60,10 @@
                                         {{ mantenimiento.usuarioModificacion }}
                                     </td>
                                     <td scope="row">
-                                        {{ formatDate(mantenimiento.fechaModificacion) }}
+                                        {{ mantenimiento.fechaCreacion }}
                                     </td>
                                     <td> {{mantenimiento.descripcion}} </td>
-                                    <td>₡ {{ formatNumber(mantenimiento.montoColones) }}</td>
+                                    <td>₡ {{ mantenimiento.montoColones }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -33,8 +33,14 @@ export class BitacoraComponent implements OnInit {
   obtenerTarifas() {
     this.tarifa.obtenerTarifas().subscribe((val) => {
       this.mantenimientos = val;
+      for(let i = 0; i < this.mantenimientos.length; i++){ // Cambio en la condición de bucle
+        this.mantenimientos[i].fechaCreacion = this.formatDate(this.mantenimientos[i].fechaCreacion); // Corrección en el acceso a la fecha de creación
+        this.mantenimientos[i].montoColones = this.formatNumber(this.mantenimientos[i].montoColones); // Corrección en el acceso a la fecha de creación
+        
+        console.log(this.mantenimientos[i].fechaCreacion);
+      }
       this.mantenimientos.reverse();
-    })
+    });
   }
 
   ngOnInit(): void {

@@ -104,7 +104,7 @@ export class MontoExonerarComponent implements OnInit {
       if (this.montoExonerarForm.valid) {
         const requestData = {
           montoColones: this.montoExonerarForm.value.montoExonerar,
-          descripcion: 'TARIFA EXONERAR'
+          descripcion: 'TARIFA MONTO MAXIMO A EXONERAR'
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({

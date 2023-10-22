@@ -95,7 +95,7 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
       if (this.tarifaParquesObrasOrnatoForm.valid) {
         const requestData = {
           montoColones: this.tarifaParquesObrasOrnatoForm.value.tarifaParquesObrasOrnato,
-          descripcion: 'TARIFA MANTENIMIENTO'
+          descripcion: 'TARIFA MANTENIMIENTO DE PARQUES Y OBRAS DE ORNATO'
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({

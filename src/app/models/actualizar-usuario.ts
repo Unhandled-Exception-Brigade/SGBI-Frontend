@@ -4,5 +4,5 @@ export class actualizarUsuario {
   public cedula: string;
   public correo: string;
   public rol: string;
-  public estaInactivo: boolean;
+  public activo: boolean;
 }

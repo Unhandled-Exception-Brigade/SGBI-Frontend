@@ -116,7 +116,7 @@ export class TarifaAseoViasSitiosPublicosComponent {
       if (this.tarifaAseoViasPublicosForm.valid) {
         const requestData = {
           montoColones: this.tarifaAseoViasPublicosForm.value.montoTarifaAseoViasPublicos,
-          descripcion: 'TARIFA SERVICIOS ASEO'
+          descripcion: 'TARIFA SERVICIOS ASEO DE VIAS Y SITIOS PUBLICOS'
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({

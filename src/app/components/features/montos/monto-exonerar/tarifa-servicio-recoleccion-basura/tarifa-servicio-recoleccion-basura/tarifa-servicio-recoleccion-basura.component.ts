@@ -116,7 +116,7 @@ export class TarifaServicioRecoleccionBasuraComponent {
       if (this.tarifaRecoleccionBasuraForm.valid) {
         const requestData = {
           montoColones: this.tarifaRecoleccionBasuraForm.value.tarifaRecoleccionBasura,
-          descripcion: 'TARIFA SERVICIOS BASURA'
+          descripcion: 'TARIFA SERVICIOS DE RECOLECCION DE BASURA'
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({
