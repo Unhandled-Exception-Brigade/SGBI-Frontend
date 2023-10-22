@@ -55,7 +55,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreDelToken;
-      console.log(this.nombre);
     });
 
     this.usuarioService.getRolUsuario().subscribe((val) => {

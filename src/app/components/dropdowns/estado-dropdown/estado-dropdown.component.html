@@ -1,11 +1,21 @@
 <div class="dropdown">
-  <button class="boton btn dropdown-toggle botonEstado" type="button" id="estadoDropdown" data-toggle="dropdown"
-    aria-haspopup="true" aria-expanded="false">
-    {{ estadoSeleccionado ? 'inactivo' : 'activo' }}
+  <button
+    class="boton btn dropdown-toggle botonEstado"
+    type="button"
+    id="estadoDropdown"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    {{ estadoSeleccionado ? "Activo" : "Inactivo" }}
   </button>
 
   <div class="cursor dropdown-menu" aria-labelledby="estadoDropdown">
-    <a class="cursor dropdown-item" (click)="estado_establecido(false)">activo</a>
-    <a class="cursor dropdown-item" (click)="estado_establecido(true)">inactivo</a>
+    <a class="cursor dropdown-item" (click)="estado_establecido(false)"
+      >Inactivo</a
+    >
+    <a class="cursor dropdown-item" (click)="estado_establecido(true)"
+      >Activo</a
+    >
   </div>
 </div>

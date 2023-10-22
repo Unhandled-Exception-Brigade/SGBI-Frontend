@@ -4,6 +4,7 @@ import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-modal-informacion-usuario',
@@ -37,7 +38,8 @@ export class ModalInformacionUsuarioComponent {
     public activeModal: NgbActiveModal,
     private editarUsuarioService: EditarUsuarioService,
     private auth: AuthService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private toast: NgToastService
   ) {}
 
   ngOnInit() {
@@ -46,10 +48,10 @@ export class ModalInformacionUsuarioComponent {
     this.nombreEditado = this.usuario.nombre;
     this.primerApellidoEditado = this.usuario.primerApellido;
     this.segundoApellidoEditado = this.usuario.segundoApellido;
-    this.correoEditado = this.usuario.correo;
+    this.correoEditado = this.usuario.email;
 
     this.selectedRole = this.usuario.rol; // Inicializa el valor de selectedRole con el rol del usuario.
-    this.estadoSeleccionado = this.usuario.estaInactivo;
+    this.estadoSeleccionado = this.usuario.activo;
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
@@ -137,7 +139,7 @@ export class ModalInformacionUsuarioComponent {
   }
 
   aplicarCambiosCorreo() {
-    this.usuarioEditado.correo = this.correoEditado;
+    this.usuarioEditado.email = this.correoEditado;
   }
 
   guardarCambios() {
@@ -155,21 +157,30 @@ export class ModalInformacionUsuarioComponent {
       this.usuario.nombre = this.nombreEditado;
       this.usuario.primerApellido = this.primerApellidoEditado;
       this.usuario.segundoApellido = this.segundoApellidoEditado;
-      this.usuario.correo = this.correoEditado;
+      this.usuario.email = this.correoEditado;
       this.usuario.rol = this.selectedRole;
-      this.usuario.estaInactivo = this.estadoSeleccionado;
+      this.usuario.activo = this.estadoSeleccionado;
 
       // Cierra el modal
       this.activeModal.close();
     }
 
-    this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe(
-      (res) => {
+    this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe({
+      next: (res) => {
+        this.toast.success({
+          detail: 'CORRECTO',
+          summary: res.message,
+          duration: 4000,
+        });
         this.closeModal();
       },
-      (error) => {
-        console.error('Error al actualizar usuario', error);
-      }
-    );
+      error: (err) => {
+        this.toast.error({
+          detail: 'ERROR',
+          summary: err.error,
+          duration: 4000,
+        });
+      },
+    });
   }
 }

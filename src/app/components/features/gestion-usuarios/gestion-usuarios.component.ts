@@ -40,7 +40,7 @@ export class GestionUsuariosComponent {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-    
+
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreCompletoDelToken;
@@ -117,11 +117,14 @@ export class GestionUsuariosComponent {
     modalRef.componentInstance.selectedRole = this.selectedRole; // Inicializa el rol en el modal
   }
 
-  verInformacionUsuario(usuario: any){
+  verInformacionUsuario(usuario: any) {
     this.usuarioSeleccionado = usuario;
-    const modalRef = this.modalService.open(ModalVerInformacionUsuarioComponent, {
-      size: 'lg',
-    });
+    const modalRef = this.modalService.open(
+      ModalVerInformacionUsuarioComponent,
+      {
+        size: 'lg',
+      }
+    );
     modalRef.componentInstance.usuario = this.usuarioSeleccionado;
   }
 }
