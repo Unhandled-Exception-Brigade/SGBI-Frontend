@@ -5,64 +5,32 @@
   <div class="container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="home-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#home"
-          type="button"
-          role="tab"
-          aria-controls="home"
-          aria-selected="true"
-        >
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true">
           Agregar tarifa de servicios de vías y sitios públicos.
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="profile-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#profile"
-          type="button"
-          role="tab"
-          aria-controls="profile"
-          aria-selected="false"
-        >
+        <button (click)="obtenerTarifas()" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false">
           <i class="fa-solid fa-book"></i>
         </button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div
-        class="tab-pane fade show active"
-        id="home"
-        role="tabpanel"
-        aria-labelledby="home-tab"
-      >
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <form [formGroup]="tarifaAseoViasPublicosForm">
           <div class="card flex flex-wrap gap-3 p-fluid mt-2 bg-card pb-3 pt-2">
             <div class="d-flex flex-column mt-3">
-              <label class="block font-bold mb-2 pb-2" for="currency-us"
-                >Ingrese la tarifa de servicios de vías y sitios
-                públicos.</label
-              >
-              <p-inputNumber
-                formControlName="montoTarifaAseoViasPublicos"
-                placeholder="Monto a exonerar"
-                inputId="currency-us"
-                mode="currency"
-                currency="CRC"
-                [minFractionDigits]="2"
-              >
+              <label class="block font-bold mb-2 pb-2" for="currency-us">Ingrese la tarifa de servicios de vías y sitios
+                públicos.</label>
+              <p-inputNumber formControlName="montoTarifaAseoViasPublicos" placeholder="Monto a exonerar"
+                inputId="currency-us" mode="currency" currency="CRC" [minFractionDigits]="2">
               </p-inputNumber>
             </div>
           </div>
 
-          <span
-            style="color: red"
-            class="mt-2"
-            *ngIf="
+          <span style="color: red" class="mt-2" *ngIf="
               this.tarifaAseoViasPublicosForm.get(
                 'montoTarifaAseoViasPublicos'
               ) &&
@@ -70,44 +38,28 @@
                 .invalid &&
               this.tarifaAseoViasPublicosForm.get('montoTarifaAseoViasPublicos')
                 .touched
-            "
-          >
+            ">
             {{ obtenerErrorCampoMonto() }}
           </span>
 
           <div class="d-flex flex-column align-items-end">
-            <button
-              [disabled]="tarifaAseoViasPublicosForm.invalid"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              data-target="exampleModal"
-              class="btn btn-success mt-3"
-            >
+            <button [disabled]="tarifaAseoViasPublicosForm.invalid" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" data-target="exampleModal" class="btn btn-success mt-3">
               <i class="fa-solid fa-check"></i>
             </button>
           </div>
 
           <!-- Modal -->
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
                     ¿Desea guardar los cambios?
                   </h1>
-                  <button
-                    type="button"
-                    #closebutton
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
+                  <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   La tarifa de servicios de aseo de vias y sitios públicos se
@@ -115,19 +67,10 @@
                   que requieran de este valor.
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-danger borde-boton"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-danger borde-boton" data-bs-dismiss="modal">
                     <i class="fa-solid fa-x"></i> Cancelar
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary color-boton borde-boton"
-                    (click)="enviar()"
-                    #saveButton
-                  >
+                  <button type="submit" class="btn btn-primary color-boton borde-boton" (click)="enviar()" #saveButton>
                     <i class="fa-solid fa-check"></i> Guardar
                   </button>
                 </div>
@@ -136,39 +79,22 @@
           </div>
         </form>
       </div>
-      <div
-        class="tab-pane fade"
-        id="profile"
-        role="tabpanel"
-        aria-labelledby="profile-tab"
-      >
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="table-container">
           <div class="table-responsive">
             <table class="table mt-4">
               <thead>
                 <tr>
-                  <th
-                    scope="col"
-                    class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
-                  >
+                  <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Usuario modificación
                   </th>
-                  <th
-                    scope="col"
-                    class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
-                  >
+                  <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Fecha
                   </th>
-                  <th
-                    scope="col"
-                    class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
-                  >
+                  <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Descripcion
                   </th>
-                  <th
-                    scope="col"
-                    class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo"
-                  >
+                  <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Monto
                   </th>
                 </tr>

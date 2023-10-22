@@ -43,6 +43,17 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
+  obtenerTarifas(){
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarMantenimiento().subscribe((res) => {
+        this.montoMantenimiento = res;
+        this.montoMantenimiento.reverse();
+      });
+
+    }
+  }
+
   ngOnInit() {
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
@@ -50,13 +61,7 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
-      this.tarifa.listarMantenimiento().subscribe((res) => {
-        this.montoMantenimiento = res;
-      });
-
-    }
+    this.obtenerTarifas();
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {

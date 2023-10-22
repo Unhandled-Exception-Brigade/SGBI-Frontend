@@ -51,6 +51,7 @@ export class MontoExonerarComponent implements OnInit {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
       this.tarifa.listarMontosExonerar().subscribe((res) => {
         this.montoMaximoExonerarLista = res;
+        this.montoMaximoExonerarLista.reverse();
       });
     }
   }
@@ -64,7 +65,6 @@ export class MontoExonerarComponent implements OnInit {
     });
 
     this.obtenerTarifas();
-    this.montoMaximoExonerarLista.reverse();
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {

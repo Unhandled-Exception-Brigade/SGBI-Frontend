@@ -67,8 +67,6 @@ export class GestionUsuariosComponent {
     }
   }
 
-
-
   /*
   filtroBusqueda: string = ''; // Término de búsqueda
   // Método para realizar la búsqueda

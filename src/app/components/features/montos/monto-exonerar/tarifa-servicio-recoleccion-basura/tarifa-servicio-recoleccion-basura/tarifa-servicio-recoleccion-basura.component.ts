@@ -43,6 +43,17 @@ export class TarifaServicioRecoleccionBasuraComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
+  obtenerTarifas(){
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarServiciosBasura().subscribe((res) => {
+        this.tarifaRecoleccionBasuraList = res;
+        this.tarifaRecoleccionBasuraList.reverse();
+      });
+
+    }
+  }
+
   ngOnInit() {
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
@@ -50,13 +61,7 @@ export class TarifaServicioRecoleccionBasuraComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
-      this.tarifa.listarServiciosBasura().subscribe((res) => {
-        this.tarifaRecoleccionBasuraList = res;
-      });
-
-    }
+    this.obtenerTarifas();
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {

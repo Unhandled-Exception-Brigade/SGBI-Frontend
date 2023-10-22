@@ -43,6 +43,17 @@ export class TarifaAseoViasSitiosPublicosComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
+  obtenerTarifas(){
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+
+      this.tarifa.listarServiciosAseo().subscribe((res) => {
+        this.montoTarifaAseoVias = res;
+        this.montoTarifaAseoVias.reverse();
+      });
+
+    }
+  }
+
   ngOnInit() {
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
@@ -50,13 +61,7 @@ export class TarifaAseoViasSitiosPublicosComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
-      this.tarifa.listarServiciosAseo().subscribe((res) => {
-        this.montoTarifaAseoVias = res;
-      });
-
-    }
+    this.obtenerTarifas();
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
