@@ -44,6 +44,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
 import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
+import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
 
 
 
@@ -68,7 +69,8 @@ import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-info
     TarifaMantenimientoParquesObrasOrnatoComponent,
     TarifaServicioRecoleccionBasuraComponent,
     ModalInformacionUsuarioComponent,
-    ModalVerInformacionUsuarioComponent
+    ModalVerInformacionUsuarioComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

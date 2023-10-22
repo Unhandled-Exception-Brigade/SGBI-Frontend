@@ -19,6 +19,8 @@ export class GestionUsuariosComponent {
   public nombre: string = '';
   public cedula: string = '';
   public rol: string = '';
+  public filtro: string = '';
+
 
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
@@ -70,6 +72,9 @@ export class GestionUsuariosComponent {
     }
   }
 
+
+
+  /*
   filtroBusqueda: string = ''; // Término de búsqueda
   // Método para realizar la búsqueda
   realizarBusqueda() {
@@ -101,6 +106,7 @@ export class GestionUsuariosComponent {
       });
     }
   }
+  */
 
   cerrarSesion() {
     this.auth.cerrarSesion();
