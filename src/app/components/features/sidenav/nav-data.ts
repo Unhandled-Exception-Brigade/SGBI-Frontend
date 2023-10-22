@@ -55,4 +55,11 @@ export const navbarData = [
     permiso: ['Administrador'],
     subEnlaces: [],
   },
+  {
+    routeLink: 'bitacora',
+    icon: 'fas fa-book-open',
+    label: 'Bitácora',
+    permiso: ['Administrador'],
+    subEnlaces: []
+  }
 ];

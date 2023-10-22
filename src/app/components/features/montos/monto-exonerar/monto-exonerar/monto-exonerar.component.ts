@@ -49,11 +49,9 @@ export class MontoExonerarComponent implements OnInit {
 
   obtenerTarifas(){
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
       this.tarifa.listarMontosExonerar().subscribe((res) => {
         this.montoMaximoExonerarLista = res;
       });
-
     }
   }
 
@@ -62,6 +60,7 @@ export class MontoExonerarComponent implements OnInit {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
+      console.log('Rol en mantenimiento '+this.rol);
     });
 
     this.obtenerTarifas();

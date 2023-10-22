@@ -21,7 +21,6 @@ export class GestionUsuariosComponent {
   public rol: string = '';
   public filtro: string = '';
 
-
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
   selectedRole: any;
@@ -41,12 +40,7 @@ export class GestionUsuariosComponent {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-
-    this.api.obtenerUsuarios().subscribe((res) => {
-      this.usuarios = res;
-      this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
-    });
-
+    
     this.usuarioService.getNombreUsuario().subscribe((val) => {
       const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
       this.nombre = val || nombreCompletoDelToken;
@@ -55,6 +49,7 @@ export class GestionUsuariosComponent {
     if (this.rol == 'Administrador') {
       this.api.obtenerUsuarios().subscribe((res) => {
         this.usuarios = res;
+        this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
       });
 
       this.usuarioService.getCedulaUsuario().subscribe((val) => {

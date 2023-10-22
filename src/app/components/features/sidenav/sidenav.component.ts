@@ -8,13 +8,6 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 import { ApiService } from 'src/app/services/api.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { TokenApiModel } from '../../../models/token-api.model';
-
-interface SideNavToggle {
-  screenWidth: number;
-  collapsed: boolean;
-}
 
 @Component({
   selector: 'app-sidenav',

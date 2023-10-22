@@ -14,6 +14,7 @@ import { MontoExonerarComponent } from './components/features/montos/monto-exone
 import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
 import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
 import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
+import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,11 @@ const routes: Routes = [
     path: 'tarifa-servicio-recoleccion-basura',
     canActivate: [authGuard],
     component: TarifaServicioRecoleccionBasuraComponent
+  },
+  {
+    path: 'bitacora',
+    canActivate: [authGuard],
+    component: BitacoraComponent
   },
   {
     path: '**',

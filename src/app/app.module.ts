@@ -45,6 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
 import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
 import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
+import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
 
 
 
@@ -70,7 +71,8 @@ import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
     TarifaServicioRecoleccionBasuraComponent,
     ModalInformacionUsuarioComponent,
     ModalVerInformacionUsuarioComponent,
-    SearchPipe
+    SearchPipe,
+    BitacoraComponent
   ],
   imports: [
     BrowserModule,
