@@ -173,7 +173,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           error: (err) => {
             this.toast.error({
               detail: 'ERROR',
-              summary: err.error.message,
+              summary: err.message,
               duration: 4000,
             });
           },
