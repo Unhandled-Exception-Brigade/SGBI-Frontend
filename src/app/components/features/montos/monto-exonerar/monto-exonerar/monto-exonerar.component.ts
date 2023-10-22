@@ -14,7 +14,6 @@ import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-se
 })
 export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
-  value1: number = 0;
   public montoMaximoExonerarLista: any = [];
 
   dateTime = new Date();
@@ -48,13 +47,7 @@ export class MontoExonerarComponent implements OnInit {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  ngOnInit() {
-
-    this.usuarioService.getRolUsuario().subscribe((val) => {
-      const rolDelToken = this.auth.obtenerRolDelToken();
-      this.rol = val || rolDelToken;
-    });
-
+  obtenerTarifas(){
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
 
       this.tarifa.listarMontosExonerar().subscribe((res) => {
@@ -62,6 +55,17 @@ export class MontoExonerarComponent implements OnInit {
       });
 
     }
+  }
+
+  ngOnInit() {
+
+    this.usuarioService.getRolUsuario().subscribe((val) => {
+      const rolDelToken = this.auth.obtenerRolDelToken();
+      this.rol = val || rolDelToken;
+    });
+
+    this.obtenerTarifas();
+    this.montoMaximoExonerarLista.reverse();
 
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
@@ -95,6 +99,7 @@ export class MontoExonerarComponent implements OnInit {
   }
 
   enviar() {
+    
     if (this.saveButton) {
       this.markFormGroupTouched(this.montoExonerarForm);
       if (this.montoExonerarForm.valid) {

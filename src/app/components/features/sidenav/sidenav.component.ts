@@ -21,7 +21,7 @@ interface SideNavToggle {
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
 })
-export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   mostrarSideNav: boolean = true;
   suscripcion: Subscription;
   subMenu: boolean = false;
@@ -69,10 +69,6 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
-  }
-
-  ngAfterViewInit() {
-    this.mostrarSideNav = true;
   }
 
   cerrarSesion() {

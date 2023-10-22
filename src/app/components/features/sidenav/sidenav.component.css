@@ -31,6 +31,7 @@
   position: relative;
   top: 3px;
 }
+
 .bi::before,
 [class^="bi-"]::before,
 [class*=" bi-"]::before {
