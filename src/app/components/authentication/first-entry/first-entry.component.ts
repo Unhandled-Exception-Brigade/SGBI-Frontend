@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ConfirmarContrasena } from 'src/app/helpers/validators/confirmarContrasena';
+import { noEspaciosEnBlanco } from 'src/app/helpers/validators/sinEspaciosEnBlanco';
 import { ResetPassword } from 'src/app/models/reset-password.model';
 import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
+import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 
 @Component({
   selector: 'app-first-entry',
   templateUrl: './first-entry.component.html',
   styleUrls: ['./first-entry.component.css'],
 })
-export class FirstEntryComponent {
+export class FirstEntryComponent implements OnDestroy {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -26,7 +28,8 @@ export class FirstEntryComponent {
     private activatedRoute: ActivatedRoute,
     private cambiarContrasenaService: CambiarContrasenaService,
     private toast: NgToastService,
-    private router: Router
+    private router: Router,
+    private sideNav: SidenavService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class FirstEntryComponent {
             Validators.pattern(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
             ),
+            noEspaciosEnBlanco()
           ],
         ],
         confirmarContrasena: ['', [Validators.required]],
@@ -67,6 +71,11 @@ export class FirstEntryComponent {
         this.router.navigate(['/tramites']);
       }
     });
+    this.sideNav.ocultar();
+  }
+
+  ngOnDestroy(){
+    this.sideNav.mostar();
   }
 
   reset() {
@@ -134,6 +143,9 @@ export class FirstEntryComponent {
     }
     if (campo?.hasError('pattern')) {
       return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
+    }
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return 'noEspaciosEnBlanco';
     }
 
     return '';

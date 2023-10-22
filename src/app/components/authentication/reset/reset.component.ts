@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResetPassword } from 'src/app/models/reset-password.model';
 import { ConfirmarContrasena } from 'src/app/helpers/validators/confirmarContrasena';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CambiarContrasenaService } from 'src/app/services/cambiar-contrasena.service';
 import { NgToastService } from 'ng-angular-popup';
+import { noEspaciosEnBlanco } from 'src/app/helpers/validators/sinEspaciosEnBlanco';
+import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 
 @Component({
   selector: 'app-reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.css'],
 })
-export class ResetComponent {
+export class ResetComponent implements OnDestroy{
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
@@ -27,7 +29,8 @@ export class ResetComponent {
     private activatedRoute: ActivatedRoute,
     private cambiarContrasenaService: CambiarContrasenaService,
     private toast: NgToastService,
-    private router: Router
+    private router: Router,
+    private sidenav: SidenavService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +45,7 @@ export class ResetComponent {
             Validators.pattern(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
             ),
+            noEspaciosEnBlanco()
           ],
         ],
         confirmarContrasena: [
@@ -53,6 +57,7 @@ export class ResetComponent {
             Validators.pattern(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$/
             ),
+            noEspaciosEnBlanco()
           ],
         ],
       },
@@ -78,6 +83,11 @@ export class ResetComponent {
         this.router.navigate(['/tramites']);
       }
     });
+    this.sidenav.ocultar();
+  }
+
+  ngOnDestroy(): void {
+    this.sidenav.mostar();
   }
 
   desactivarBoton() {
@@ -153,6 +163,10 @@ export class ResetComponent {
       return 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial';
     }
 
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return 'noEspaciosEnBlanco';
+    }
+
     return '';
   }
   obtenerErrorCampoConfirmarContrasena() {
@@ -171,6 +185,9 @@ export class ResetComponent {
     }
     if (campo?.hasError('ConfirmarContrasena')) {
       return 'Las contraseñas no coinciden';
+    }
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return 'noEspaciosEnBlanco';
     }
 
     return '';
