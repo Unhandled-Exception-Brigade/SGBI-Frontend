@@ -16,7 +16,12 @@ export class TarifaServicioRecoleccionBasuraComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  public currentPage: number = 1; // Página actual
+  public usersPerPage: number = 5; // Usuarios por página
+  public filtro: string = '';
   public tarifaRecoleccionBasuraList: any = [];
+  public tarifaRecoleccionBasuraFiltrados: any;
+
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -48,6 +53,16 @@ export class TarifaServicioRecoleccionBasuraComponent {
 
       this.tarifa.listarServiciosBasura().subscribe((res) => {
         this.tarifaRecoleccionBasuraList = res;
+
+        for (const element of this.tarifaRecoleccionBasuraList) {
+          element.fechaCreacion = this.formatDate(
+            element.fechaCreacion
+          );
+          element.montoColones = this.formatNumber(
+            element.montoColones
+          );
+        }
+
         this.tarifaRecoleccionBasuraList.reverse();
       });
 
@@ -167,4 +182,41 @@ export class TarifaServicioRecoleccionBasuraComponent {
   }
 
   errorBorderClass: string = 'error-border';
+
+  //Paginacion
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  getPaginated() {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    return this.tarifaRecoleccionBasuraList.slice(startIndex, endIndex);
+  }
+
+  getPaginationArray() {
+    const totalUsers = this.tarifaRecoleccionBasuraList.length; // Total de usuarios
+    const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
+    return new Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  //Busqueda
+  realizarBusqueda() {
+    if (this.filtro) {
+      this.tarifaRecoleccionBasuraFiltrados = this.tarifaRecoleccionBasuraList.filter((usuario) =>
+        this.matchesSearch(usuario)
+      );
+    } else {
+      this.tarifaRecoleccionBasuraFiltrados = null; // Si no hay filtro, borra los resultados
+    }
+  }
+
+  matchesSearch(elemento: any) {
+    const lowerCaseFiltro = this.filtro.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
+    return palabrasClave.every((palabra) =>
+      // Verificar si alguna parte del usuario coincide con la palabra clave
+      JSON.stringify(elemento).toLowerCase().includes(palabra)
+    );
+  }
 }

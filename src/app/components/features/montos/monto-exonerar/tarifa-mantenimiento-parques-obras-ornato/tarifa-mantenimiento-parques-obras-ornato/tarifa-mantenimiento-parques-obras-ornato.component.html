@@ -24,7 +24,8 @@
             <div class="d-flex flex-column mt-3">
               <label class="block font-bold mb-2 pb-2" for="currency-us">Ingrese la la tarifa mantenimiento de parques y
                 obras de
-                ornato.</label>
+                ornato.
+              </label>
               <p-inputNumber formControlName="tarifaParquesObrasOrnato" placeholder="Monto a exonerar"
                 inputId="currency-us" mode="currency" currency="CRC" [minFractionDigits]="2">
               </p-inputNumber>
@@ -81,6 +82,18 @@
         </form>
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+        <div class="barra-busqueda mb-3">
+          <label for="busqueda" class="form-label"> </label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Búsqueda" id="busqueda" [(ngModel)]="filtro"
+              (input)="realizarBusqueda()" />
+            <span class="input-group-text">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+
         <div class="table-container">
           <div class="table-responsive">
             <table class="table mt-4">
@@ -101,15 +114,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let montos of montoMantenimiento; let i = index">
+                <tr *ngFor="let montoMantenimiento of (montoMantenimientoFiltrados || getPaginated()); let i = index">
                   <td scope="row">
-                    {{ montos.usuarioModificacion }}
+                    {{ montoMantenimiento.usuarioModificacion }}
                   </td>
                   <td scope="row">
-                    {{ formatDate(montos.fechaModificacion) }}
+                    {{ montoMantenimiento.fechaCreacion }}
                   </td>
-                  <td>Tarifa de aseo de vías y mantenimiento de parques</td>
-                  <td>₡ {{ formatNumber(montos.montoColones) }}</td>
+                  
+                  <td>{{montoMantenimiento.descripcion}}</td>
+
+                  <td>₡ {{ montoMantenimiento.montoColones }}</td>
                 </tr>
               </tbody>
             </table>

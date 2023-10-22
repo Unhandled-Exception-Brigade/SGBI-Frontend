@@ -16,7 +16,13 @@ export class TarifaAseoViasSitiosPublicosComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  formModal: any
+  public currentPage: number = 1; // Página actual
+  public usersPerPage: number = 5; // Usuarios por página
+  public filtro: string = '';
   public montoTarifaAseoVias: any = [];
+  public montoTarifaAseoViasFiltrados: any;
+
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -48,6 +54,16 @@ export class TarifaAseoViasSitiosPublicosComponent {
 
       this.tarifa.listarServiciosAseo().subscribe((res) => {
         this.montoTarifaAseoVias = res;
+
+        for (const element of this.montoTarifaAseoVias) {
+          element.fechaCreacion = this.formatDate(
+            element.fechaCreacion
+          );
+          element.montoColones = this.formatNumber(
+            element.montoColones
+          );
+        }
+        
         this.montoTarifaAseoVias.reverse();
       });
 
@@ -168,4 +184,41 @@ export class TarifaAseoViasSitiosPublicosComponent {
   }
 
   errorBorderClass: string = 'error-border';
+
+  //Paginacion
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  getPaginated() {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    return this.montoTarifaAseoVias.slice(startIndex, endIndex);
+  }
+
+  getPaginationArray() {
+    const totalUsers = this.montoTarifaAseoVias.length; // Total de usuarios
+    const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
+    return new Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  //Busqueda
+  realizarBusqueda() {
+    if (this.filtro) {
+      this.montoTarifaAseoViasFiltrados = this.montoTarifaAseoVias.filter((usuario) =>
+        this.matchesSearch(usuario)
+      );
+    } else {
+      this.montoTarifaAseoViasFiltrados = null; // Si no hay filtro, borra los resultados
+    }
+  }
+
+  matchesSearch(elemento: any) {
+    const lowerCaseFiltro = this.filtro.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
+    return palabrasClave.every((palabra) =>
+      // Verificar si alguna parte del usuario coincide con la palabra clave
+      JSON.stringify(elemento).toLowerCase().includes(palabra)
+    );
+  }
 }

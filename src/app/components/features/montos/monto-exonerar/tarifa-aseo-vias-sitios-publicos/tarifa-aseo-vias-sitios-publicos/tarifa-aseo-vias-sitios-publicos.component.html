@@ -80,6 +80,18 @@
         </form>
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+        <div class="barra-busqueda mb-3">
+          <label for="busqueda" class="form-label"> </label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Búsqueda" id="busqueda" [(ngModel)]="filtro"
+              (input)="realizarBusqueda()" />
+            <span class="input-group-text">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+
         <div class="table-container">
           <div class="table-responsive">
             <table class="table mt-4">
@@ -100,15 +112,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let montos of montoTarifaAseoVias; let i = index">
+                <tr *ngFor="let montoTarifaAseoVias of (montoTarifaAseoViasFiltrados || getPaginated()); let i = index">
                   <td scope="row">
-                    {{ montos.usuarioModificacion }}
+                    {{ montoTarifaAseoVias.usuarioModificacion }}
                   </td>
                   <td scope="row">
-                    {{ formatDate(montos.fechaModificacion) }}
+                    {{ montoTarifaAseoVias.fechaCreacion }}
                   </td>
                   <td>Tarifa de aseo de vías y mantenimiento de parques</td>
-                  <td>₡ {{ formatNumber(montos.montoColones) }}</td>
+                  <td>₡ {{ montoTarifaAseoVias.montoColones }}</td>
                 </tr>
               </tbody>
             </table>

@@ -15,9 +15,14 @@ import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-se
 export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
   public montoMaximoExonerarLista: any = [];
-
+  public date = new Date();
   dateTime = new Date();
   formModal: any
+  public currentPage: number = 1; // Página actual
+  public usersPerPage: number = 5; // Usuarios por página
+  public filtro: string = '';
+  public montoMaximoExonerarFiltrados: any;
+
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -47,10 +52,20 @@ export class MontoExonerarComponent implements OnInit {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  obtenerTarifas(){
+  
+
+  obtenerTarifas() {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
       this.tarifa.listarMontosExonerar().subscribe((res) => {
         this.montoMaximoExonerarLista = res;
+        for (const element of this.montoMaximoExonerarLista) {
+          element.fechaCreacion = this.formatDate(
+            element.fechaCreacion
+          );
+          element.montoColones = this.formatNumber(
+            element.montoColones
+          );
+        }
         this.montoMaximoExonerarLista.reverse();
       });
     }
@@ -61,7 +76,7 @@ export class MontoExonerarComponent implements OnInit {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
-      console.log('Rol en mantenimiento '+this.rol);
+      console.log('Rol en mantenimiento ' + this.rol);
     });
 
     this.obtenerTarifas();
@@ -98,7 +113,7 @@ export class MontoExonerarComponent implements OnInit {
   }
 
   enviar() {
-    
+
     if (this.saveButton) {
       this.markFormGroupTouched(this.montoExonerarForm);
       if (this.montoExonerarForm.valid) {
@@ -129,7 +144,7 @@ export class MontoExonerarComponent implements OnInit {
       }
       this.closebutton.nativeElement.click();
     }
-  } 
+  }
 
   formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -147,11 +162,11 @@ export class MontoExonerarComponent implements OnInit {
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
       minimumFractionDigits: 3,
-      maximumFractionDigits: 3, 
+      maximumFractionDigits: 3,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
-  
+
 
   obtenerErrorCampoMonto() {
     const campo = this.montoExonerarForm.get('montoExonerar');
@@ -170,4 +185,42 @@ export class MontoExonerarComponent implements OnInit {
     return '';
   }
   errorBorderClass: string = 'error-border';
+
+  //Paginacion
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  getPaginated() {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    return this.montoMaximoExonerarLista.slice(startIndex, endIndex);
+  }
+
+  getPaginationArray() {
+    const totalUsers = this.montoMaximoExonerarLista.length; // Total de usuarios
+    const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
+    return new Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  //Busqueda
+  realizarBusqueda() {
+    if (this.filtro) {
+      this.montoMaximoExonerarFiltrados = this.montoMaximoExonerarLista.filter((usuario) =>
+        this.matchesSearch(usuario)
+      );
+    } else {
+      this.montoMaximoExonerarFiltrados = null; // Si no hay filtro, borra los resultados
+    }
+  }
+
+  matchesSearch(elemento: any) {
+    const lowerCaseFiltro = this.filtro.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
+    return palabrasClave.every((palabra) =>
+      // Verificar si alguna parte del usuario coincide con la palabra clave
+      JSON.stringify(elemento).toLowerCase().includes(palabra)
+    );
+  }
 }
+

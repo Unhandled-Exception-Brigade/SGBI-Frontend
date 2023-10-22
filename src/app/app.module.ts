@@ -47,8 +47,6 @@ import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-info
 import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
 import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +95,7 @@ import { BitacoraComponent } from './components/features/bitacora/bitacora.compo
     ConfirmDialogModule,
     DragDropModule,
     CommonModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     {

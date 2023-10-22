@@ -28,22 +28,22 @@ export const navbarData = [
     subEnlaces: [
       {
         link: 'monto-exonerar',
-        etiqueta: 'Monto a exonerar',
+        etiqueta: 'Monto a exonerar.',
         icon: 'fas fa-dollar-sign fa-2xs',
       },
       {
         link: 'tarifa-servicios-aseo-vias-y-sitios-publicos',
-        etiqueta: 'Aseos de vias y sitios publicos',
+        etiqueta: 'Aseos de vias y sitios publicos.',
         icon: 'fas fa-road fa-2xs',
       },
       {
         link: 'tarifa-mantenimiento-parques-obras-ornato',
-        etiqueta: 'Tarifa parques y obras ornato',
+        etiqueta: 'Tarifa parques y obras ornato.',
         icon: 'fas fa-tree fa-2xs',
       },
       {
         link: 'tarifa-servicio-recoleccion-basura',
-        etiqueta: 'Tarifa de recolección de basura',
+        etiqueta: 'Tarifa de recolección de basura.',
         icon: 'fas fa-trash fa-2xs',
       },
     ],

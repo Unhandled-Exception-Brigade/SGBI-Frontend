@@ -16,7 +16,13 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
+  formModal: any
+  public currentPage: number = 1; // Página actual
+  public usersPerPage: number = 5; // Usuarios por página
+  public filtro: string = '';
   public montoMantenimiento: any = [];
+  public montoMantenimientoFiltrados: any;
+
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
@@ -48,6 +54,16 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
 
       this.tarifa.listarMantenimiento().subscribe((res) => {
         this.montoMantenimiento = res;
+
+        for (const element of this.montoMantenimiento) {
+          element.fechaCreacion = this.formatDate(
+            element.fechaCreacion
+          );
+          element.montoColones = this.formatNumber(
+            element.montoColones
+          );
+        }
+
         this.montoMantenimiento.reverse();
       });
 
@@ -167,4 +183,41 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
   }
 
   errorBorderClass: string = 'error-border';
+
+  //Paginacion
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  getPaginated() {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    return this.montoMantenimiento.slice(startIndex, endIndex);
+  }
+
+  getPaginationArray() {
+    const totalUsers = this.montoMantenimiento.length; // Total de usuarios
+    const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
+    return new Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  //Busqueda
+  realizarBusqueda() {
+    if (this.filtro) {
+      this.montoMantenimientoFiltrados = this.montoMantenimiento.filter((usuario) =>
+        this.matchesSearch(usuario)
+      );
+    } else {
+      this.montoMantenimientoFiltrados = null; // Si no hay filtro, borra los resultados
+    }
+  }
+
+  matchesSearch(elemento: any) {
+    const lowerCaseFiltro = this.filtro.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
+    return palabrasClave.every((palabra) =>
+      // Verificar si alguna parte del usuario coincide con la palabra clave
+      JSON.stringify(elemento).toLowerCase().includes(palabra)
+    );
+  }
 }
