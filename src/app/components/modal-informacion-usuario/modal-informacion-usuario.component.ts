@@ -158,7 +158,9 @@ export class ModalInformacionUsuarioComponent {
       this.usuario.primerApellido = this.primerApellidoEditado;
       this.usuario.segundoApellido = this.segundoApellidoEditado;
       this.usuario.email = this.correoEditado;
-      this.usuario.rol = this.selectedRole;
+      this.usuario.rol = Array.isArray(this.selectedRole)
+        ? this.selectedRole
+        : [this.selectedRole];
       this.usuario.activo = this.estadoSeleccionado;
 
       // Cierra el modal

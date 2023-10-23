@@ -1,23 +1,34 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 
 @Component({
   selector: 'app-monto-exonerar',
   templateUrl: './monto-exonerar.component.html',
-  styleUrls: ['./monto-exonerar.component.css']
+  styleUrls: ['./monto-exonerar.component.css'],
 })
 export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
   public montoMaximoExonerarLista: any = [];
   public date = new Date();
   dateTime = new Date();
-  formModal: any
+  formModal: any;
   public currentPage: number = 1; // Página actual
   public usersPerPage: number = 5; // Usuarios por página
   public filtro: string = '';
@@ -38,7 +49,7 @@ export class MontoExonerarComponent implements OnInit {
   });
 
   getMontoExonerar() {
-    return this.montoExonerarForm.get('montoExonerar')
+    return this.montoExonerarForm.get('montoExonerar');
   }
 
   constructor(
@@ -52,19 +63,13 @@ export class MontoExonerarComponent implements OnInit {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  
-
   obtenerTarifas() {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
       this.tarifa.listarMontosExonerar().subscribe((res) => {
         this.montoMaximoExonerarLista = res;
         for (const element of this.montoMaximoExonerarLista) {
-          element.fechaCreacion = this.formatDate(
-            element.fechaCreacion
-          );
-          element.montoColones = this.formatNumber(
-            element.montoColones
-          );
+          element.fechaCreacion = this.formatDate(element.fechaCreacion);
+          element.montoColones = this.formatNumber(element.montoColones);
         }
         this.montoMaximoExonerarLista.reverse();
       });
@@ -72,11 +77,9 @@ export class MontoExonerarComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
-      console.log('Rol en mantenimiento ' + this.rol);
     });
 
     this.obtenerTarifas();
@@ -90,7 +93,6 @@ export class MontoExonerarComponent implements OnInit {
       });
       this.router.navigate(['/tramites']);
     }
-
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -113,13 +115,12 @@ export class MontoExonerarComponent implements OnInit {
   }
 
   enviar() {
-
     if (this.saveButton) {
       this.markFormGroupTouched(this.montoExonerarForm);
       if (this.montoExonerarForm.valid) {
         const requestData = {
           montoColones: this.montoExonerarForm.value.montoExonerar,
-          descripcion: 'TARIFA MONTO MAXIMO A EXONERAR'
+          descripcion: 'TARIFA MONTO MAXIMO A EXONERAR',
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({
@@ -167,7 +168,6 @@ export class MontoExonerarComponent implements OnInit {
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
 
-
   obtenerErrorCampoMonto() {
     const campo = this.montoExonerarForm.get('montoExonerar');
 
@@ -206,8 +206,8 @@ export class MontoExonerarComponent implements OnInit {
   //Busqueda
   realizarBusqueda() {
     if (this.filtro) {
-      this.montoMaximoExonerarFiltrados = this.montoMaximoExonerarLista.filter((usuario) =>
-        this.matchesSearch(usuario)
+      this.montoMaximoExonerarFiltrados = this.montoMaximoExonerarLista.filter(
+        (usuario) => this.matchesSearch(usuario)
       );
     } else {
       this.montoMaximoExonerarFiltrados = null; // Si no hay filtro, borra los resultados
@@ -223,4 +223,3 @@ export class MontoExonerarComponent implements OnInit {
     );
   }
 }
-
