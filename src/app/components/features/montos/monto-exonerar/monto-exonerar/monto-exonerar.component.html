@@ -32,7 +32,7 @@
           <div class="card flex flex-wrap gap-3 p-fluid pb-3 pt-2 bg-card">
             <div class="d-flex flex-column mt-3">
               <label class="block font-bold mb-2 pb-2" for="currency-us">Ingrese el monto máximo a exonerar.</label>
-              <p-inputNumber formControlName="montoExonerar" placeholder="Monto a exonerar" inputId="currency-us"
+              <p-inputNumber formControlName="montoExonerar" placeholder="Monto máximo a exonerar" inputId="currency-us"
                 mode="currency" currency="CRC" [minFractionDigits]="3">
               </p-inputNumber>
             </div>
@@ -102,13 +102,13 @@
               <thead>
                 <tr>
                   <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">
-                    Usuario modificación
+                    Usuario
                   </th>
                   <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">
                     Fecha
                   </th>
                   <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">
-                    Descripcion
+                    Descripción
                   </th>
                   <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">
                     Monto
@@ -125,7 +125,7 @@
                     {{ montoMaximoExonerarLista.fechaCreacion }}
                   </td>
 
-                  <td>{{ montoMaximoExonerarLista.descripcion }}</td>
+                  <td>{{ montoMaximoExonerarLista.descripcion }}.</td>
 
                   <td>₡ {{ montoMaximoExonerarLista.montoColones }}</td>
                 </tr>

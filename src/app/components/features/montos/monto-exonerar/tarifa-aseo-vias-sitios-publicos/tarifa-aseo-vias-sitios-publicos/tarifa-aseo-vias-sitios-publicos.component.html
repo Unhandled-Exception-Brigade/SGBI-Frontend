@@ -11,8 +11,8 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button (click)="obtenerTarifas()" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-          role="tab" aria-controls="profile" aria-selected="false">
+        <button (click)="obtenerTarifas()" class="nav-link" id="profile-tab" data-bs-toggle="tab"
+          data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
           <i class="fa-solid fa-book"></i>
         </button>
       </li>
@@ -24,8 +24,9 @@
             <div class="d-flex flex-column mt-3">
               <label class="block font-bold mb-2 pb-2" for="currency-us">Ingrese la tarifa de servicios de vías y sitios
                 públicos.</label>
-              <p-inputNumber formControlName="montoTarifaAseoViasPublicos" placeholder="Monto a exonerar"
-                inputId="currency-us" mode="currency" currency="CRC" [minFractionDigits]="2">
+              <p-inputNumber formControlName="montoTarifaAseoViasPublicos"
+                placeholder="Tarifa de de servicio de vías y sistios públicos" inputId="currency-us" mode="currency"
+                currency="CRC" [minFractionDigits]="2">
               </p-inputNumber>
             </div>
           </div>
@@ -98,13 +99,13 @@
               <thead>
                 <tr>
                   <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
-                    Usuario modificación
+                    Usuario
                   </th>
                   <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Fecha
                   </th>
                   <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
-                    Descripcion
+                    Descripción
                   </th>
                   <th scope="col" class="bg-color-tabla-tarifa-aseo-vias-sitios-publicos color-titulo">
                     Monto
@@ -119,7 +120,11 @@
                   <td scope="row">
                     {{ montoTarifaAseoVias.fechaCreacion }}
                   </td>
-                  <td>Tarifa de aseo de vías y mantenimiento de parques</td>
+
+                  <td>
+                    {{ montoTarifaAseoVias.descripcion }}.
+                  </td>
+
                   <td>₡ {{ montoTarifaAseoVias.montoColones }}</td>
                 </tr>
               </tbody>

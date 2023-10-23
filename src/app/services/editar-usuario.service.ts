@@ -12,7 +12,6 @@ export class EditarUsuarioService {
   constructor(private http: HttpClient) {}
 
   actualizarUsuario(actualizarUsuarioObj: actualizarUsuario) {
-    console.log(actualizarUsuarioObj);
 
     return this.http.post<any>(
       `${this.baseURL}cuenta/actualizar-usuario`,
