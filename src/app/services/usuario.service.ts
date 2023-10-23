@@ -22,11 +22,14 @@ export class UsuarioService {
     return this.nombreUsuario$.asObservable();
   }
 
+  public setNombreUsuario(nombre: string) {
+    this.nombreUsuario$.next(nombre);
+  }
+
   public getCedulaUsuario() {
     return this.cedulaUsuario$.asObservable();
   }
-  public setNombreUsuario(nombre: string) {
-    this.cedulaUsuario$.next(nombre);
+  public setCedulaUsuario(cedula: string) {
+    this.cedulaUsuario$.next(cedula);
   }
-
 }

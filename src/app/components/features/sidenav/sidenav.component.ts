@@ -39,10 +39,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.suscripcion.unsubscribe();
-  }
-
   collapsed = false;
 
   navData = navbarData;
@@ -61,6 +57,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
   }
 
   cerrarSesion() {

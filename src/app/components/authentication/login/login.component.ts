@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       /*console.log(this.loginForm.value);*/
       this.auth.ingresar(this.loginForm.value).subscribe({
         next: (res) => {
-          /*console.log(res.message);*/
           this.loginForm.reset();
 
           this.auth.guardarToken(res.accessToken);
@@ -76,8 +75,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           const tokenPayload = this.auth.decodedToken();
 
-          this.usuarioService.setNombreUsuario(tokenPayload.unique_name);
-          this.usuarioService.setRolUsuario(tokenPayload.role);
+          this.usuarioService.setNombreUsuario(
+            tokenPayload[
+              'http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'
+            ]
+          );
+          this.usuarioService.setRolUsuario(
+            tokenPayload[
+              'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+            ]
+          );
 
           this.toast.success({
             detail: 'CORRECTO',
