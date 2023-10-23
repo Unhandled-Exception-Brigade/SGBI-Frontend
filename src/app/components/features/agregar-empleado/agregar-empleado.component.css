@@ -12,6 +12,11 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.color{
+  color: #136137;
+}
+
 a:hover {
   text-decoration: none;
 }
