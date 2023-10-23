@@ -1,5 +1,6 @@
 <ng-container *ngIf="rol === 'Administrador' || rol == 'Jefe'">
 
+  <!--
   <div class="centrado">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -8,6 +9,7 @@
       </ol>
     </nav>
   </div>
+  -->
 
   <h4 class="mt-3 text-center">Monto máximo a exonerar</h4>
 
@@ -125,7 +127,7 @@
                     {{ montoMaximoExonerarLista.fechaCreacion }}
                   </td>
 
-                  <td>{{ montoMaximoExonerarLista.descripcion }}.</td>
+                  <td>MONTO MAXIMO A EXONERAR.</td>
 
                   <td>₡ {{ montoMaximoExonerarLista.montoColones }}</td>
                 </tr>

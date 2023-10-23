@@ -38,6 +38,13 @@ export class BitacoraComponent implements OnInit {
           this.mantenimientos[i].montoColones
         ); 
       }
+
+      for (let i = 0; i < this.mantenimientos.length; i++) {
+        if (this.mantenimientos[i].descripcion === 'TARIFA MONTO MAXIMO A EXONERAR') {
+          this.mantenimientos[i].descripcion = 'MONTO MAXIMO A EXONERAR';
+        }
+      }
+
       this.mantenimientos.reverse();
     });
   }
