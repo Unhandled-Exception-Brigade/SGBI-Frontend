@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { sinTildes } from 'src/app/helpers/validators/sinTildes';
 import { noEspaciosEnBlanco } from 'src/app/helpers/validators/sinEspaciosEnBlanco';
+import { noCaracteresEspeciales } from 'src/app/helpers/validators/noCaracteresEspeciales';
+import { noNumeros } from 'src/app/helpers/validators/noNumeros';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -46,7 +48,9 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
-            noEspaciosEnBlanco()
+            noEspaciosEnBlanco(),
+            noCaracteresEspeciales(),
+            noNumeros()
           ],
         ],
         primerApellido: [
@@ -56,7 +60,9 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
-            noEspaciosEnBlanco()
+            noEspaciosEnBlanco(),
+            noCaracteresEspeciales(),
+            noNumeros()
           ],
         ],
         segundoApellido: [
@@ -66,7 +72,9 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
-            noEspaciosEnBlanco()
+            noEspaciosEnBlanco(),
+            noCaracteresEspeciales(),
+            noNumeros()
           ],
         ],
         cedula: [
@@ -208,6 +216,14 @@ export class AgregarEmpleadoComponent {
       return campo.getError('noEspaciosEnBlanco').mensaje;
     }
 
+    if (campo?.hasError('noCaracteresEspeciales')) {
+      return campo.getError('noCaracteresEspeciales').mensaje;
+    }
+
+    if (campo?.hasError('noNumeros')) {
+      return campo.getError('noNumeros').mensaje;
+    }
+
     return '';
   }
   obtenerErrorCampoPrimerApellido() {
@@ -228,6 +244,14 @@ export class AgregarEmpleadoComponent {
 
     if (campo?.hasError('noEspaciosEnBlanco')) {
       return campo.getError('noEspaciosEnBlanco').mensaje;
+    }
+
+    if (campo?.hasError('noCaracteresEspeciales')) {
+      return campo.getError('noCaracteresEspeciales').mensaje;
+    }
+
+    if (campo?.hasError('noNumeros')) {
+      return campo.getError('noNumeros').mensaje;
     }
 
     return '';
@@ -251,6 +275,14 @@ export class AgregarEmpleadoComponent {
 
     if (campo?.hasError('noEspaciosEnBlanco')) {
       return campo.getError('noEspaciosEnBlanco').mensaje;
+    }
+
+    if (campo?.hasError('noCaracteresEspeciales')) {
+      return campo.getError('noCaracteresEspeciales').mensaje;
+    }
+
+    if (campo?.hasError('noNumeros')) {
+      return campo.getError('noNumeros').mensaje;
     }
 
     return '';
