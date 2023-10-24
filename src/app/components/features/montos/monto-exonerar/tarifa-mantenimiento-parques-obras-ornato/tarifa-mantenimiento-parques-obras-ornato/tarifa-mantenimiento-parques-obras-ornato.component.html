@@ -61,15 +61,19 @@
               <label class="block font-bold mb-2 pb-2" for="currency-us"
                 >Ingrese la tarifa mantenimiento de parques y obras de ornato.
               </label>
-              <p-inputNumber
-                formControlName="tarifaParquesObrasOrnato"
-                placeholder="Tarifa mantenimiento de parques y obras de ornato."
-                inputId="currency-us"
-                mode="currency"
-                currency="CRC"
-                [minFractionDigits]="2"
-              >
-              </p-inputNumber>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">₡</span>
+                <p-inputNumber
+                  formControlName="tarifaParquesObrasOrnato"
+                  placeholder="Tarifa mantenimiento de parques y obras de ornato"
+                  currency="CRC"
+                  [minFractionDigits]="2"
+                  [maxFractionDigits]="2"
+                  useGrouping="true"
+                  [(ngModel)]="montoExonerarValue"
+                >
+                </p-inputNumber>
+              </div>
             </div>
           </div>
 

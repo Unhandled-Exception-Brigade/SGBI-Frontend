@@ -61,15 +61,19 @@
               <label class="block font-bold mb-2 pb-2" for="currency-us"
                 >Ingrese la tarifa de servicio de recolección de basura.</label
               >
-              <p-inputNumber
-                formControlName="tarifaRecoleccionBasura"
-                placeholder="Tarifa de servicio de recolección de basura"
-                inputId="currency-us"
-                mode="currency"
-                currency="CRC"
-                [minFractionDigits]="2"
-              >
-              </p-inputNumber>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">₡</span>
+                <p-inputNumber
+                  formControlName="tarifaRecoleccionBasura"
+                  placeholder="Tarifa de servicio de recolección de basura"
+                  currency="CRC"
+                  [minFractionDigits]="2"
+                  [maxFractionDigits]="2"
+                  useGrouping="true"
+                  [(ngModel)]="montoExonerarValue"
+                >
+                </p-inputNumber>
+              </div>
             </div>
           </div>
 

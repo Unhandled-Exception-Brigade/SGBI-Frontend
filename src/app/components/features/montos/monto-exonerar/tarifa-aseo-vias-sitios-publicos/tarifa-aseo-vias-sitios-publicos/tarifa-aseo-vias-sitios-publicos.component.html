@@ -62,15 +62,19 @@
                 >Ingrese la tarifa de servicios de vías y sitios
                 públicos.</label
               >
-              <p-inputNumber
-                formControlName="montoTarifaAseoViasPublicos"
-                placeholder="Tarifa de de servicio de vías y sistios públicos"
-                inputId="currency-us"
-                mode="currency"
-                currency="CRC"
-                [minFractionDigits]="2"
-              >
-              </p-inputNumber>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">₡</span>
+                <p-inputNumber
+                  formControlName="montoTarifaAseoViasPublicos"
+                  placeholder="Tarifa de servicios de aseo de vías y sitios públicos"
+                  currency="CRC"
+                  [minFractionDigits]="2"
+                  [maxFractionDigits]="2"
+                  useGrouping="true"
+                  [(ngModel)]="montoExonerarValue"
+                >
+                </p-inputNumber>
+              </div>
             </div>
           </div>
 
