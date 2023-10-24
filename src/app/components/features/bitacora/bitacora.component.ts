@@ -51,23 +51,25 @@ export class BitacoraComponent implements OnInit {
           this.mantenimientos[i].descripcion ===
           'TARIFA SERVICIOS DE RECOLECCION DE BASURA'
         ) {
-          this.mantenimientos[i].descripcion = 'Tarifa de servicios de recolección de basura.';
+          this.mantenimientos[i].descripcion =
+            'Tarifa de servicios de recolección de basura.';
         }
 
         if (
           this.mantenimientos[i].descripcion ===
           'TARIFA MANTENIMIENTO DE PARQUES Y OBRAS DE ORNATO'
         ) {
-          this.mantenimientos[i].descripcion = 'Tarifa de servicios de mantenimiento de parques y obras de ornato.';
+          this.mantenimientos[i].descripcion =
+            'Tarifa de servicios de mantenimiento de parques y obras de ornato.';
         }
 
         if (
           this.mantenimientos[i].descripcion ===
           'TARIFA SERVICIOS ASEO DE VIAS Y SITIOS PUBLICOS'
         ) {
-          this.mantenimientos[i].descripcion = 'Tarifa de servicios de aseo de vías y sitios públicos.';
+          this.mantenimientos[i].descripcion =
+            'Tarifa de servicios de aseo de vías y sitios públicos.';
         }
-
       }
 
       this.mantenimientos.reverse();
@@ -131,6 +133,14 @@ export class BitacoraComponent implements OnInit {
     return new Array(totalPages).fill(0).map((_, index) => index + 1);
   }
 
+  // Función para quitar acentos de una cadena
+  quitarAcentos(cadena: string): string {
+    return cadena
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
   //Busqueda
   realizarBusqueda() {
     if (this.filtro) {
@@ -143,11 +153,23 @@ export class BitacoraComponent implements OnInit {
   }
 
   matchesSearch(elemento: any) {
-    const lowerCaseFiltro = this.filtro.toLowerCase();
-    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
-    return palabrasClave.every((palabra) =>
-      // Verificar si alguna parte del usuario coincide con la palabra clave
-      JSON.stringify(elemento).toLowerCase().includes(palabra)
-    );
+    const filtroSinAcentos = this.quitarAcentos(this.filtro); // Quita acentos del filtro
+    const lowerCaseFiltro = filtroSinAcentos.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' ');
+    if (palabrasClave.includes('monto')) {
+      return this.quitarAcentos(elemento.descripcion)
+        .toLowerCase()
+        .includes('monto');
+    } else {
+      return palabrasClave.every(
+        (palabra) =>
+          this.quitarAcentos(JSON.stringify(elemento))
+            .toLowerCase()
+            .includes(palabra) ||
+          this.quitarAcentos(elemento.descripcion)
+            .toLowerCase()
+            .includes(palabra)
+      );
+    }
   }
 }
