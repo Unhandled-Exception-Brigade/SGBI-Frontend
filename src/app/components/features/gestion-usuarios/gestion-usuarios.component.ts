@@ -45,20 +45,14 @@ export class GestionUsuariosComponent {
       this.rol = val || rolDelToken;
     });
 
-    this.api.obtenerUsuarios().subscribe((res) => {
-      this.usuarios = res;
-      this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
-    });
-
-    this.usuarioService.getNombreUsuario().subscribe((val) => {
-      const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
-      this.nombre = val || nombreCompletoDelToken;
-    });
-
     if (this.rol == 'Administrador') {
       this.api.obtenerUsuarios().subscribe((res) => {
         this.usuarios = res;
         this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
+      });
+      this.usuarioService.getNombreUsuario().subscribe((val) => {
+        const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
+        this.nombre = val || nombreCompletoDelToken;
       });
 
       this.usuarioService.getCedulaUsuario().subscribe((val) => {
