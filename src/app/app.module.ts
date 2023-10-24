@@ -31,10 +31,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
-import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
-import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
-import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
+import { MontoExonerarComponent } from './components/features/montos/tarifas/monto-exonerar/monto-exonerar.component';
+import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/tarifas/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
+import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/tarifas/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
+import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/tarifas/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -72,7 +72,7 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
     ModalVerInformacionUsuarioComponent,
     SearchPipe,
     BitacoraComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
   ],
   imports: [
     BrowserModule,

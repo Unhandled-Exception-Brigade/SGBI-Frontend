@@ -1,22 +1,33 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { YearPickerComponent } from 'src/app/components/dropdowns/year-picker/year-picker.component';
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 
 @Component({
   selector: 'app-tarifa-aseo-vias-sitios-publicos',
   templateUrl: './tarifa-aseo-vias-sitios-publicos.component.html',
-  styleUrls: ['./tarifa-aseo-vias-sitios-publicos.component.css']
+  styleUrls: ['./tarifa-aseo-vias-sitios-publicos.component.css'],
 })
 export class TarifaAseoViasSitiosPublicosComponent {
   public rol: string = '';
   value1: number = 0;
   dateTime = new Date();
-  formModal: any
+  formModal: any;
   public currentPage: number = 1; // Página actual
   public usersPerPage: number = 5; // Usuarios por página
   public filtro: string = '';
@@ -35,7 +46,7 @@ export class TarifaAseoViasSitiosPublicosComponent {
   });
 
   getMontoTarifaAseoViasPublicos() {
-    return this.tarifaAseoViasPublicosForm.get('montoTarifaAseoViasPublicos')
+    return this.tarifaAseoViasPublicosForm.get('montoTarifaAseoViasPublicos');
   }
 
   constructor(
@@ -49,37 +60,29 @@ export class TarifaAseoViasSitiosPublicosComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  obtenerTarifas(){
+  obtenerTarifas() {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
       this.tarifa.listarServiciosAseo().subscribe((res) => {
         this.montoTarifaAseoVias = res;
 
         for (const element of this.montoTarifaAseoVias) {
-          element.fechaCreacion = this.formatDate(
-            element.fechaCreacion
-          );
-          element.montoColones = this.formatNumber(
-            element.montoColones
-          );
+          element.fechaCreacion = this.formatDate(element.fechaCreacion);
+          element.montoColones = this.formatNumber(element.montoColones);
         }
-        
+
         this.montoTarifaAseoVias.reverse();
       });
-
     }
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
 
-    this.obtenerTarifas();
-
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+      this.obtenerTarifas();
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -126,7 +129,7 @@ export class TarifaAseoViasSitiosPublicosComponent {
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2, 
+      maximumFractionDigits: 2,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
@@ -136,10 +139,11 @@ export class TarifaAseoViasSitiosPublicosComponent {
       this.markFormGroupTouched(this.tarifaAseoViasPublicosForm);
       if (this.tarifaAseoViasPublicosForm.valid) {
         const requestData = {
-          montoColones: this.tarifaAseoViasPublicosForm.value.montoTarifaAseoViasPublicos,
-          descripcion: 'TARIFA SERVICIOS ASEO DE VIAS Y SITIOS PUBLICOS'
+          montoColones:
+            this.tarifaAseoViasPublicosForm.value.montoTarifaAseoViasPublicos,
+          descripcion: 'TARIFA SERVICIOS ASEO DE VIAS Y SITIOS PUBLICOS',
         };
-        console.log(requestData);
+
         this.tarifa.registrarTarifa(requestData).subscribe({
           next: (res) => {
             this.tarifaAseoViasPublicosForm.reset();
@@ -164,9 +168,10 @@ export class TarifaAseoViasSitiosPublicosComponent {
     }
   }
 
-
   obtenerErrorCampoMonto() {
-    const campo = this.tarifaAseoViasPublicosForm.get('montoTarifaAseoViasPublicos');
+    const campo = this.tarifaAseoViasPublicosForm.get(
+      'montoTarifaAseoViasPublicos'
+    );
 
     if (campo?.hasError('required')) {
       return 'El monto es requerido';
@@ -205,8 +210,8 @@ export class TarifaAseoViasSitiosPublicosComponent {
   //Busqueda
   realizarBusqueda() {
     if (this.filtro) {
-      this.montoTarifaAseoViasFiltrados = this.montoTarifaAseoVias.filter((usuario) =>
-        this.matchesSearch(usuario)
+      this.montoTarifaAseoViasFiltrados = this.montoTarifaAseoVias.filter(
+        (usuario) => this.matchesSearch(usuario)
       );
     } else {
       this.montoTarifaAseoViasFiltrados = null; // Si no hay filtro, borra los resultados

@@ -1,16 +1,27 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { YearPickerComponent } from 'src/app/components/dropdowns/year-picker/year-picker.component';
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 
 @Component({
   selector: 'app-tarifa-servicio-recoleccion-basura',
   templateUrl: './tarifa-servicio-recoleccion-basura.component.html',
-  styleUrls: ['./tarifa-servicio-recoleccion-basura.component.css']
+  styleUrls: ['./tarifa-servicio-recoleccion-basura.component.css'],
 })
 export class TarifaServicioRecoleccionBasuraComponent {
   public rol: string = '';
@@ -34,7 +45,7 @@ export class TarifaServicioRecoleccionBasuraComponent {
   });
 
   getTarifaParquesObrasOrnato() {
-    return this.tarifaRecoleccionBasuraForm.get('tarifaRecoleccionBasura')
+    return this.tarifaRecoleccionBasuraForm.get('tarifaRecoleccionBasura');
   }
 
   constructor(
@@ -48,37 +59,29 @@ export class TarifaServicioRecoleccionBasuraComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  obtenerTarifas(){
+  obtenerTarifas() {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
       this.tarifa.listarServiciosBasura().subscribe((res) => {
         this.tarifaRecoleccionBasuraList = res;
 
         for (const element of this.tarifaRecoleccionBasuraList) {
-          element.fechaCreacion = this.formatDate(
-            element.fechaCreacion
-          );
-          element.montoColones = this.formatNumber(
-            element.montoColones
-          );
+          element.fechaCreacion = this.formatDate(element.fechaCreacion);
+          element.montoColones = this.formatNumber(element.montoColones);
         }
 
         this.tarifaRecoleccionBasuraList.reverse();
       });
-
     }
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
 
-    this.obtenerTarifas();
-
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+      this.obtenerTarifas();
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -106,7 +109,7 @@ export class TarifaServicioRecoleccionBasuraComponent {
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2, 
+      maximumFractionDigits: 2,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
@@ -135,8 +138,9 @@ export class TarifaServicioRecoleccionBasuraComponent {
       this.markFormGroupTouched(this.tarifaRecoleccionBasuraForm);
       if (this.tarifaRecoleccionBasuraForm.valid) {
         const requestData = {
-          montoColones: this.tarifaRecoleccionBasuraForm.value.tarifaRecoleccionBasura,
-          descripcion: 'TARIFA SERVICIOS DE RECOLECCION DE BASURA'
+          montoColones:
+            this.tarifaRecoleccionBasuraForm.value.tarifaRecoleccionBasura,
+          descripcion: 'TARIFA SERVICIOS DE RECOLECCION DE BASURA',
         };
         console.log(requestData);
         this.tarifa.registrarTarifa(requestData).subscribe({
@@ -164,7 +168,9 @@ export class TarifaServicioRecoleccionBasuraComponent {
   }
 
   obtenerErrorCampoMonto() {
-    const campo = this.tarifaRecoleccionBasuraForm.get('tarifaRecoleccionBasura');
+    const campo = this.tarifaRecoleccionBasuraForm.get(
+      'tarifaRecoleccionBasura'
+    );
 
     if (campo?.hasError('required')) {
       return 'El monto es requerido';
@@ -203,9 +209,10 @@ export class TarifaServicioRecoleccionBasuraComponent {
   //Busqueda
   realizarBusqueda() {
     if (this.filtro) {
-      this.tarifaRecoleccionBasuraFiltrados = this.tarifaRecoleccionBasuraList.filter((usuario) =>
-        this.matchesSearch(usuario)
-      );
+      this.tarifaRecoleccionBasuraFiltrados =
+        this.tarifaRecoleccionBasuraList.filter((usuario) =>
+          this.matchesSearch(usuario)
+        );
     } else {
       this.tarifaRecoleccionBasuraFiltrados = null; // Si no hay filtro, borra los resultados
     }

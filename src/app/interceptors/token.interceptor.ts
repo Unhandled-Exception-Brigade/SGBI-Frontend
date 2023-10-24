@@ -40,7 +40,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
+          if (err.status === 401!) {
             return this.handleUnauthorizedError(request, next);
           }
         }
@@ -65,15 +65,17 @@ export class TokenInterceptor implements HttpInterceptor {
 
         return next.handle(req);
       }),
-      catchError((err) => {
+      catchError(() => {
         return throwError(() => {
           this.toast.warning({
             detail: 'Alerta',
             summary:
               'Tu sesion ha expirado. Por favor, identificate de nuevo para continuar donde lo dejaste',
           });
-          this.auth.cerrarSesion();
+
           this.router.navigate(['/ingresar']);
+
+          this.auth.cerrarSesion();
         });
       })
     );

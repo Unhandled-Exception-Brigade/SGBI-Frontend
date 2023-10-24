@@ -1,41 +1,49 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
-import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service'
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MenuItem } from 'primeng/api';
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
 
 @Component({
-  selector: 'app-tarifa-mantenimiento-parques-obras-ornato',
-  templateUrl: './tarifa-mantenimiento-parques-obras-ornato.component.html',
-  styleUrls: ['./tarifa-mantenimiento-parques-obras-ornato.component.css']
+  selector: 'app-monto-exonerar',
+  templateUrl: './monto-exonerar.component.html',
+  styleUrls: ['./monto-exonerar.component.css'],
 })
-export class TarifaMantenimientoParquesObrasOrnatoComponent {
+export class MontoExonerarComponent implements OnInit {
   public rol: string = '';
-  value1: number = 0;
+  public montoMaximoExonerarLista: any = [];
+  public date = new Date();
   dateTime = new Date();
-  formModal: any
+  formModal: any;
   public currentPage: number = 1; // Página actual
   public usersPerPage: number = 5; // Usuarios por página
   public filtro: string = '';
-  public montoMantenimiento: any = [];
-  public montoMantenimientoFiltrados: any;
+  public montoMaximoExonerarFiltrados: any;
 
   @ViewChild('closebutton') closebutton;
   @ViewChild('saveButton') saveButton: ElementRef;
 
-  tarifaParquesObrasOrnatoForm = new FormGroup({
-    tarifaParquesObrasOrnato: new FormControl('', [
+  items: MenuItem[] | undefined;
+  home: MenuItem | undefined;
+
+  montoExonerarForm = new FormGroup({
+    montoExonerar: new FormControl('', [
       Validators.required,
-      Validators.min(100), // Mínimo 15 millones
-      Validators.max(900), // Máximo 30 millones
+      Validators.min(15000000), // Mínimo 15 millones
+      Validators.max(30000000), // Máximo 30 millones
     ]),
   });
 
-  getTarifaParquesObrasOrnato() {
-    return this.tarifaParquesObrasOrnatoForm.get('tarifaParquesObrasOrnato')
+  getMontoExonerar() {
+    return this.montoExonerarForm.get('montoExonerar');
   }
 
   constructor(
@@ -49,44 +57,33 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
     this.dateTime.setDate(this.dateTime.getDate());
   }
 
-  obtenerTarifas(){
+  obtenerTarifas() {
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
-
-      this.tarifa.listarMantenimiento().subscribe((res) => {
-        this.montoMantenimiento = res;
-
-        for (const element of this.montoMantenimiento) {
-          element.fechaCreacion = this.formatDate(
-            element.fechaCreacion
-          );
-          element.montoColones = this.formatNumber(
-            element.montoColones
-          );
+      this.tarifa.listarMontosExonerar().subscribe((res) => {
+        this.montoMaximoExonerarLista = res;
+        for (const element of this.montoMaximoExonerarLista) {
+          element.fechaCreacion = this.formatDate(element.fechaCreacion);
+          element.montoColones = this.formatNumber(element.montoColones);
         }
-
-        this.montoMantenimiento.reverse();
+        this.montoMaximoExonerarLista.reverse();
       });
-
     }
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
 
-    this.obtenerTarifas();
-
     if (this.rol == 'Administrador' || this.rol == 'Jefe') {
+      this.obtenerTarifas();
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
         summary: 'No tiene los permisos para acceder a este modulo',
         duration: 4000,
       });
-
       this.router.navigate(['/tramites']);
     }
   }
@@ -101,9 +98,9 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
     });
   }
 
-  onTarifaParquesObrasOrnato() {
-    this.markFormGroupTouched(this.tarifaParquesObrasOrnatoForm);
-    if (this.tarifaParquesObrasOrnatoForm.valid) {
+  onMontoExonerar() {
+    this.markFormGroupTouched(this.montoExonerarForm);
+    if (this.montoExonerarForm.valid) {
       console.log('valido');
     } else {
       console.log('Formulario inválido');
@@ -112,16 +109,16 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
 
   enviar() {
     if (this.saveButton) {
-      this.markFormGroupTouched(this.tarifaParquesObrasOrnatoForm);
-      if (this.tarifaParquesObrasOrnatoForm.valid) {
+      this.markFormGroupTouched(this.montoExonerarForm);
+      if (this.montoExonerarForm.valid) {
         const requestData = {
-          montoColones: this.tarifaParquesObrasOrnatoForm.value.tarifaParquesObrasOrnato,
-          descripcion: 'TARIFA MANTENIMIENTO DE PARQUES Y OBRAS DE ORNATO'
+          montoColones: this.montoExonerarForm.value.montoExonerar,
+          descripcion: 'TARIFA MONTO MAXIMO A EXONERAR',
         };
-        console.log(requestData);
+
         this.tarifa.registrarTarifa(requestData).subscribe({
           next: (res) => {
-            this.tarifaParquesObrasOrnatoForm.reset();
+            this.montoExonerarForm.reset();
             this.toast.success({
               detail: 'CORRECTO',
               summary: res.message,
@@ -158,30 +155,28 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
 
   formatNumber(number: number): string {
     const options: Intl.NumberFormatOptions = {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2, 
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
     };
     return new Intl.NumberFormat('es-ES', options).format(number);
   }
 
   obtenerErrorCampoMonto() {
-    const campo = this.tarifaParquesObrasOrnatoForm.get('tarifaParquesObrasOrnato');
+    const campo = this.montoExonerarForm.get('montoExonerar');
 
     if (campo?.hasError('required')) {
       return 'El monto es requerido';
     }
 
     if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a ₡100,00';
+      return 'El monto debe ser igual o mayor a ₡15 000 000,000';
     }
 
     if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a ₡900,00';
+      return 'El monto debe ser igual o menor ₡30.000.000,000';
     }
-
     return '';
   }
-
   errorBorderClass: string = 'error-border';
 
   //Paginacion
@@ -192,11 +187,11 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
   getPaginated() {
     const startIndex = (this.currentPage - 1) * this.usersPerPage;
     const endIndex = startIndex + this.usersPerPage;
-    return this.montoMantenimiento.slice(startIndex, endIndex);
+    return this.montoMaximoExonerarLista.slice(startIndex, endIndex);
   }
 
   getPaginationArray() {
-    const totalUsers = this.montoMantenimiento.length; // Total de usuarios
+    const totalUsers = this.montoMaximoExonerarLista.length; // Total de usuarios
     const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
     return new Array(totalPages).fill(0).map((_, index) => index + 1);
   }
@@ -204,11 +199,11 @@ export class TarifaMantenimientoParquesObrasOrnatoComponent {
   //Busqueda
   realizarBusqueda() {
     if (this.filtro) {
-      this.montoMantenimientoFiltrados = this.montoMantenimiento.filter((usuario) =>
-        this.matchesSearch(usuario)
+      this.montoMaximoExonerarFiltrados = this.montoMaximoExonerarLista.filter(
+        (usuario) => this.matchesSearch(usuario)
       );
     } else {
-      this.montoMantenimientoFiltrados = null; // Si no hay filtro, borra los resultados
+      this.montoMaximoExonerarFiltrados = null; // Si no hay filtro, borra los resultados
     }
   }
 

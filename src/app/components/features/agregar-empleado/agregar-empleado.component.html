@@ -4,89 +4,144 @@
       <div class="col-lg-5 col-md-7 mx-auto">
         <div class="panel border bg-white">
           <div class="panel-heading">
-            <h3 class="pt-3 font-weight-bold">Registrar</h3>
+            <h3 class="pt-3 font-weight-bold">Agregar empleado</h3>
           </div>
 
           <div class="panel-body p-3">
             <form [formGroup]="signupForm">
               <div class="form-group pt-3">
-                <div class="input-field" [class.error]="
+                <div
+                  class="input-field"
+                  [class.error]="
                     signupForm.get('nombre').touched &&
                     signupForm.get('nombre').invalid
-                  ">
+                  "
+                >
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="nombre" type="text" placeholder="Nombre" />
+                  <input
+                    formControlName="nombre"
+                    type="text"
+                    placeholder="Nombre"
+                  />
                 </div>
-                <small class="text-danger" *ngIf="
+                <small
+                  class="text-danger"
+                  *ngIf="
                     signupForm.get('nombre').touched &&
                     signupForm.get('nombre').invalid
-                  ">
+                  "
+                >
                   {{ obtenerErrorCampoNombre() }}
                 </small>
               </div>
 
               <div class="form-group pt-3">
-                <div class="input-field" [class.error]="
+                <div
+                  class="input-field"
+                  [class.error]="
                     signupForm.get('primerApellido').touched &&
                     signupForm.get('primerApellido').invalid
-                  ">
+                  "
+                >
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="primerApellido" type="text" placeholder="Primer apellido" />
+                  <input
+                    formControlName="primerApellido"
+                    type="text"
+                    placeholder="Primer apellido"
+                  />
                 </div>
-                <small class="text-danger" *ngIf="
+                <small
+                  class="text-danger"
+                  *ngIf="
                     signupForm.get('primerApellido').touched &&
                     signupForm.get('primerApellido').invalid
-                  ">
+                  "
+                >
                   {{ obtenerErrorCampoPrimerApellido() }}
                 </small>
               </div>
               <div class="form-group pt-3">
-                <div class="input-field" [class.error]="
+                <div
+                  class="input-field"
+                  [class.error]="
                     signupForm.get('segundoApellido').touched &&
                     signupForm.get('segundoApellido').invalid
-                  ">
+                  "
+                >
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="segundoApellido" type="text" placeholder="Segundo apellido" />
+                  <input
+                    formControlName="segundoApellido"
+                    type="text"
+                    placeholder="Segundo apellido"
+                  />
                 </div>
-                <small class="text-danger" *ngIf="
+                <small
+                  class="text-danger"
+                  *ngIf="
                     signupForm.get('segundoApellido').touched &&
                     signupForm.get('segundoApellido').invalid
-                  ">
+                  "
+                >
                   {{ obtenerErrorCampoSegundoApellido() }}
                 </small>
               </div>
 
               <div class="form-group pt-3">
-                <div class="input-field" [class.error]="
+                <div
+                  class="input-field"
+                  [class.error]="
                     signupForm.get('cedula').touched &&
                     signupForm.get('cedula').invalid
-                  ">
+                  "
+                >
                   <span class="fa fa-id-card p-2"></span>
-                  <input formControlName="cedula" type="text" placeholder="Cédula" />
+                  <input
+                    formControlName="cedula"
+                    type="text"
+                    placeholder="Cédula"
+                  />
                 </div>
-                <small class="text-danger" *ngIf="
+                <small
+                  class="text-danger"
+                  *ngIf="
                     signupForm.get('cedula').touched &&
                     signupForm.get('cedula').invalid
-                  ">
+                  "
+                >
                   {{ obtenerErrorCampoCedula() }}
                 </small>
               </div>
 
               <div class="form-group pt-3">
-                <div class="input-field" [class.error]="
+                <div
+                  class="input-field"
+                  [class.error]="
                     signupForm.get('email').touched &&
                     signupForm.get('email').invalid
-                  ">
+                  "
+                >
                   <span class="fa fa-envelope p-2"></span>
-                  <input formControlName="email" type="text" placeholder="Correo" />
+                  <input
+                    formControlName="email"
+                    type="text"
+                    placeholder="Correo"
+                  />
                 </div>
-                <small class="text-danger" *ngIf="
+                <small
+                  class="text-danger"
+                  *ngIf="
                     signupForm.get('email').touched &&
                     signupForm.get('email').invalid
-                  ">{{ obtenerErrorCampoCorreo() }}</small>
+                  "
+                  >{{ obtenerErrorCampoCorreo() }}</small
+                >
               </div>
 
-              <button (click)="onSignup()" type="submit" class="btn btn-primary btn-block mt-4 w-100 custom-btn">
+              <button
+                (click)="onSignup()"
+                type="submit"
+                class="btn btn-primary btn-block mt-4 w-100 custom-btn"
+              >
                 Registrarse
               </button>
             </form>
