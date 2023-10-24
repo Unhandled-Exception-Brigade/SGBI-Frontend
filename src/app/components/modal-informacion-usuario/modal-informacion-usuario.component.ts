@@ -4,7 +4,9 @@ import { EditarUsuarioService } from 'src/app/services/editar-usuario.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgToastService } from 'ng-angular-popup';
+import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
 
 @Component({
   selector: 'app-modal-informacion-usuario',
@@ -39,6 +41,7 @@ export class ModalInformacionUsuarioComponent {
     private editarUsuarioService: EditarUsuarioService,
     private auth: AuthService,
     private usuarioService: UsuarioService,
+    private modalService: NgbModal,
     private toast: NgToastService
   ) {}
 
@@ -168,6 +171,31 @@ export class ModalInformacionUsuarioComponent {
 
   aplicarCambiosCorreo() {
     this.usuarioEditado.email = this.correoEditado;
+  }
+
+  mostrarDialogoConfirmacion() {
+    const modalRef = this.modalService.open(ModalConfirmacionComponent, {
+      centered: true,
+    });
+
+    modalRef.componentInstance.mensaje =
+      '¿Estás seguro de que deseas guardar los cambios?';
+
+    modalRef.result.then(
+      (result) => {
+        if (result === 'confirmado') {
+          // El usuario confirmó, procede a guardar los cambios
+          this.guardarCambios();
+        }
+      },
+      (reason) => {
+        // El usuario canceló el cuadro de diálogo, no hagas nada
+      }
+    );
+  }
+
+  guardarCambiosConConfirmacion() {
+    this.mostrarDialogoConfirmacion();
   }
 
   guardarCambios() {
