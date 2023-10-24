@@ -44,8 +44,9 @@ export class BitacoraComponent implements OnInit {
           this.mantenimientos[i].descripcion ===
           'TARIFA MONTO MAXIMO A EXONERAR'
         ) {
-          this.mantenimientos[i].descripcion = 'MONTO MÁXIMO A EXONERAR';
+          this.mantenimientos[i].descripcion = 'MONTO MAXIMO A EXONERAR';
         }
+
       }
 
       this.mantenimientos.reverse();
