@@ -5,6 +5,15 @@
   padding: 10px; /* Añade un espacio alrededor del contenido dentro del contenedor */
   background-color: rgb(243, 243, 243);
 }
+
+
+.container-titulo {
+  margin: 0 auto; 
+  width: 72.5%; 
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .bg-card {
   background-color: rgb(243, 243, 243);
   border: none;
