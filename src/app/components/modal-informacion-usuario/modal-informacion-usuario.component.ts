@@ -77,37 +77,66 @@ export class ModalInformacionUsuarioComponent {
   }
 
   validarNombre_Apellidos() {
-    // Expresión regular que permite letras, tildes y la letra "ñ".
-    const patron = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+    let errorMensajeNombre = '';
+    let errorMensajePrimerApellido = '';
+    let errorMensajeSegundoApellido = '';
 
-    // Valida el campo "Nombre"
-    if (!patron.test(this.nombreEditado)) {
-      this.nombreValido = false;
-      this.mensajeErrorNombre = 'El nombre solo debe contener letras y tildes.';
-    } else {
-      this.nombreValido = true;
-      this.mensajeErrorNombre = '';
+    if (!/^[A-ZÑ][a-zñ]*$/.test(this.nombreEditado)) {
+      if (!/^[A-ZÑ]/.test(this.nombreEditado)) {
+        errorMensajeNombre = 'La primera letra debe ser en mayúscula.';
+      } else if (/\d/.test(this.nombreEditado)) {
+        errorMensajeNombre = 'No se permiten números en el nombre.';
+      } else if (/\s/.test(this.nombreEditado)) {
+        errorMensajeNombre = 'No se permiten espacios en blanco en el nombre.';
+      } else if (/[áéíóúÁÉÍÓÚ]/.test(this.nombreEditado)) {
+        errorMensajeNombre = 'No se permiten tildes en el nombre.';
+      } else {
+        errorMensajeNombre = 'No se permiten caracteres especiales.';
+      }
     }
 
-    // Valida el campo "Primer Apellido"
-    if (!patron.test(this.primerApellidoEditado)) {
-      this.primerApellidoValido = false;
-      this.mensajeErrorPrimerApellido =
-        'El primer apellido solo debe contener letras y tildes.';
-    } else {
-      this.primerApellidoValido = true;
-      this.mensajeErrorPrimerApellido = '';
+    if (!/^[A-ZÑ][a-zñ]*$/.test(this.primerApellidoEditado)) {
+      if (!/^[A-ZÑ]/.test(this.primerApellidoEditado)) {
+        errorMensajePrimerApellido = 'La primera letra debe ser en mayúscula.';
+      } else if (/\d/.test(this.primerApellidoEditado)) {
+        errorMensajePrimerApellido =
+          'No se permiten números en el primer apellido.';
+      } else if (/\s/.test(this.primerApellidoEditado)) {
+        errorMensajePrimerApellido =
+          'No se permiten espacios en blanco en el primer apellido.';
+      } else if (/[áéíóúÁÉÍÓÚ]/.test(this.primerApellidoEditado)) {
+        errorMensajePrimerApellido =
+          'No se permiten tildes en el primer apellido.';
+      } else {
+        errorMensajePrimerApellido = 'No se permiten caracteres especiales.';
+      }
     }
 
-    // Valida el campo "Segundo Apellido"
-    if (!patron.test(this.segundoApellidoEditado)) {
-      this.segundoApellidoValido = false;
-      this.mensajeErrorSegundoApellido =
-        'El segundo apellido solo debe contener letras y tildes.';
-    } else {
-      this.segundoApellidoValido = true;
-      this.mensajeErrorSegundoApellido = '';
+    if (!/^[A-ZÑ][a-zñ]*$/.test(this.segundoApellidoEditado)) {
+      if (!/^[A-ZÑ]/.test(this.segundoApellidoEditado)) {
+        errorMensajeSegundoApellido =
+          'La primera letra debe ser en mayúscula.';
+      } else if (/\d/.test(this.segundoApellidoEditado)) {
+        errorMensajeSegundoApellido =
+          'No se permiten números en el segundo apellido.';
+      } else if (/\s/.test(this.segundoApellidoEditado)) {
+        errorMensajeSegundoApellido =
+          'No se permiten espacios en blanco en el segundo apellido.';
+      } else if (/[áéíóúÁÉÍÓÚ]/.test(this.segundoApellidoEditado)) {
+        errorMensajeSegundoApellido =
+          'No se permiten tildes en el segundo apellido.';
+      } else {
+        errorMensajeSegundoApellido = 'No se permiten caracteres especiales.';
+      }
     }
+
+    this.mensajeErrorNombre = errorMensajeNombre;
+    this.mensajeErrorPrimerApellido = errorMensajePrimerApellido;
+    this.mensajeErrorSegundoApellido = errorMensajeSegundoApellido;
+
+    this.nombreValido = errorMensajeNombre === '';
+    this.primerApellidoValido = errorMensajePrimerApellido === '';
+    this.segundoApellidoValido = errorMensajeSegundoApellido === '';
   }
 
   validarCorreo() {
