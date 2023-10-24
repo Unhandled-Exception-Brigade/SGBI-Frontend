@@ -21,10 +21,14 @@ export class GestionUsuariosComponent {
   public rol: string = '';
   public filtro: string = '';
 
+  public currentPage: number = 1; // Página actual
+  public usersPerPage: number = 5; // Usuarios por página
+
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
   selectedRole: any;
   usuariosOriginales: any[];
+  usuariosFiltrados: any;
 
   constructor(
     private api: ApiService,
@@ -39,6 +43,11 @@ export class GestionUsuariosComponent {
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
+    });
+
+    this.api.obtenerUsuarios().subscribe((res) => {
+      this.usuarios = res;
+      this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
     });
 
     this.usuarioService.getNombreUsuario().subscribe((val) => {
@@ -67,42 +76,50 @@ export class GestionUsuariosComponent {
     }
   }
 
-  /*
-  filtroBusqueda: string = ''; // Término de búsqueda
-  // Método para realizar la búsqueda
+  // Busqueda de usuarios
   realizarBusqueda() {
-    const termino = this.filtroBusqueda.toLowerCase();
-
-    function quitarTildes(texto) {
-      // Para realizar búsqueda con o sin tildes, incluyendo la ñ
-      return texto
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase();
-    }
-
-    if (termino === '') {
-      this.usuarios = [...this.usuariosOriginales]; // Restaura la lista original
+    if (this.filtro) {
+      this.usuariosFiltrados = this.usuarios.filter((usuario) =>
+        this.matchesSearch(usuario)
+      );
     } else {
-      // Filtra la lista original en función del término de búsqueda
-      this.usuarios = this.usuariosOriginales.filter((usuario: any) => {
-        return (
-          quitarTildes(usuario.nombre).includes(quitarTildes(termino)) ||
-          quitarTildes(
-            usuario.primerApellido + ' ' + usuario.segundoApellido
-          ).includes(quitarTildes(termino)) ||
-          quitarTildes(usuario.rol).includes(quitarTildes(termino)) ||
-          quitarTildes(usuario.cedula).includes(
-            quitarTildes(this.filtroBusqueda)
-          )
-        );
-      });
+      this.usuariosFiltrados = null; // Si no hay filtro, borra los resultados
     }
   }
-  */
+
+  matchesSearch(usuario: any) {
+    const lowerCaseFiltro = this.filtro.toLowerCase();
+    const palabrasClave = lowerCaseFiltro.split(' '); // Dividir el filtro en palabras clave
+    return palabrasClave.every(
+      (palabra) =>
+        // Verificar si alguna parte del usuario coincide con la palabra clave
+        JSON.stringify(usuario).toLowerCase().includes(palabra) ||
+        usuario.nombre.toLowerCase().includes(palabra) ||
+        usuario.primerApellido.toLowerCase().includes(palabra) ||
+        (usuario.segundoApellido &&
+          usuario.segundoApellido.toLowerCase().includes(palabra))
+    );
+  }
 
   cerrarSesion() {
     this.auth.cerrarSesion();
+  }
+
+  // Paginacion
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  getPaginatedUsers() {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    return this.usuarios.slice(startIndex, endIndex);
+  }
+
+  getPaginationArray() {
+    const totalUsers = this.usuarios.length; // Total de usuarios
+    const totalPages = Math.ceil(totalUsers / this.usersPerPage); // Total de páginas
+    return new Array(totalPages).fill(0).map((_, index) => index + 1);
   }
 
   // Método para abrir el modal y mostrar la información del usuario seleccionado

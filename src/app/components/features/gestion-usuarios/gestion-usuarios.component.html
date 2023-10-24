@@ -7,8 +7,8 @@
       <div class="barra-busqueda mb-3">
         <label for="busqueda" class="form-label"> </label>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Búsqueda"
-            id="busqueda" [(ngModel)]="filtro" />
+          <input type="text" class="form-control" placeholder="Búsqueda de usuario por cédula, nombre, apellidos o rol"
+            id="busqueda" [(ngModel)]="filtro" (input)="realizarBusqueda()" />
           <span class="input-group-text">
             <i class="fas fa-search"></i>
           </span>
@@ -42,7 +42,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios | search: filtro">
+            <tr *ngFor="let usuario of (usuariosFiltrados || getPaginatedUsers()); let i = index">
               <td>{{ usuario.cedula }}</td>
               <td class="columnaNombre">{{ usuario.nombre }}</td>
               <td class="columnaApellidos">{{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
@@ -54,6 +54,12 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="pagination">
+        <button *ngFor="let page of getPaginationArray()" [class.active]="page === currentPage"
+          (click)="changePage(page)">
+          {{ page }}
+        </button>
       </div>
     </div>
   </div>
