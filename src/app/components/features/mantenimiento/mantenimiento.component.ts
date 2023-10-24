@@ -4,7 +4,15 @@ import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {YearPickerComponent} from 'src/app/components/dropdowns/year-picker/year-picker.component'
+import {TramitesComponent} from 'src/app/components/features/tramites/tramites.component'
 
+
+
+interface City {
+  name: string;
+  code: string;
+}
 declare var $: any; // Declara jQuery para su uso en TypeScript
 
 @Component({
@@ -14,21 +22,10 @@ declare var $: any; // Declara jQuery para su uso en TypeScript
 })
 export class MantenimientoComponent implements OnInit {
   public rol: string = '';
-
+  value1: number = 1500;
   dateTime = new Date();
-
-  loginForm = new FormGroup({
-    montoExonerar: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[0-9]*$/), // Solo números
-      Validators.min(15000000), // Mínimo 15 millones
-      Validators.max(30000000), // Máximo 30 millones
-    ]),
-  });
-
-  getMontoExonerar() {
-    return this.loginForm.get('montoExonerar')
-  }
+  selectedOption: string | null = null;
+  buttonText: string = 'Seleccione una opción';
 
   constructor(
     private fb: FormBuilder,
@@ -41,13 +38,12 @@ export class MantenimientoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador' || this.rol == 'jefe') {
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -59,51 +55,9 @@ export class MantenimientoComponent implements OnInit {
     }
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach((control) => {
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      } else {
-        control.markAsTouched();
-      }
-    });
+  selectOption(option: string) {
+    this.selectedOption = option;
+    this.buttonText = option;
   }
-
-  onLogin() {
-    this.markFormGroupTouched(this.loginForm);
-    if (this.loginForm.valid) {
-      console.log('valido');
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
-
-  enviar() {
-    console.log('sdsd');
-  }
-
-  obtenerErrorCampoMonto() {
-    const campo = this.loginForm.get('montoExonerar');
-
-    if (campo?.hasError('required')) {
-      return 'El monto es requerido';
-    }
-
-    if (campo?.hasError('pattern')) {
-      return 'Ingrese solo números';
-    }
-
-    if (campo?.hasError('min')) {
-      return 'El monto debe ser igual o mayor a 15 millones';
-    }
-
-    if (campo?.hasError('max')) {
-      return 'El monto debe ser igual o menor a 30 millones';
-    }
-
-    return '';
-  }
-
-  errorBorderClass: string = 'error-border';
 
 }

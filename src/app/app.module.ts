@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './helpers/material/material.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -21,8 +22,6 @@ import { MantenimientoComponent } from './components/features/mantenimiento/mant
 import { ReporteriaComponent } from './components/features/reporteria/reporteria.component';
 import { TramitesComponent } from './components/features/tramites/tramites.component';
 import { FirstEntryComponent } from './components/authentication/first-entry/first-entry.component';
-import { ModalConfirmacionComponent } from './components/authentication/modal-confirmacion/modal-confirmacion.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -32,7 +31,21 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
+import { MontoExonerarComponent } from './components/features/montos/monto-exonerar/monto-exonerar/monto-exonerar.component';
+import { TarifaAseoViasSitiosPublicosComponent } from './components/features/montos/monto-exonerar/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos/tarifa-aseo-vias-sitios-publicos.component';
+import { TarifaMantenimientoParquesObrasOrnatoComponent } from './components/features/montos/monto-exonerar/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato/tarifa-mantenimiento-parques-obras-ornato.component';
+import { TarifaServicioRecoleccionBasuraComponent } from './components/features/montos/monto-exonerar/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura/tarifa-servicio-recoleccion-basura.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DragDropModule } from 'primeng/dragdrop';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalInformacionUsuarioComponent } from './components/modal-informacion-usuario/modal-informacion-usuario.component';
+import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
+import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
+import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +62,15 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ReporteriaComponent,
     TramitesComponent,
     FirstEntryComponent,
-    ModalConfirmacionComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    MontoExonerarComponent,
+    TarifaAseoViasSitiosPublicosComponent,
+    TarifaMantenimientoParquesObrasOrnatoComponent,
+    TarifaServicioRecoleccionBasuraComponent,
+    ModalInformacionUsuarioComponent,
+    ModalVerInformacionUsuarioComponent,
+    SearchPipe,
+    BitacoraComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +81,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     HttpClientModule,
     NgToastModule,
     FormsModule,
-    NgbModule,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
@@ -69,7 +88,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputMaskModule,
     InputTextModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    InputNumberModule,
+    DropdownModule,
+    BreadcrumbModule,
+    ConfirmDialogModule,
+    DragDropModule,
+    CommonModule,
+    NgbModule,
   ],
   providers: [
     {
@@ -77,6 +103,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
       useClass: TokenInterceptor,
       multi: true,
     },
+    ConfirmationService,
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+
 
 @Component({
   selector: 'app-creacion-tramites',
@@ -25,7 +26,7 @@ export class CreacionTramitesComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador' || this.rol == 'jefe') {
+    if (this.rol == 'Administrador' || this.rol == 'Jefe') {
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',

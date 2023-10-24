@@ -4,19 +4,19 @@
       <div class="col-lg-5 col-md-7 mx-auto">
         <div class="panel border bg-white">
           <div class="panel-heading">
-            <h3 class="pt-3 font-weight-bold">Registrarse</h3>
+            <h3 class="pt-3 font-weight-bold">Registrar</h3>
           </div>
 
           <div class="panel-body p-3">
             <form [formGroup]="signupForm">
               <div class="form-group pt-3">
-                <ng-container class="input-field" [class.error]="
+                <div class="input-field" [class.error]="
                     signupForm.get('nombre').touched &&
                     signupForm.get('nombre').invalid
                   ">
                   <span class="fa fa-user p-2"></span>
                   <input formControlName="nombre" type="text" placeholder="Nombre" />
-                </ng-container>
+                </div>
                 <small class="text-danger" *ngIf="
                     signupForm.get('nombre').touched &&
                     signupForm.get('nombre').invalid
@@ -74,15 +74,15 @@
 
               <div class="form-group pt-3">
                 <div class="input-field" [class.error]="
-                    signupForm.get('correo').touched &&
-                    signupForm.get('correo').invalid
+                    signupForm.get('email').touched &&
+                    signupForm.get('email').invalid
                   ">
                   <span class="fa fa-envelope p-2"></span>
-                  <input formControlName="correo" type="text" placeholder="Correo" />
+                  <input formControlName="email" type="text" placeholder="Correo" />
                 </div>
                 <small class="text-danger" *ngIf="
-                    signupForm.get('correo').touched &&
-                    signupForm.get('correo').invalid
+                    signupForm.get('email').touched &&
+                    signupForm.get('email').invalid
                   ">{{ obtenerErrorCampoCorreo() }}</small>
               </div>
 

@@ -72,6 +72,7 @@ export class TokenInterceptor implements HttpInterceptor {
             summary:
               'Tu sesion ha expirado. Por favor, identificate de nuevo para continuar donde lo dejaste',
           });
+          this.auth.cerrarSesion();
           this.router.navigate(['/ingresar']);
         });
       })

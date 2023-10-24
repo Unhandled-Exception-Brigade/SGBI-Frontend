@@ -8,6 +8,7 @@ export class UsuarioService {
   private cedulaUsuario$ = new BehaviorSubject<string>('');
   private nombreUsuario$ = new BehaviorSubject<string>('');
   private rolUsuario$ = new BehaviorSubject<string>('');
+  private estadoUsuario$ = new BehaviorSubject<string>('');
 
   constructor() {}
 
@@ -21,10 +22,14 @@ export class UsuarioService {
     return this.nombreUsuario$.asObservable();
   }
 
+  public setNombreUsuario(nombre: string) {
+    this.nombreUsuario$.next(nombre);
+  }
+
   public getCedulaUsuario() {
     return this.cedulaUsuario$.asObservable();
   }
-  public setNombreUsuario(nombre: string) {
-    this.cedulaUsuario$.next(nombre);
+  public setCedulaUsuario(cedula: string) {
+    this.cedulaUsuario$.next(cedula);
   }
 }

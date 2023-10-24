@@ -1,0 +1,31 @@
+.Roboto {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+.container{
+    margin-top: 1rem;
+    border: 2px solid #b3b3b3; /* Cambia #000 al color que desees para el borde */
+    border-radius: 10px;
+    padding: 10px; /* Añade un espacio alrededor del contenido dentro del contenedor */
+    /*background-color: rgb(243, 243, 243); */
+}
+
+.nombre{
+    width: calc(100% - 200px);
+}
+
+.col .form-check {
+    margin-bottom: 20px; /* Puedes ajustar el valor según tus necesidades */
+}
+
+.contenedor-botones{
+    display: flex;
+    justify-content: center; /* Puedes ajustar esto según tus necesidades */
+    align-items: center;
+    height: 300px; /* Ajusta la altura según tus necesidades */
+}
+
+.align-items-center {
+    display: flex;
+    justify-content: flex-end;
+}

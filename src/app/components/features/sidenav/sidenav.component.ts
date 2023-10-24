@@ -1,16 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { navbarData } from './nav-data';
 import { Subscription } from 'rxjs';
 import { SidenavService } from 'src/app/services/app-services/sidenav.service';
 import { Router } from '@angular/router';
-
-interface SideNavToggle {
-  screenWidth: number;
-  collapsed: boolean;
-}
+import { NgToastService } from 'ng-angular-popup';
+import { tarifaService } from 'src/app/services/mantenimiento-services/tarifa-service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,25 +17,30 @@ interface SideNavToggle {
 export class SidenavComponent implements OnInit, OnDestroy {
   mostrarSideNav: boolean = true;
   suscripcion: Subscription;
+  subMenu: boolean = false;
+  public montoMaximoExonerarLista: any = [];
+  public usuarios: any = [];
+
+  mostrarSubMenu() {
+    this.subMenu = !this.subMenu;
+  }
 
   constructor(
-    private api: ApiService,
+    private toast: NgToastService,
     private auth: AuthService,
     private usuarioService: UsuarioService,
     private sideNavService: SidenavService,
-    private Router: Router
+    private Router: Router,
+    private tarifa: tarifaService,
+    private api: ApiService
   ) {
     this.suscripcion = this.sideNavService.mostraSidenav.subscribe((value) => {
       this.mostrarSideNav = value;
     });
   }
 
-  ngOnDestroy(): void {
-    this.suscripcion.unsubscribe();
-  }
-
   collapsed = false;
-  screenWidth = 0;
+
   navData = navbarData;
   multiple: boolean = false;
 
@@ -46,22 +48,28 @@ export class SidenavComponent implements OnInit, OnDestroy {
   public rol: string = '';
 
   ngOnInit() {
-    this.screenWidth = window.innerWidth;
+    this.usuarioService.getNombreUsuario().subscribe((val) => {
+      const nombreDelToken = this.auth.obtenerNombreDelToken();
+      this.nombre = val || nombreDelToken;
+    });
 
     this.usuarioService.getRolUsuario().subscribe((val) => {
       const rolDelToken = this.auth.obtenerRolDelToken();
       this.rol = val || rolDelToken;
     });
+  }
 
-    this.usuarioService.getNombreUsuario().subscribe((val) => {
-      const nombreDelToken = this.auth.obtenerNombreDelToken();
-      this.nombre = val || nombreDelToken;
-    });
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
   }
 
   cerrarSesion() {
     this.auth.cerrarSesion();
-    window.location.reload(); // Recarga la página actual
+    this.toast.info({
+      detail: 'INFORMACION',
+      summary: 'Sesión cerrada correctamente',
+      duration: 2000,
+    });
   }
 
   tienePermiso(permisos: string[]) {

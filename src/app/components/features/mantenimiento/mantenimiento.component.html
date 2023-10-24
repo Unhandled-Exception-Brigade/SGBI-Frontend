@@ -1,89 +1,44 @@
-<header class="text-center">
-    <h3>Mantenimiento</h3>
-</header>
-
-<div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Agregar monto a exonerar</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Historico</button>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-            <form [formGroup]="loginForm" (ngSubmit)="enviar()">
-
-                <div class="input-group mb-3 mt-3">
-                    <p-calendar view="year" dateFormat="yy" inputId="yearpicker" formControlName="ano" [showIcon]="true" placeholder="Seleccione el año" [minDate]="dateTime" ></p-calendar>
-                </div>
-
-                <div class="input-group mb-3"
-                    [ngClass]="{'error-border': loginForm.get('montoExonerar').invalid && loginForm.get('montoExonerar').touched}">
-                    <span class="input-group-text" id="basic-addon1">₡</span>
-                    <input type="text" class="input-field form-control" formControlName="montoExonerar"
-                        placeholder="Ingresar el monto a exonerar" aria-label="montoExonerar"
-                        aria-describedby="basic-addon1">
-                </div>
-
-                <span style="color: red;"
-                    *ngIf="this.loginForm.get('montoExonerar') && this.loginForm.get('montoExonerar').invalid && this.loginForm.get('montoExonerar').touched">{{obtenerErrorCampoMonto()}}</span>
-
-                <div class="d-flex flex-column align-items-end">
-                    <button type="submit" [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-success"><i
-                            class="fa-solid fa-check"></i></button>
-                </div>
-            </form>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <table class="table mt-4">
-                <thead>
-                    <tr>
-                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Agregado por</th>
-                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Año</th>
-                        <th scope="col" class="bg-color-tabla-montoExonerar color-titulo">Monto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Yesenia</th>
-                        <td>2021</td>
-                        <td>17.973.000,00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Ericka</th>
-                        <td>2022</td>
-                        <td>17.973.000,00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Vinicio</th>
-                        <td>2023</td>
-                        <td>17.973.000,00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<ng-container *ngIf="rol === 'Administrador' || rol == 'Jefe'">
+    
+    <div class="text-center mt-3">
+        <h3 class="Roboto">Mantenimiento</h3>
     </div>
-</div>
-
-<div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit"
-                role="tab" aria-controls="home" aria-selected="true">Agregar monto a exonerar</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Historico</button>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    
+    <div class="container mb-4">
+        <div class="container-fluid mb-3 mt-1">
+            <h4 class="Roboto">Seleccione el valor a dar mantenimiento.</h4>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              Seleccione una opción <!-- Enlace de datos para mostrar el texto actual del botón -->
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" (click)="selectOption('Monto máximo a exonerar')">Monto máximo a exonerar.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa de servicios de aseo de vías y sitios públicos')">
+                Tarifa de servicios de aseo de vías y sitios públicos.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa mantenimiento de parques y obras de ornato')">
+                Tarifa mantenimiento de parques y obras de ornato.</a></li>
+              <li><a class="dropdown-item" (click)="selectOption('Tarifa de servicio de recolección de basura')">
+                Tarifa de servicio de recolección de basura.</a></li>
+            </ul>
+        </div>          
     </div>
-</div>
+
+    <ng-container *ngIf="selectedOption === 'Monto máximo a exonerar'">
+        <app-monto-exonerar></app-monto-exonerar>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa de servicios de aseo de vías y sitios públicos'">
+        <app-tarifa-aseo-vias-sitios-publicos></app-tarifa-aseo-vias-sitios-publicos>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa mantenimiento de parques y obras de ornato'">
+        <app-tarifa-mantenimiento-parques-obras-ornato></app-tarifa-mantenimiento-parques-obras-ornato>
+    </ng-container>
+
+    <ng-container *ngIf="selectedOption === 'Tarifa de servicio de recolección de basura'">
+        <app-tarifa-servicio-recoleccion-basura></app-tarifa-servicio-recoleccion-basura>
+    </ng-container>
+
+</ng-container>

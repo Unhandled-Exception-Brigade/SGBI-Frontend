@@ -11,6 +11,7 @@ import { primeraLetraMayuscula } from 'src/app/helpers/validators/primeraLetraMa
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { sinTildes } from 'src/app/helpers/validators/sinTildes';
+import { noEspaciosEnBlanco } from 'src/app/helpers/validators/sinEspaciosEnBlanco';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -36,7 +37,7 @@ export class AgregarEmpleadoComponent {
       this.rol = val || rolDelToken;
     });
 
-    if (this.rol == 'administrador') {
+    if (this.rol == 'Administrador') {
       this.signupForm = this.fb.group({
         nombre: [
           '',
@@ -45,6 +46,7 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
+            noEspaciosEnBlanco()
           ],
         ],
         primerApellido: [
@@ -54,6 +56,7 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
+            noEspaciosEnBlanco()
           ],
         ],
         segundoApellido: [
@@ -63,6 +66,7 @@ export class AgregarEmpleadoComponent {
             Validators.minLength(4),
             primeraLetraMayuscula(),
             sinTildes(),
+            noEspaciosEnBlanco()
           ],
         ],
         cedula: [
@@ -74,7 +78,7 @@ export class AgregarEmpleadoComponent {
             Validators.maxLength(9),
           ],
         ],
-        correo: [
+        email: [
           '',
           [
             Validators.required,
@@ -152,10 +156,15 @@ export class AgregarEmpleadoComponent {
     if (campo?.hasError('minlength')) {
       return 'La cédula debe tener mínimo 9 caracteres';
     }
+
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return campo.getError('noEspaciosEnBlanco').mensaje;
+    }
+
   }
 
   obtenerErrorCampoCorreo() {
-    const campo = this.signupForm.get('correo');
+    const campo = this.signupForm.get('email');
 
     if (campo?.hasError('required')) {
       return 'El correo es requerido';
@@ -171,6 +180,10 @@ export class AgregarEmpleadoComponent {
     }
     if (campo?.hasError('minlength')) {
       return 'El correo debe tener mínimo 5 caracteres';
+    }
+
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return campo.getError('noEspaciosEnBlanco').mensaje;
     }
 
     return '';
@@ -191,6 +204,10 @@ export class AgregarEmpleadoComponent {
       return campo.getError('sinTildes').mensaje;
     }
 
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return campo.getError('noEspaciosEnBlanco').mensaje;
+    }
+
     return '';
   }
   obtenerErrorCampoPrimerApellido() {
@@ -207,6 +224,10 @@ export class AgregarEmpleadoComponent {
     }
     if (campo?.hasError('sinTildes')) {
       return campo.getError('sinTildes').mensaje;
+    }
+
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return campo.getError('noEspaciosEnBlanco').mensaje;
     }
 
     return '';
@@ -226,6 +247,10 @@ export class AgregarEmpleadoComponent {
     }
     if (campo?.hasError('sinTildes')) {
       return campo.getError('sinTildes').mensaje;
+    }
+
+    if (campo?.hasError('noEspaciosEnBlanco')) {
+      return campo.getError('noEspaciosEnBlanco').mensaje;
     }
 
     return '';

@@ -11,20 +11,24 @@ import { environment } from 'src/environments/environment.development';
 export class AuthService {
   private baseUrl: string = environment.apiUrl;
   private usuarioPayload: any;
+
   constructor(private http: HttpClient, private router: Router) {
     this.usuarioPayload = this.decodedToken();
   }
 
   registrarse(userFrontEnd: any) {
-    return this.http.post<any>(this.baseUrl + 'registrarse', userFrontEnd);
+    return this.http.post<any>(
+      this.baseUrl + 'cuenta/registrarse',
+      userFrontEnd
+    );
   }
 
   ingresar(userFrontEnd: any) {
-    return this.http.post<any>(this.baseUrl + 'ingresar', userFrontEnd);
+    return this.http.post<any>(this.baseUrl + 'cuenta/ingresar', userFrontEnd);
   }
 
   renewToken(tokenApi: TokenApiModel) {
-    return this.http.post<any>(this.baseUrl + 'refrescar', tokenApi);
+    return this.http.post<any>(this.baseUrl + 'cuenta/refrescar', tokenApi);
   }
 
   cerrarSesion() {
@@ -57,23 +61,30 @@ export class AuthService {
     return helper.decodeToken(token);
   }
   obtenerCedulaDelToken() {
+    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
-      return this.usuarioPayload.unique_name;
+      return this.usuarioPayload[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ];
     }
+    return '';
   }
   obtenerRolDelToken() {
+    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
-      return this.usuarioPayload.role;
+      return this.usuarioPayload[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
     }
+    return '';
   }
   obtenerNombreDelToken() {
+    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
-      return this.usuarioPayload.actort;
+      return this.usuarioPayload[
+        'http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'
+      ];
     }
-  }
-  obtenerEstadoDelUsuario() {
-    if (this.usuarioPayload) {
-      return this.usuarioPayload.estado;
-    }
+    return '';
   }
 }
