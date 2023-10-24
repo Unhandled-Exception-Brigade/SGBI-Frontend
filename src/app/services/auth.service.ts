@@ -61,7 +61,6 @@ export class AuthService {
     return helper.decodeToken(token);
   }
   obtenerCedulaDelToken() {
-    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
       return this.usuarioPayload[
         'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
@@ -70,7 +69,6 @@ export class AuthService {
     return '';
   }
   obtenerRolDelToken() {
-    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
       return this.usuarioPayload[
         'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
@@ -79,7 +77,6 @@ export class AuthService {
     return '';
   }
   obtenerNombreDelToken() {
-    this.usuarioPayload = this.decodedToken();
     if (this.usuarioPayload) {
       return this.usuarioPayload[
         'http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'
