@@ -42,7 +42,7 @@ export class BitacoraComponent implements OnInit {
       for (let i = 0; i < this.mantenimientos.length; i++) {
         if (
           this.mantenimientos[i].descripcion ===
-          'TARIFA MONTO MÁXIMO A EXONERAR'
+          'TARIFA MONTO MAXIMO A EXONERAR'
         ) {
           this.mantenimientos[i].descripcion = 'MONTO MÁXIMO A EXONERAR';
         }
