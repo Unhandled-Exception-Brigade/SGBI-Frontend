@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BitacoraComponent implements OnInit {
   public currentPage: number = 1; // Página actual
-  public usersPerPage: number = 5; // Usuarios por página
+  public usersPerPage: number = 10; // Usuarios por página
   public rol: string = '';
   public filtro: string = '';
   public mantenimientos: any = [];
@@ -33,14 +33,17 @@ export class BitacoraComponent implements OnInit {
       for (let i = 0; i < this.mantenimientos.length; i++) {
         this.mantenimientos[i].fechaCreacion = this.formatDate(
           this.mantenimientos[i].fechaCreacion
-        ); 
+        );
         this.mantenimientos[i].montoColones = this.formatNumber(
           this.mantenimientos[i].montoColones
-        ); 
+        );
       }
 
       for (let i = 0; i < this.mantenimientos.length; i++) {
-        if (this.mantenimientos[i].descripcion === 'TARIFA MONTO MAXIMO A EXONERAR') {
+        if (
+          this.mantenimientos[i].descripcion ===
+          'TARIFA MONTO MAXIMO A EXONERAR'
+        ) {
           this.mantenimientos[i].descripcion = 'MONTO MAXIMO A EXONERAR';
         }
       }
