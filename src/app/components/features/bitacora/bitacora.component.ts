@@ -44,7 +44,28 @@ export class BitacoraComponent implements OnInit {
           this.mantenimientos[i].descripcion ===
           'TARIFA MONTO MAXIMO A EXONERAR'
         ) {
-          this.mantenimientos[i].descripcion = 'MONTO MAXIMO A EXONERAR';
+          this.mantenimientos[i].descripcion = 'Monto máximo a exonerar.';
+        }
+
+        if (
+          this.mantenimientos[i].descripcion ===
+          'TARIFA SERVICIOS DE RECOLECCION DE BASURA'
+        ) {
+          this.mantenimientos[i].descripcion = 'Tarifa de servicios de recolección de basura.';
+        }
+
+        if (
+          this.mantenimientos[i].descripcion ===
+          'TARIFA MANTENIMIENTO DE PARQUES Y OBRAS DE ORNATO'
+        ) {
+          this.mantenimientos[i].descripcion = 'Tarifa de servicios de mantenimiento de parques y obras de ornato.';
+        }
+
+        if (
+          this.mantenimientos[i].descripcion ===
+          'TARIFA SERVICIOS ASEO DE VIAS Y SITIOS PUBLICOS'
+        ) {
+          this.mantenimientos[i].descripcion = 'Tarifa de servicios de aseo de vías y sitios públicos.';
         }
 
       }
