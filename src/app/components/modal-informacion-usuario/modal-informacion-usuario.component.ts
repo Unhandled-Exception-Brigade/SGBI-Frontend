@@ -114,8 +114,7 @@ export class ModalInformacionUsuarioComponent {
 
     if (!/^[A-ZÑ][a-zñ]*$/.test(this.segundoApellidoEditado)) {
       if (!/^[A-ZÑ]/.test(this.segundoApellidoEditado)) {
-        errorMensajeSegundoApellido =
-          'La primera letra debe ser en mayúscula.';
+        errorMensajeSegundoApellido = 'La primera letra debe ser en mayúscula.';
       } else if (/\d/.test(this.segundoApellidoEditado)) {
         errorMensajeSegundoApellido =
           'No se permiten números en el segundo apellido.';
@@ -195,6 +194,7 @@ export class ModalInformacionUsuarioComponent {
       // Cierra el modal
       this.activeModal.close();
     }
+    console.log(this.usuario);
 
     this.editarUsuarioService.actualizarUsuario(this.usuario).subscribe({
       next: (res) => {

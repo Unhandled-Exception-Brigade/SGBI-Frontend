@@ -22,7 +22,7 @@ export class GestionUsuariosComponent {
   public filtro: string = '';
 
   public currentPage: number = 1; // Página actual
-  public usersPerPage: number = 5; // Usuarios por página
+  public usersPerPage: number = 10; // Usuarios por página
 
   // Variable para almacenar la información del usuario seleccionado
   public usuarioSeleccionado: any;
