@@ -46,6 +46,7 @@ import { ModalInformacionUsuarioComponent } from './components/modal-informacion
 import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-informacion-usuario/modal-ver-informacion-usuario.component';
 import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
 import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
+import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { BitacoraComponent } from './components/features/bitacora/bitacora.compo
     ModalInformacionUsuarioComponent,
     ModalVerInformacionUsuarioComponent,
     SearchPipe,
-    BitacoraComponent
+    BitacoraComponent,
+    ModalConfirmacionComponent
   ],
   imports: [
     BrowserModule,

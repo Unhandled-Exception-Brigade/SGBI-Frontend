@@ -12,8 +12,14 @@
   <!-- Nombre -->
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreEditado" name="nombre"
-      (input)="aplicarCambiosNombre(); validarNombre_Apellidos()" />
+    <input
+      type="text"
+      class="form-control"
+      id="nombre"
+      [(ngModel)]="nombreEditado"
+      name="nombre"
+      (input)="aplicarCambiosNombre(); validarNombre_Apellidos()"
+    />
     <div *ngIf="!nombreValido" class="text-danger">
       {{ mensajeErrorNombre }}
     </div>
@@ -22,8 +28,14 @@
   <!-- Apellidos -->
   <div class="form-group">
     <label for="primerApellido">Primer Apellido</label>
-    <input type="text" class="form-control" id="primerApellido" [(ngModel)]="primerApellidoEditado"
-      name="primerApellido" (input)="aplicarCambiosPrimerApellido(); validarNombre_Apellidos()" />
+    <input
+      type="text"
+      class="form-control"
+      id="primerApellido"
+      [(ngModel)]="primerApellidoEditado"
+      name="primerApellido"
+      (input)="aplicarCambiosPrimerApellido(); validarNombre_Apellidos()"
+    />
     <div *ngIf="!primerApellidoValido" class="text-danger">
       {{ mensajeErrorPrimerApellido }}
     </div>
@@ -31,8 +43,14 @@
 
   <div class="form-group">
     <label for="segundoApellido">Segundo Apellido</label>
-    <input type="text" class="form-control" id="segundoApellido" [(ngModel)]="segundoApellidoEditado"
-      name="segundoApellido" (input)="aplicarCambiosSegundoApellido(); validarNombre_Apellidos()" />
+    <input
+      type="text"
+      class="form-control"
+      id="segundoApellido"
+      [(ngModel)]="segundoApellidoEditado"
+      name="segundoApellido"
+      (input)="aplicarCambiosSegundoApellido(); validarNombre_Apellidos()"
+    />
     <div *ngIf="!segundoApellidoValido" class="text-danger">
       {{ mensajeErrorSegundoApellido }}
     </div>
@@ -41,8 +59,14 @@
   <!-- Correo -->
   <div class="form-group">
     <label for="correo">Correo</label>
-    <input type="text" class="form-control" id="correo" [(ngModel)]="correoEditado" name="correo"
-      (input)="aplicarCambiosCorreo(); validarCorreo()" />
+    <input
+      type="text"
+      class="form-control"
+      id="correo"
+      [(ngModel)]="correoEditado"
+      name="correo"
+      (input)="aplicarCambiosCorreo(); validarCorreo()"
+    />
     <div *ngIf="!correoValido" class="text-danger">
       {{ mensajeErrorCorreo }}
     </div>
@@ -51,15 +75,20 @@
   <!-- Rol -->
   <div class="form-group">
     <label for="roleDropdown">Rol:</label>
-    <app-role-dropdown [selectedRole]="selectedRole" (roleSelected)="selectedRole = $event"></app-role-dropdown>
+    <app-role-dropdown
+      [selectedRole]="selectedRole"
+      (roleSelected)="selectedRole = $event"
+    ></app-role-dropdown>
   </div>
 
   <!-- Estado -->
   <div class="form=form">
     <label for="estadoDropdown">Estado:</label>
     <!-- <p><strong>Estado:</strong> {{ usuario.estaInactivo }}</p> -->
-    <app-estado-dropdown [estadoSeleccionado]="estadoSeleccionado"
-      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"></app-estado-dropdown>
+    <app-estado-dropdown
+      [estadoSeleccionado]="estadoSeleccionado"
+      (estadoSeleccionadoOutput)="estadoSeleccionado = $event"
+    ></app-estado-dropdown>
   </div>
 </div>
 <!-- fin de modal-body -->
@@ -69,12 +98,17 @@
   <button type="button" class="btn btn-danger" (click)="closeModal()">
     Cancelar
   </button>
-  <button type="button" class="btn botonGuardar" (click)="guardarCambios()" [disabled]="
+  <button
+    type="button"
+    class="btn botonGuardar"
+    (click)="guardarCambiosConConfirmacion()"
+    [disabled]="
       !nombreValido ||
       !primerApellidoValido ||
       !segundoApellidoValido ||
       !correoValido
-    ">
+    "
+  >
     Guardar
   </button>
 </div>
