@@ -22,14 +22,14 @@ export const navbarData = [
   },
   {
     routeLink: 'mantenimiento',
-    icon: 'fas fa-toolbox',
-    label: 'Mantenimiento',
+    icon: 'fas fa-dollar-sign',
+    label: 'Montos y tarifas',
     permiso: ['Administrador', 'Jefe'],
     subEnlaces: [
       {
         link: 'monto-exonerar',
         etiqueta: 'Monto a exonerar',
-        icon: 'fas fa-dollar-sign fa-2xs',
+        icon: 'fa-solid fa-house fa-2xs',
       },
       {
         link: 'tarifa-servicios-aseo-vias-y-sitios-publicos',
