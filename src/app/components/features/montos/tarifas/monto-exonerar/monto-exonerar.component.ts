@@ -65,7 +65,6 @@ export class MontoExonerarComponent implements OnInit {
           element.fechaCreacion = this.formatDate(element.fechaCreacion);
           element.montoColones = this.formatNumber(element.montoColones);
         }
-
         this.montoMaximoExonerarLista.reverse();
       });
     }
