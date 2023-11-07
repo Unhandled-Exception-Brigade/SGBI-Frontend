@@ -25,10 +25,17 @@
             <ng-container *ngIf="rol === 'Administrador'">
               <button
                 type="button"
-                class="btn btn-success ml-3 custom-btn"
+                class="btn btn-success custom-btn"
+                (click)="llenarTabla()"
+              >
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-success custom-btn"
                 [routerLink]="['/agregarEmpleado']"
               >
-                <i class="ml-1 fa-solid fa-user-plus"></i>
+                <i class="fa-solid fa-user-plus"></i>
               </button>
             </ng-container>
           </form>

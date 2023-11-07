@@ -124,8 +124,6 @@ export class GestionUsuariosComponent {
   // Método para abrir el modal y mostrar la información del usuario seleccionado
   // Aqui se edita la informacion de los usuarios, por medio del modal.
   mostrarInformacionUsuario(usuario: any) {
-    this.llenarTabla();
-
     this.usuarioSeleccionado = usuario;
     this.selectedRole = usuario.rol;
     const modalRef = this.modalService.open(ModalInformacionUsuarioComponent, {
@@ -136,8 +134,6 @@ export class GestionUsuariosComponent {
   }
 
   verInformacionUsuario(usuario: any) {
-    this.llenarTabla();
-
     this.usuarioSeleccionado = usuario;
     const modalRef = this.modalService.open(
       ModalVerInformacionUsuarioComponent,
