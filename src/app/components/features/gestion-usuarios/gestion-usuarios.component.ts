@@ -46,10 +46,6 @@ export class GestionUsuariosComponent {
     });
 
     if (this.rol == 'Administrador') {
-      this.api.obtenerUsuarios().subscribe((res) => {
-        this.usuarios = res;
-        this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
-      });
       this.usuarioService.getNombreUsuario().subscribe((val) => {
         const nombreCompletoDelToken = this.auth.obtenerNombreDelToken();
         this.nombre = val || nombreCompletoDelToken;
@@ -59,6 +55,8 @@ export class GestionUsuariosComponent {
         const cedulaDelToken = this.auth.obtenerCedulaDelToken();
         this.cedula = val || cedulaDelToken;
       });
+
+      this.llenarTabla();
     } else {
       this.toast.warning({
         detail: 'ADVERTENCIA',
@@ -79,6 +77,13 @@ export class GestionUsuariosComponent {
     } else {
       this.usuariosFiltrados = null; // Si no hay filtro, borra los resultados
     }
+  }
+
+  llenarTabla() {
+    this.api.obtenerUsuarios().subscribe((res) => {
+      this.usuarios = res;
+      this.usuariosOriginales = [...res]; // Almacena la lista original en otra propiedad
+    });
   }
 
   matchesSearch(usuario: any) {
@@ -119,6 +124,8 @@ export class GestionUsuariosComponent {
   // Método para abrir el modal y mostrar la información del usuario seleccionado
   // Aqui se edita la informacion de los usuarios, por medio del modal.
   mostrarInformacionUsuario(usuario: any) {
+    this.llenarTabla();
+
     this.usuarioSeleccionado = usuario;
     this.selectedRole = usuario.rol;
     const modalRef = this.modalService.open(ModalInformacionUsuarioComponent, {
@@ -129,6 +136,8 @@ export class GestionUsuariosComponent {
   }
 
   verInformacionUsuario(usuario: any) {
+    this.llenarTabla();
+
     this.usuarioSeleccionado = usuario;
     const modalRef = this.modalService.open(
       ModalVerInformacionUsuarioComponent,

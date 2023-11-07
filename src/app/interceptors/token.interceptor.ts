@@ -6,7 +6,8 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
@@ -40,14 +41,21 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status === 401!) {
+          if (err.status === 401) {
             return this.handleUnauthorizedError(request, next);
+          } else {
+            // Manejar otros errores aquí
+            this.toast.error({
+              detail: 'Error',
+              summary: 'Se ha producido un error inesperado en la solicitud.',
+            });
           }
         }
         return throwError(() => err.error); // Retornar el error
       })
     );
   }
+
   handleUnauthorizedError(req: HttpRequest<any>, next: HttpHandler) {
     let tokenApiModel = new TokenApiModel();
 
@@ -65,18 +73,14 @@ export class TokenInterceptor implements HttpInterceptor {
 
         return next.handle(req);
       }),
-      catchError(() => {
-        return throwError(() => {
-          this.toast.warning({
-            detail: 'Alerta',
-            summary:
-              'Tu sesion ha expirado. Por favor, identificate de nuevo para continuar donde lo dejaste',
-          });
-
-          this.router.navigate(['/ingresar']);
-
-          this.auth.cerrarSesion();
+      catchError((err: any) => {
+        this.toast.warning({
+          detail: 'Alerta',
+          summary:
+            'Tu sesión ha expirado. Por favor, identifícate de nuevo para continuar donde lo dejaste',
         });
+
+        return throwError(() => err.error); // Retornar el error
       })
     );
   }
