@@ -74,11 +74,11 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(req);
       }),
       catchError((err: any) => {
-        this.toast.warning({
-          detail: 'Alerta',
-          summary:
-            'Tu sesión ha expirado. Por favor, identifícate de nuevo para continuar donde lo dejaste',
-        });
+        //this.toast.warning({
+          //detail: 'Alerta',
+          //summary:
+          //  'Tu sesión ha expirado. Por favor, identifícate de nuevo para continuar donde lo dejaste',
+        //});
 
         return throwError(() => err.error); // Retornar el error
       })
