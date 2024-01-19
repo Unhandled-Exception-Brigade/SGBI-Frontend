@@ -47,6 +47,7 @@ import { ModalVerInformacionUsuarioComponent } from './components/modal-ver-info
 import { SearchPipe } from './components/features/gestion-usuarios/search.pipe';
 import { BitacoraComponent } from './components/features/bitacora/bitacora.component';
 import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
     DragDropModule,
     CommonModule,
     NgbModule,
+    TableModule,
   ],
   providers: [
     {
